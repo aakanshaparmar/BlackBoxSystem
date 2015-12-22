@@ -16,6 +16,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ElderlyRegisterEnterName"
+            android:label="@string/title_activity_elderly_register_enter_name"
+            android:windowSoftInputMode="stateAlwaysVisible" >
+        </activity>
+        <activity
+            android:name=".FamilyRegisterPage1"
+            android:label="@string/title_activity_family_register_page1" >
+        </activity>
+        <activity
+            android:name=".ElderlyRegisterPhoneNo"
+            android:label="@string/title_activity_elderly_register_phone_no"
+            android:windowSoftInputMode="stateAlwaysVisible" >
+        </activity>
+        <activity
+            android:name=".ElderlyRegisterAddress"
+            android:label="@string/title_activity_elderly_register_address"
+            android:windowSoftInputMode="stateAlwaysVisible" >
+        </activity>
+        <activity
+            android:name=".ElderlyRegisterPageFinal"
+            android:label="@string/title_activity_elderly_register_page_final" >
+        </activity>
     </application>
 
 </manifest>

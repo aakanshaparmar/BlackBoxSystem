@@ -7,33 +7,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
-public class MainActivity extends ActionBarActivity {
+public class ElderlyRegisterEnterName extends ActionBarActivity {
 
-    Button elderlyButton;
-    Button familyButton;
-
+    Button continueButton;
+    EditText nameField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_elderly_register_enter_name);
 
-        elderlyButton = (Button) findViewById(R.id.button1);
-        familyButton = (Button) findViewById(R.id.button2);
+        continueButton = (Button) findViewById(R.id.button1);
+        nameField = (EditText) findViewById(R.id.editText1);
 
-        elderlyButton.setOnClickListener(new View.OnClickListener() {
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ElderlyRegisterEnterName.class);
-                startActivity(intent);
-            }
-        });
 
-        familyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),FamilyRegisterPage1.class);
+                Intent intent = new Intent( v.getContext(), ElderlyRegisterPhoneNo.class);
+                intent.putExtra("personName", String.valueOf(nameField.getText()));
                 startActivity(intent);
+                
             }
         });
     }
@@ -41,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_elderly_register_enter_name, menu);
         return true;
     }
 
