@@ -13,7 +13,6 @@ import android.widget.EditText;
 public class ElderlyRegisterAddress extends ActionBarActivity {
 
     Button continueButton;
-    Button backButton;
     EditText addressField;
 
     @Override
@@ -28,8 +27,8 @@ public class ElderlyRegisterAddress extends ActionBarActivity {
         final String phoneNo = intent.getExtras().getString("phoneNumber");
 
         continueButton = (Button) findViewById(R.id.button1);
-        backButton = (Button) findViewById(R.id.button2);
         addressField = (EditText) findViewById(R.id.editText1);
+
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,18 +43,6 @@ public class ElderlyRegisterAddress extends ActionBarActivity {
             }
         });
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent( v.getContext(), ElderlyRegisterPhoneNo.class);
-                intent.putExtra("phoneNumber", phoneNo);
-                intent.putExtra("personName", personName);
-                intent.putExtra("address", String.valueOf(addressField.getText()));
-                startActivity(intent);
-
-            }
-        });
     }
 
     @Override

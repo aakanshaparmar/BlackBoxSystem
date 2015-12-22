@@ -1,17 +1,52 @@
 package aakanshaparmar.blackboxsystem;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 public class ElderlyRegisterPageFinal extends ActionBarActivity {
+
+    TextView personNameField, phoneNoField, addressField;
+    Button continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elderly_register_page_final);
+
+        Intent intent = getIntent();
+        final String personName = intent.getExtras().getString("personName");
+        final String phoneNo = intent.getExtras().getString("phoneNumber");
+        final String address = intent.getExtras().getString("address");
+
+        personNameField = (TextView) findViewById(R.id.personName);
+        phoneNoField = (TextView) findViewById(R.id.phoneNo);
+        addressField = (TextView) findViewById(R.id.address);
+
+        continueButton = (Button)findViewById(R.id.button1);
+
+        personNameField.setText(personName);
+        phoneNoField.setText(phoneNo);
+        addressField.setText(address);
+
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(v.getContext(), ElderlyHomePage.class);
+                startActivity(intent)
+                ;
+
+            }
+        });
+
+
     }
 
     @Override

@@ -39,6 +39,10 @@
             android:name=".ElderlyRegisterPageFinal"
             android:label="@string/title_activity_elderly_register_page_final" >
         </activity>
+        <activity
+            android:name=".ElderlyHomePage"
+            android:label="@string/title_activity_elderly_home_page" >
+        </activity>
     </application>
 
 </manifest>
