@@ -7,33 +7,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
-public class MainActivity extends ActionBarActivity {
+public class FamilyRegisterPhone extends ActionBarActivity {
 
-    Button elderlyButton;
-    Button familyButton;
-
+    Button continueButton;
+    EditText phoneField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_elderly_register_phone_no);
 
-        elderlyButton = (Button) findViewById(R.id.button1);
-        familyButton = (Button) findViewById(R.id.button2);
+        Intent intent = getIntent();
+        final String personName = intent.getExtras().getString("personName");
+        final String eldPhoneNo = intent.getExtras().getString("eldPhoneNo");
 
-        elderlyButton.setOnClickListener(new View.OnClickListener() {
+        continueButton = (Button) findViewById(R.id.button1);
+        phoneField = (EditText) findViewById(R.id.editText1);
+
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ElderlyRegisterEnterName.class);
-                startActivity(intent);
-            }
-        });
 
-        familyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),FamilyRegisterElderlyPhone.class);
+                Intent intent = new Intent(v.getContext(), FamilyRegisterAddress.class);
+                intent.putExtra("phoneNumber", String.valueOf(phoneField.getText()));
+                intent.putExtra("personName", personName);
+                intent.putExtra("eldPhoneNo", eldPhoneNo);
                 startActivity(intent);
+
             }
         });
     }
@@ -41,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_elderly_register_phone_no, menu);
         return true;
     }
 

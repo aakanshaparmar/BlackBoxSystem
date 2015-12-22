@@ -13,6 +13,9 @@
     <string name="enterPhoneNo">Please Enter Your Phone Number</string>
     <string name="enterAddress">Please Enter Your Address</string>
     <string name="finalRegPage">Please Review Information Else Press Back to Edit</string>
+    <string name="enterEldPhoneNo">Please Enter The Elderly \'s Phone Number</string>
+    <string name="enterEmailID">Please Enter Your Email ID</string>
+    <string name="enterCommonPassword">Please Enter Your Common Password</string>
 
 
 
@@ -23,4 +26,12 @@
     <string name="title_activity_elderly_register_address">ElderlyRegisterAddress</string>
     <string name="title_activity_elderly_register_page_final">ElderlyRegisterPageFinal</string>
     <string name="title_activity_elderly_home_page">ElderlyHomePage</string>
+    <string name="title_activity_family_register_naem">FamilyRegisterNaem</string>
+    <string name="title_activity_family_register_name">FamilyRegisterName</string>
+    <string name="title_activity_family_register_phone">FamilyRegisterPhone</string>
+    <string name="title_activity_family_register_elderly_phone">FamilyRegisterElderlyPhone</string>
+    <string name="title_activity_family_register_address">FamilyRegisterAddress</string>
+    <string name="title_activity_family_register_email_id">FamilyRegisterEmailID</string>
+    <string name="title_activity_family_register_common_password">FamilyRegisterCommonPassword
+    </string>
 </resources>

@@ -7,41 +7,50 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
-public class MainActivity extends ActionBarActivity {
+public class FamilyRegisterAddress extends ActionBarActivity {
 
-    Button elderlyButton;
-    Button familyButton;
-
+    Button continueButton;
+    EditText addressField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_elderly_register_address);
 
-        elderlyButton = (Button) findViewById(R.id.button1);
-        familyButton = (Button) findViewById(R.id.button2);
+        Intent intent = getIntent();
 
-        elderlyButton.setOnClickListener(new View.OnClickListener() {
+        final String personName = intent.getExtras().getString("personName");
+        final String phoneNo = intent.getExtras().getString("phoneNumber");
+        final String eldPhoneNo = intent.getExtras().getString("eldPhoneNo");
+
+        continueButton = (Button) findViewById(R.id.button1);
+        addressField = (EditText) findViewById(R.id.editText1);
+
+
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ElderlyRegisterEnterName.class);
+
+                Intent intent = new Intent( v.getContext(), FamilyRegisterCommonPassword.class);
+                intent.putExtra("phoneNumber", phoneNo);
+                intent.putExtra("personName", personName);
+                intent.putExtra("eldPhoneNo", eldPhoneNo);
+                intent.putExtra("address", String.valueOf(addressField.getText()));
                 startActivity(intent);
+
             }
         });
 
-        familyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),FamilyRegisterElderlyPhone.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_elderly_register_address, menu);
         return true;
     }
 

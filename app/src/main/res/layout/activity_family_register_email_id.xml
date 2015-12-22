@@ -5,13 +5,13 @@
     android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="aakanshaparmar.blackboxsystem.ElderlyRegisterAddress">
+    tools:context="aakanshaparmar.blackboxsystem.FamilyRegisterEmailID">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/enterAddress"
+        android:text="@string/enterEmailID"
         android:id="@+id/enterAddress1"
         android:textStyle="bold"
         android:textSize="35dp"

@@ -7,33 +7,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
-public class MainActivity extends ActionBarActivity {
+public class FamilyRegisterElderlyPhone extends ActionBarActivity {
 
-    Button elderlyButton;
-    Button familyButton;
-
+    Button continueButton;
+    EditText phoneField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_elderly_register_phone_no);
 
-        elderlyButton = (Button) findViewById(R.id.button1);
-        familyButton = (Button) findViewById(R.id.button2);
 
-        elderlyButton.setOnClickListener(new View.OnClickListener() {
+        continueButton = (Button) findViewById(R.id.button1);
+        phoneField = (EditText) findViewById(R.id.editText1);
+
+        final String eldPhoneNo = String.valueOf(phoneField.getText());
+
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ElderlyRegisterEnterName.class);
-                startActivity(intent);
-            }
-        });
 
-        familyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),FamilyRegisterElderlyPhone.class);
+                Intent intent = new Intent(v.getContext(), FamilyRegisterName.class);
+                intent.putExtra("eldPhoneNumber", eldPhoneNo);
                 startActivity(intent);
+
             }
         });
     }
@@ -41,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_elderly_register_phone_no, menu);
         return true;
     }
 
