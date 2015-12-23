@@ -6,8 +6,7 @@
     <string name="chooseRole">Choose Your Role</string>
     <string name="elderlyRole">Elderly</string>
     <string name="famRole">Family</string>
-
-    <string name="enterName">Please Enter Your Full Name</string>
+     <string name="enterName">Please Enter Your Full Name</string>
     <string name="continueButton">Continue</string>
     <string name="backButton">Back</string>
     <string name="enterPhoneNo">Please Enter Your Phone Number</string>
@@ -15,10 +14,7 @@
     <string name="finalRegPage">Please Review Information Else Press Back to Edit</string>
     <string name="enterEldPhoneNo">Please Enter The Elderly \'s Phone Number</string>
     <string name="enterEmailID">Please Enter Your Email ID</string>
-    <string name="enterCommonPassword">Please Enter Your Common Password</string>
-
-
-
+    <string name="enterCommonPassword">Please Enter Common Password Provided to the Elderly</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_elderly_register_enter_name">ElderlyRegisterEnterName</string>
     <string name="title_activity_family_register_page1">FamilyRegisterPage1</string>
@@ -32,6 +28,9 @@
     <string name="title_activity_family_register_elderly_phone">FamilyRegisterElderlyPhone</string>
     <string name="title_activity_family_register_address">FamilyRegisterAddress</string>
     <string name="title_activity_family_register_email_id">FamilyRegisterEmailID</string>
-    <string name="title_activity_family_register_common_password">FamilyRegisterCommonPassword
-    </string>
+    <string name="title_activity_family_register_common_password">FamilyRegisterCommonPassword</string>
+    <string name="submitButton">Submit</string>
+    <string name="continueToHomePg">Continue To Home Page</string>
+    <string name="title_activity_family_register_final">FamilyRegisterFinal</string>
+    <string name="title_activity_elderly_show_common_pass">ElderlyShowCommonPass</string>
 </resources>

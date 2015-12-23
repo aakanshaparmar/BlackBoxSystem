@@ -7,33 +7,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 
-public class FamilyRegisterName extends ActionBarActivity {
+public class ElderlyShowCommonPass extends ActionBarActivity {
 
     Button continueButton;
-    EditText nameField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_family_register_name);
+        setContentView(R.layout.activity_elderly_show_common_pass);
 
-        continueButton = (Button) findViewById(R.id.button1);
-        nameField = (EditText) findViewById(R.id.editText1);
-
-        Intent intent = getIntent();
-
-        final String eldPhoneNo = intent.getExtras().getString("eldPhoneNO");
+        continueButton = (Button)findViewById(R.id.button1);
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(v.getContext(), FamilyRegisterPhone.class);
-                intent.putExtra("personName", String.valueOf(nameField.getText()));
-                intent.putExtra("eldPhoneNo", eldPhoneNo);
+                Intent intent = new Intent(v.getContext(), ElderlyHomePage.class);
                 startActivity(intent);
 
             }
@@ -43,7 +34,7 @@ public class FamilyRegisterName extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_elderly_register_enter_name, menu);
+        getMenuInflater().inflate(R.menu.menu_elderly_show_common_pass, menu);
         return true;
     }
 

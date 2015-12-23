@@ -19,7 +19,7 @@ public class FamilyRegisterAddress extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_elderly_register_address);
+        setContentView(R.layout.activity_family_register_address);
 
         Intent intent = getIntent();
 
@@ -35,7 +35,7 @@ public class FamilyRegisterAddress extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent( v.getContext(), FamilyRegisterCommonPassword.class);
+                Intent intent = new Intent( v.getContext(), FamilyRegisterEmailID.class);
                 intent.putExtra("phoneNumber", phoneNo);
                 intent.putExtra("personName", personName);
                 intent.putExtra("eldPhoneNo", eldPhoneNo);

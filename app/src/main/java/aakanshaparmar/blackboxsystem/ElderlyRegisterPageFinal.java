@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class ElderlyRegisterPageFinal extends ActionBarActivity {
 
     TextView personNameField, phoneNoField, addressField;
-    Button continueButton;
+    Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +29,18 @@ public class ElderlyRegisterPageFinal extends ActionBarActivity {
         phoneNoField = (TextView) findViewById(R.id.phoneNo);
         addressField = (TextView) findViewById(R.id.address);
 
-        continueButton = (Button)findViewById(R.id.button1);
+        submitButton = (Button)findViewById(R.id.button1);
 
         personNameField.setText(personName);
         phoneNoField.setText(phoneNo);
         addressField.setText(address);
 
-        continueButton.setOnClickListener(new View.OnClickListener() {
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(v.getContext(), ElderlyHomePage.class);
-                startActivity(intent)
-                ;
+                Intent intent = new Intent(v.getContext(), ElderlyShowCommonPass.class);
+                startActivity(intent);
 
             }
         });

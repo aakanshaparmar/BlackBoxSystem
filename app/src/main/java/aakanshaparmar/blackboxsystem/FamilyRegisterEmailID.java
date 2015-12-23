@@ -19,7 +19,7 @@ public class FamilyRegisterEmailID extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_elderly_register_address);
+        setContentView(R.layout.activity_family_register_email_id);
 
         Intent intent = getIntent();
 

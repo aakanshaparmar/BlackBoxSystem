@@ -18,7 +18,7 @@ public class FamilyRegisterElderlyPhone extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_elderly_register_phone_no);
+        setContentView(R.layout.activity_family_register_elderly_phone);
 
 
         continueButton = (Button) findViewById(R.id.button1);

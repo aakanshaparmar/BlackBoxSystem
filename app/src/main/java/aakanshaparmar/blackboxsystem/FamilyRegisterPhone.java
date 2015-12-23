@@ -18,14 +18,14 @@ public class FamilyRegisterPhone extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_elderly_register_phone_no);
+        setContentView(R.layout.activity_family_register_phone);
 
         Intent intent = getIntent();
         final String personName = intent.getExtras().getString("personName");
         final String eldPhoneNo = intent.getExtras().getString("eldPhoneNo");
 
         continueButton = (Button) findViewById(R.id.button1);
-        phoneField = (EditText) findViewById(R.id.editText1);
+        phoneField = (EditText)findViewById(R.id.editText1);
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
