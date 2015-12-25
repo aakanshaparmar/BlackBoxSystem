@@ -33,4 +33,5 @@
     <string name="continueToHomePg">Continue To Home Page</string>
     <string name="title_activity_family_register_final">FamilyRegisterFinal</string>
     <string name="title_activity_elderly_show_common_pass">ElderlyShowCommonPass</string>
+    <string name="title_activity_family_home_page">FamilyHomePage</string>
 </resources>

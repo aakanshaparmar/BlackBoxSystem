@@ -3,6 +3,7 @@ package aakanshaparmar.blackboxsystem;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,9 +31,11 @@ public class FamilyRegisterElderlyPhone extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
+                Log.d("msg",eldPhoneNo);
                 Intent intent = new Intent(v.getContext(), FamilyRegisterName.class);
                 intent.putExtra("eldPhoneNumber", eldPhoneNo);
                 startActivity(intent);
+
 
             }
         });

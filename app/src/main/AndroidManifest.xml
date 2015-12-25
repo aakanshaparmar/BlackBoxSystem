@@ -9,7 +9,9 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,25 +21,35 @@
         <activity
             android:name=".ElderlyRegisterEnterName"
             android:label="@string/title_activity_elderly_register_enter_name"
-            android:windowSoftInputMode="stateAlwaysVisible" >
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ElderlyRegisterPhoneNo"
             android:label="@string/title_activity_elderly_register_phone_no"
-            android:windowSoftInputMode="stateAlwaysVisible" >
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ElderlyRegisterAddress"
             android:label="@string/title_activity_elderly_register_address"
-            android:windowSoftInputMode="stateAlwaysVisible" >
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ElderlyRegisterPageFinal"
-            android:label="@string/title_activity_elderly_register_page_final" >
+            android:label="@string/title_activity_elderly_register_page_final"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ElderlyHomePage"
-            android:label="@string/title_activity_elderly_home_page" >
+            android:label="@string/title_activity_elderly_home_page"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".FamilyRegisterName"
@@ -47,35 +59,55 @@
         <activity
             android:name=".FamilyRegisterPhone"
             android:label="@string/title_activity_family_register_phone"
-            android:windowSoftInputMode="stateAlwaysVisible" >
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".FamilyRegisterElderlyPhone"
             android:label="@string/title_activity_family_register_elderly_phone"
-            android:windowSoftInputMode="stateAlwaysVisible" >
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".FamilyRegisterAddress"
             android:label="@string/title_activity_family_register_address"
-            android:windowSoftInputMode="stateAlwaysVisible" >
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".FamilyRegisterEmailID"
             android:label="@string/title_activity_family_register_email_id"
-            android:windowSoftInputMode="stateAlwaysVisible" >
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".FamilyRegisterCommonPassword"
             android:label="@string/title_activity_family_register_common_password"
-            android:windowSoftInputMode="stateAlwaysVisible" >
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".FamilyRegisterFinal"
-            android:label="@string/title_activity_family_register_final" >
+            android:label="@string/title_activity_family_register_final"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ElderlyShowCommonPass"
-            android:label="@string/title_activity_elderly_show_common_pass" >
+            android:label="@string/title_activity_elderly_show_common_pass"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".FamilyHomePage"
+            android:label="@string/title_activity_family_home_page"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
