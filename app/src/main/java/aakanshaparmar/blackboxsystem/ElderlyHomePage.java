@@ -1,12 +1,22 @@
 package aakanshaparmar.blackboxsystem;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.example.aakanshaparmar.myapplication.backend.myApi.MyApi;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
+import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
+
+import java.io.IOException;
 
 
 public class ElderlyHomePage extends ActionBarActivity {
@@ -28,8 +38,11 @@ public class ElderlyHomePage extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elderly_home_page);
 
+
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        if (actionBar != null) {
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        }
 
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -92,3 +105,5 @@ public class ElderlyHomePage extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+
