@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.aakanshaparmar.myapplication.backend.myApi.MyApi;
+import com.example.aakanshaparmar.myapplication.backend.elderlyRegistrationApi.ElderlyRegistrationApi;
+import com.example.aakanshaparmar.myapplication.backend.elderlyRegistrationApi.model.ElderlyRegistration;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 
@@ -26,6 +27,13 @@ public class ElderlyRegisterPageFinal extends ActionBarActivity {
     TextView personNameField, phoneNoField, addressField;
     Button submitButton;
 
+    String personName;
+    String phoneNo;
+    String address;
+
+    public ElderlyRegisterPageFinal() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +42,9 @@ public class ElderlyRegisterPageFinal extends ActionBarActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        final String personName = sharedPreferences.getString("fullName", "");
-        final String phoneNo = sharedPreferences.getString("phoneNo", "");
-        final String address = sharedPreferences.getString("address", "");
+        personName = sharedPreferences.getString("fullName", "");
+        phoneNo = sharedPreferences.getString("phoneNo", "");
+        address = sharedPreferences.getString("address", "");
 
         personNameField = (TextView) findViewById(R.id.personName);
         phoneNoField = (TextView) findViewById(R.id.phoneNo);
@@ -53,10 +61,7 @@ public class ElderlyRegisterPageFinal extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                new EndpointsAsyncTask().execute(new Pair<Context, String>(getApplicationContext(), "Manfred"));
-
-                Intent intent = new Intent(v.getContext(), ElderlyShowCommonPass.class);
-                startActivity(intent);
+                new EldRegistrationAsyncTask().execute(getApplicationContext());
 
             }
         });
@@ -87,34 +92,63 @@ public class ElderlyRegisterPageFinal extends ActionBarActivity {
     }
 }
 
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
-    private static MyApi myApiService = null;
+class EldRegistrationAsyncTask extends AsyncTask<Context, Void, ElderlyRegistration> {
+    private static ElderlyRegistrationApi myApiService = null;
     private Context context;
 
-    @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+
+    protected ElderlyRegistration doInBackground(Context... params) {
 
         if(myApiService == null) {  // Only do this once
-            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+            ElderlyRegistrationApi.Builder builder = new ElderlyRegistrationApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://bbsystemproject.appspot.com/_ah/api/");
             // end options for devappserver
 
             myApiService = builder.build();
         }
 
-        context = params[0].first;
-        String name = params[0].second;
+        context = params[0];
+
+        ElderlyRegistration eldInfo = new ElderlyRegistration();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+
+        String personName = prefs.getString("fullName", "");
+        String phoneNo = prefs.getString("phoneNo", "");
+        String address = prefs.getString("address", "");
+        String eID = "e"+phoneNo;
+        int commonPass = 1234;
+
+        eldInfo.setFullName("Aditya");
+        eldInfo.setPhoneNo("9971792703");
+        eldInfo.setAddress("DGC2");
+        eldInfo.setEid("e9971792703");
+        eldInfo.setCommonPass(1234);
+
+        String name = eldInfo.getFullName();
+        //Toast.makeText(context, name, Toast.LENGTH_LONG).show();
 
         try {
-            return myApiService.sayHi(name).execute().getData();
+            return myApiService.insertElderlyRegistration(eldInfo).execute();
         } catch (IOException e) {
-            return e.getMessage();
+            return null;
         }
     }
 
-    @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, "Connected", Toast.LENGTH_LONG).show();
+         if (result == null) {
+                Toast.makeText(context, "Error in reigstrations!", Toast.LENGTH_LONG).show();
+
+            } else {
+             Toast.makeText(context, "Registration complete", Toast.LENGTH_LONG).show();
+                Intent intent;
+                intent = new Intent(context, ElderlyHomePage.class);
+                context.startActivity(intent);
+
+            }
     }
+
 }
+
 

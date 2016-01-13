@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,7 +53,7 @@ public class FamilyRegisterFinal extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                new EndpointsAsyncTask().execute(new Pair<Context, String>(getApplicationContext(), "Manfred"));
+               // new EndpointsAsyncTask().execute(new Pair<Context, String>(getApplicationContext(), "Manfred"));
 
                 Intent intent = new Intent(v.getContext(), FamilyViewEldLoc.class);
                 startActivity(intent);
