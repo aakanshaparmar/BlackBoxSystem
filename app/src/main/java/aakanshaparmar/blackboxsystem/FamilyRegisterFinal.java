@@ -56,7 +56,7 @@ public class FamilyRegisterFinal extends ActionBarActivity {
 
                 new EndpointsAsyncTask().execute(new Pair<Context, String>(getApplicationContext(), "Manfred"));
 
-                Intent intent = new Intent(v.getContext(), FamilyHomePage.class);
+                Intent intent = new Intent(v.getContext(), FamilyViewEldLoc.class);
                 startActivity(intent);
 
             }

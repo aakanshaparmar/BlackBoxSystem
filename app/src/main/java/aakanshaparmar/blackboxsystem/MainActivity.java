@@ -29,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
             startActivity(intent);
         }
         else if(role.equals("family")){
-            Intent intent = new Intent(this,FamilyHomePage.class);
+            Intent intent = new Intent(this,FamilyViewEldLoc.class);
             startActivity(intent);
         }
         else {
