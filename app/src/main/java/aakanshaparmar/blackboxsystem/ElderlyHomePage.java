@@ -1,6 +1,8 @@
 package aakanshaparmar.blackboxsystem;
 
+import android.app.ActionBar;
 import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
@@ -12,7 +14,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
+import java.text.DateFormat;
 
 import static android.app.ActionBar.NAVIGATION_MODE_TABS;
 
@@ -34,15 +39,12 @@ public class ElderlyHomePage extends ActionBarActivity  implements
     ElderlyHospPoliceFragment hospPoliceFragment = new  ElderlyHospPoliceFragment();
     ElderlySOSFragment sosFragment = new  ElderlySOSFragment();
 
-    /**
-     * Provides the entry point to Google Play services.
-     */
     protected GoogleApiClient mGoogleApiClient;
-
-    /**
-     * Represents a geographical location.
-     */
+    protected boolean mRequestingLocationUpdates = true;
     protected Location mLastLocation;
+    protected Location mCurrentLocation;
+    protected LocationRequest mLocationRequest;
+
 
 
     @Override
@@ -92,7 +94,6 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         actionBar.addTab(hospPoliceTab);
 
         buildGoogleApiClient();
-
 
     }
 
@@ -174,7 +175,6 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         Log.i(TAG, "Connection suspended");
         mGoogleApiClient.connect();
     }
-
 
 }
 
