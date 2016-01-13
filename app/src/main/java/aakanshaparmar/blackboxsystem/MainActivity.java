@@ -1,11 +1,12 @@
 package aakanshaparmar.blackboxsystem;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 
@@ -20,22 +21,22 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        elderlyButton = (Button) findViewById(R.id.button1);
-        familyButton = (Button) findViewById(R.id.button2);
+        SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+        String role = sharedPreferences.getString("role",null);
 
-        elderlyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ElderlyRegisterEnterName.class);
-                startActivity(intent);
-            }
-        });
+        if(role == null){
+            Intent intent = new Intent(this,chooseRole.class);
+            startActivity(intent);
+        }
+        else if(role.equals("family")){
+            Intent intent = new Intent(this,FamilyHomePage.class);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this,ElderlyHomePage.class);
+            startActivity(intent);
+        }
 
-        familyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),FamilyRegisterElderlyPhone.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override

@@ -1,6 +1,8 @@
 package aakanshaparmar.blackboxsystem;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -23,17 +25,17 @@ public class FamilyRegisterName extends ActionBarActivity {
         continueButton = (Button) findViewById(R.id.button1);
         nameField = (EditText) findViewById(R.id.editText1);
 
-        Intent intent = getIntent();
-
-        final String eldPhoneNo = intent.getExtras().getString("eldPhoneNO");
-
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putString("fullName", String.valueOf(nameField.getText()));
+                editor.commit();
+
                 Intent intent = new Intent(v.getContext(), FamilyRegisterPhone.class);
-                intent.putExtra("personName", String.valueOf(nameField.getText()));
-                intent.putExtra("eldPhoneNo", eldPhoneNo);
                 startActivity(intent);
 
             }

@@ -1,6 +1,8 @@
 package aakanshaparmar.blackboxsystem;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -21,13 +23,6 @@ public class FamilyRegisterCommonPassword extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family_register_common_password);
 
-        Intent intent1  = getIntent();
-        final String personName = intent1.getExtras().getString("personName");
-        final String phoneNumber = intent1.getExtras().getString("phoneNumber");
-        final String eldPhoneNo = intent1.getExtras().getString("eldPhoneNo");
-        final String address = intent1.getExtras().getString("address");
-        final String emailID = intent1.getExtras().getString("emailID");
-
 
         continueButton = (Button)findViewById(R.id.button1);
         commonPassField = (EditText)findViewById(R.id.editText1);
@@ -41,12 +36,13 @@ public class FamilyRegisterCommonPassword extends ActionBarActivity {
 
                 if(commonPass.equals("1234")){
 
+                    SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putString("commonPass", String.valueOf(commonPassField.getText()));
+                    editor.commit();
+
                     Intent intent = new Intent(v.getContext(), FamilyRegisterFinal.class);
-                    intent.putExtra("personName",personName);
-                    intent.putExtra("phoneNumber",phoneNumber);
-                    intent.putExtra("eldPhoneNo", eldPhoneNo);
-                    intent.putExtra("address",address);
-                    intent.putExtra("emailID", emailID);
                     startActivity(intent);
 
                 }

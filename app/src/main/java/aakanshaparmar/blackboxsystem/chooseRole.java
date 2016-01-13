@@ -1,55 +1,46 @@
 package aakanshaparmar.blackboxsystem;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 
-public class ElderlyRegisterAddress extends ActionBarActivity {
+public class chooseRole extends ActionBarActivity {
 
-    Button continueButton;
-    EditText addressField;
+    Button elderlyButton;
+    Button familyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_elderly_register_address);
+        setContentView(R.layout.activity_choose_role);
 
+        elderlyButton = (Button) findViewById(R.id.button1);
+        familyButton = (Button) findViewById(R.id.button2);
 
-        continueButton = (Button) findViewById(R.id.button1);
-        addressField = (EditText) findViewById(R.id.editText1);
-
-
-        continueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+        elderlyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                editor.putString("address", String.valueOf(addressField.getText()));
-                editor.commit();
-
-                Intent intent = new Intent( v.getContext(), ElderlyRegisterPageFinal.class);
+                Intent intent = new Intent(v.getContext(), ElderlyRegisterEnterName.class);
                 startActivity(intent);
-
             }
         });
 
+        familyButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), FamilyRegisterElderlyPhone.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_elderly_register_address, menu);
+        getMenuInflater().inflate(R.menu.menu_choose_role, menu);
         return true;
     }
 

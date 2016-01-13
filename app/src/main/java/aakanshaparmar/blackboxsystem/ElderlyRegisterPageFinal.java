@@ -2,6 +2,7 @@ package aakanshaparmar.blackboxsystem;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -30,10 +31,12 @@ public class ElderlyRegisterPageFinal extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elderly_register_page_final);
 
-        Intent intent = getIntent();
-        final String personName = intent.getExtras().getString("personName");
-        final String phoneNo = intent.getExtras().getString("phoneNumber");
-        final String address = intent.getExtras().getString("address");
+        SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        final String personName = sharedPreferences.getString("fullName", "");
+        final String phoneNo = sharedPreferences.getString("phoneNo", "");
+        final String address = sharedPreferences.getString("address", "");
 
         personNameField = (TextView) findViewById(R.id.personName);
         phoneNoField = (TextView) findViewById(R.id.phoneNo);
@@ -111,7 +114,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, "Submitted", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Connected", Toast.LENGTH_LONG).show();
     }
 }
 

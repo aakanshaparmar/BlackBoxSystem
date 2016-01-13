@@ -111,6 +111,10 @@
             android:label="@string/title_activity_family_home_page"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".chooseRole"
+            android:label="@string/title_activity_choose_role" >
+        </activity>
     </application>
 
 </manifest>

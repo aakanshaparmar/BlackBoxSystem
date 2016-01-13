@@ -1,13 +1,17 @@
 package aakanshaparmar.blackboxsystem;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class FamilyRegisterFinal extends ActionBarActivity {
@@ -20,12 +24,15 @@ public class FamilyRegisterFinal extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family_register_final);
 
-        Intent intent = getIntent();
-        final String personName = intent.getExtras().getString("personName");
-        final String phoneNo = intent.getExtras().getString("phoneNumber");
-        final String address = intent.getExtras().getString("address");
-        final String eldPhoneNo = intent.getExtras().getString("eldPhoneNo");
-        final String emailID = intent.getExtras().getString("emailID");
+        SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        final String personName = sharedPreferences.getString("fullName", "");
+        final String phoneNo = sharedPreferences.getString("phoneNo", "");
+        final String address = sharedPreferences.getString("address", "");
+        final String eldPhoneNo = sharedPreferences.getString("eldPhoneNo", "");
+        final String emailID = sharedPreferences.getString("emailID", "");
+        final String role = sharedPreferences.getString("role", "");
 
         personNameField = (TextView) findViewById(R.id.personName);
         phoneNoField = (TextView) findViewById(R.id.phoneNo);
@@ -35,17 +42,19 @@ public class FamilyRegisterFinal extends ActionBarActivity {
 
         submitButton = (Button)findViewById(R.id.button1);
 
-
-
         personNameField.setText(personName);
         phoneNoField.setText(phoneNo);
         addressField.setText(address);
         emailIDField.setText(emailID);
         eldPhoneNoField.setText(eldPhoneNo);
 
+        Toast.makeText(this, role, Toast.LENGTH_LONG).show();
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                new EndpointsAsyncTask().execute(new Pair<Context, String>(getApplicationContext(), "Manfred"));
 
                 Intent intent = new Intent(v.getContext(), FamilyHomePage.class);
                 startActivity(intent);
@@ -78,3 +87,4 @@ public class FamilyRegisterFinal extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+

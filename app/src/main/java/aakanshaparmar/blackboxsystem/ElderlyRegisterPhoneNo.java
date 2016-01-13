@@ -1,6 +1,8 @@
 package aakanshaparmar.blackboxsystem;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -20,22 +22,21 @@ public class ElderlyRegisterPhoneNo extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elderly_register_phone_no);
 
-        Intent intent = getIntent();
-        String personName = new String();
-        personName = intent.getExtras().getString("personName");
-
         continueButton = (Button) findViewById(R.id.button1);
         phoneField = (EditText) findViewById(R.id.editText1);
 
-        final String finalPersonName = personName;
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putString("phoneNo", String.valueOf(phoneField.getText()));
+                editor.commit();
+
                 Intent intent = new Intent( v.getContext(), ElderlyRegisterAddress.class);
-                intent.putExtra("phoneNumber", String.valueOf(phoneField.getText()));
-                intent.putExtra("personName", finalPersonName);
                 startActivity(intent);
 
             }

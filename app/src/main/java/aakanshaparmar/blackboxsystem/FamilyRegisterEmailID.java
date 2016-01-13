@@ -1,6 +1,8 @@
 package aakanshaparmar.blackboxsystem;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -21,13 +23,6 @@ public class FamilyRegisterEmailID extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family_register_email_id);
 
-        Intent intent = getIntent();
-
-        final String personName = intent.getExtras().getString("personName");
-        final String phoneNo = intent.getExtras().getString("phoneNumber");
-        final String eldPhoneNo = intent.getExtras().getString("eldPhoneNo");
-        final String address = intent.getExtras().getString("address");
-
         continueButton = (Button) findViewById(R.id.button1);
         emailIDField = (EditText) findViewById(R.id.editText1);
 
@@ -36,12 +31,13 @@ public class FamilyRegisterEmailID extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
+                SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putString("emailID", String.valueOf(emailIDField.getText()));
+                editor.commit();
+
                 Intent intent = new Intent( v.getContext(), FamilyRegisterCommonPassword.class);
-                intent.putExtra("phoneNumber", phoneNo);
-                intent.putExtra("personName", personName);
-                intent.putExtra("eldPhoneNo", eldPhoneNo);
-                intent.putExtra("address", address);
-                intent.putExtra("emailID", String.valueOf(emailIDField.getText()));
                 startActivity(intent);
 
             }
