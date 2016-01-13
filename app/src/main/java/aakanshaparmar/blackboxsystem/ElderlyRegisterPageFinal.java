@@ -90,10 +90,9 @@ public class ElderlyRegisterPageFinal extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-}
 
-class EldRegistrationAsyncTask extends AsyncTask<Context, Void, ElderlyRegistration> {
-    private static ElderlyRegistrationApi myApiService = null;
+private class EldRegistrationAsyncTask extends AsyncTask<Context, Void, ElderlyRegistration> {
+    private  ElderlyRegistrationApi myApiService = null;
     private Context context;
 
 
@@ -120,10 +119,10 @@ class EldRegistrationAsyncTask extends AsyncTask<Context, Void, ElderlyRegistrat
         String eID = "e"+phoneNo;
         int commonPass = 1234;
 
-        eldInfo.setFullName("Aditya");
-        eldInfo.setPhoneNo("9971792703");
-        eldInfo.setAddress("DGC2");
-        eldInfo.setEid("e9971792703");
+        eldInfo.setFullName("Mw4");
+        eldInfo.setPhoneNo("9w4");
+        eldInfo.setAddress("Dw4");
+        eldInfo.setEid("e9w5n");
         eldInfo.setCommonPass(1234);
 
         String name = eldInfo.getFullName();
@@ -136,19 +135,21 @@ class EldRegistrationAsyncTask extends AsyncTask<Context, Void, ElderlyRegistrat
         }
     }
 
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(ElderlyRegistration result) {
          if (result == null) {
-                Toast.makeText(context, "Error in reigstrations!", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Error in registrations!", Toast.LENGTH_LONG).show();
 
             } else {
-             Toast.makeText(context, "Registration complete", Toast.LENGTH_LONG).show();
-                Intent intent;
-                intent = new Intent(context, ElderlyHomePage.class);
-                context.startActivity(intent);
+                Toast.makeText(context, "Registration complete", Toast.LENGTH_LONG).show();
+
+                 Intent intent;
+                 intent = new Intent(context, ElderlyHomePage.class);
+                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                 context.startActivity(intent);
 
             }
     }
 
 }
-
+}
 
