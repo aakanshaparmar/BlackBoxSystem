@@ -119,10 +119,10 @@ private class EldRegistrationAsyncTask extends AsyncTask<Context, Void, ElderlyR
         String eID = "e"+phoneNo;
         int commonPass = 1234;
 
-        eldInfo.setFullName("Mw4");
-        eldInfo.setPhoneNo("9w4");
-        eldInfo.setAddress("Dw4");
-        eldInfo.setEid("e9w5n");
+        eldInfo.setFullName("Vanisha");
+        eldInfo.setPhoneNo("123456789");
+        eldInfo.setAddress("b908");
+        eldInfo.setEid("e123456789");
         eldInfo.setCommonPass(1234);
 
         String name = eldInfo.getFullName();
@@ -143,7 +143,7 @@ private class EldRegistrationAsyncTask extends AsyncTask<Context, Void, ElderlyR
                 Toast.makeText(context, "Registration complete", Toast.LENGTH_LONG).show();
 
                  Intent intent;
-                 intent = new Intent(context, ElderlyHomePage.class);
+                 intent = new Intent(context, ElderlyShowCommonPass.class);
                  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                  context.startActivity(intent);
 
