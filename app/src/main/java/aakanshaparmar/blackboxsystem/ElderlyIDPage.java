@@ -27,7 +27,7 @@ public class ElderlyIDPage extends ActionBarActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         personName = sharedPreferences.getString("fullName", "");
-        phoneNo = sharedPreferences.getString("phoneNo", "");
+        phoneNo = sharedPreferences.getString("emergencyPhoneNo", "");
         address = sharedPreferences.getString("address", "");
 
         personNameField = (TextView) findViewById(R.id.personName);

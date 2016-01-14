@@ -8,6 +8,7 @@ public class ElderlyRegistration {
     //Elderly Registration Info
     private String fullName;
     private String phoneNo;
+    private String emerPhoneNo;
     private String address;
     private String eID;
     private int commonPass;
@@ -18,6 +19,10 @@ public class ElderlyRegistration {
 
     public String getPhoneNo() {
         return phoneNo;
+    }
+
+    public String getEmerPhoneNo() {
+        return emerPhoneNo;
     }
 
     public String getAddress() {
@@ -38,6 +43,10 @@ public class ElderlyRegistration {
 
     public void setPhoneNo(String num) {
         phoneNo = num;
+    }
+
+    public void setemerPhoneNo(String num) {
+        emerPhoneNo = num;
     }
 
     public void setAddress(String add) {

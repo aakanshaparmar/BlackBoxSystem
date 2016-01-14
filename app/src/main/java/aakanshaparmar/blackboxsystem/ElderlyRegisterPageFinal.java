@@ -24,12 +24,13 @@ import java.io.IOException;
 
 public class ElderlyRegisterPageFinal extends ActionBarActivity {
 
-    TextView personNameField, phoneNoField, addressField;
+    TextView personNameField, phoneNoField, addressField, emerPhoneNoField;
     Button submitButton;
 
     String personName;
     String phoneNo;
     String address;
+    String emergencyPhoneNo;
 
     public ElderlyRegisterPageFinal() {
     }
@@ -45,16 +46,19 @@ public class ElderlyRegisterPageFinal extends ActionBarActivity {
         personName = sharedPreferences.getString("fullName", "");
         phoneNo = sharedPreferences.getString("phoneNo", "");
         address = sharedPreferences.getString("address", "");
+        emergencyPhoneNo = sharedPreferences.getString("emergencyPhoneNo", "")+"(Emergency No.)";
 
         personNameField = (TextView) findViewById(R.id.personName);
         phoneNoField = (TextView) findViewById(R.id.phoneNo);
         addressField = (TextView) findViewById(R.id.address);
+        emerPhoneNoField = (TextView) findViewById(R.id.emerPhoneNo);
 
         submitButton = (Button)findViewById(R.id.button1);
 
         personNameField.setText(personName);
         phoneNoField.setText(phoneNo);
         addressField.setText(address);
+        emerPhoneNoField.setText(emergencyPhoneNo);
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -119,11 +123,13 @@ private class EldRegistrationAsyncTask extends AsyncTask<Context, Void, ElderlyR
         String eID = "e"+phoneNo;
         int commonPass = 1234;
 
-        eldInfo.setFullName("Vanisha");
-        eldInfo.setPhoneNo("123456789");
+        eldInfo.setFullName("Medhavi");
+        eldInfo.setPhoneNo("789564");
         eldInfo.setAddress("b908");
-        eldInfo.setEid("e123456789");
+        eldInfo.setEid("e789564");
         eldInfo.setCommonPass(1234);
+        eldInfo.setEmerPhoneNo("1234567");
+
 
 
         try {

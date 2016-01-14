@@ -10,6 +10,7 @@
     <string name="continueButton">Continue</string>
     <string name="backButton">Back</string>
     <string name="enterPhoneNo">Please Enter Your Phone Number</string>
+    <string name="enterEmergencyPhoneNo">Please Enter an Emergency Phone Number</string>
     <string name="enterAddress">Please Enter Your Address</string>
     <string name="finalRegPage">Please Review Information Else Press Back to Edit</string>
     <string name="enterEldPhoneNo">Please Enter The Elderly \'s Phone Number</string>
@@ -39,5 +40,6 @@
     <string name="title_activity_family_view_eld_loc">Map</string>
     <string name="elderly_action_bar_name">ElderlyActionBarName</string>
     <string name="title_activity_elderly_idpage">ElderlyIDPage</string>
-    <string name="idPageTitle">ID card of phone owner</string>
+    <string name="idPageTitle">Name, Emergency Contact Number and Address of Phone Owner</string>
+    <string name="title_activity_elderly_register_emergency_no">ElderlyRegisterEmergencyNo</string>
 </resources>
