@@ -34,7 +34,10 @@
     <string name="title_activity_family_register_final">FamilyRegisterFinal</string>
     <string name="title_activity_elderly_show_common_pass">ElderlyShowCommonPass</string>
     <string name="title_activity_family_home_page">FamilyHomePage</string>
-<string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_choose_role">chooseRole</string>
     <string name="title_activity_family_view_eld_loc">Map</string>
+    <string name="elderly_action_bar_name">ElderlyActionBarName</string>
+    <string name="title_activity_elderly_idpage">ElderlyIDPage</string>
+    <string name="idPageTitle">ID card of phone owner</string>
 </resources>

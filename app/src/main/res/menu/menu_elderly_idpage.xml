@@ -1,14 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="aakanshaparmar.blackboxsystem.ElderlyHomePage">
-
+    tools:context="aakanshaparmar.blackboxsystem.ElderlyIDPage">
 
     <item
         android:id="@+id/action_idpage"
-        android:icon="@drawable/ic_action_name"
+        android:icon="@drawable/home_icon"
         android:title="@string/elderly_action_bar_name"
         app:showAsAction="ifRoom"/>
-
-
 </menu>

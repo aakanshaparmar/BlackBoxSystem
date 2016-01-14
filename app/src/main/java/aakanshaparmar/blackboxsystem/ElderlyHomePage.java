@@ -1,6 +1,7 @@
 package aakanshaparmar.blackboxsystem;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
@@ -18,8 +19,6 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import java.text.DateFormat;
-
-import static android.app.ActionBar.NAVIGATION_MODE_TABS;
 
 
 public class ElderlyHomePage extends ActionBarActivity  implements
@@ -55,7 +54,7 @@ public class ElderlyHomePage extends ActionBarActivity  implements
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setNavigationMode(NAVIGATION_MODE_TABS);
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         }
 
         // Initilization
@@ -101,7 +100,7 @@ public class ElderlyHomePage extends ActionBarActivity  implements
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_elderly_home_page, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -113,7 +112,9 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_idpage) {
+            Intent intent = new Intent(getApplicationContext(), ElderlyIDPage.class);
+            startActivity(intent);
             return true;
         }
 

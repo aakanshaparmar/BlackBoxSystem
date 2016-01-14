@@ -135,6 +135,10 @@
             android:name=".FamilyViewEldLoc"
             android:label="@string/title_activity_family_view_eld_loc" >
         </activity>
+        <activity
+            android:name=".ElderlyIDPage"
+            android:label="@string/title_activity_elderly_idpage" >
+        </activity>
     </application>
 
 </manifest>
