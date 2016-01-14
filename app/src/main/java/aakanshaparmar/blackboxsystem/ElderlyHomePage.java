@@ -1,8 +1,11 @@
 package aakanshaparmar.blackboxsystem;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
@@ -12,10 +15,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.aakanshaparmar.myapplication.backend.elderlyLocationInfoApi.ElderlyLocationInfoApi;
+import com.example.aakanshaparmar.myapplication.backend.elderlyLocationInfoApi.model.ElderlyLocationInfo;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 
 
 public class ElderlyHomePage extends ActionBarActivity  implements
@@ -47,6 +58,7 @@ public class ElderlyHomePage extends ActionBarActivity  implements
     protected final static String REQUESTING_LOCATION_UPDATES_KEY = "requesting-location-updates-key";
     protected final static String LOCATION_KEY = "location-key";
     protected final static String LAST_UPDATED_TIME_STRING_KEY = "last-updated-time-string-key";
+    protected String mLastUpdateTime;
 
 
 
@@ -157,16 +169,13 @@ public class ElderlyHomePage extends ActionBarActivity  implements
      * Runs when a GoogleApiClient object successfully connects.
      */
     public void onConnected(Bundle connectionHint) {
-        // Provides a simple way of getting a device's location and is well suited for
-        // applications that do not require a fine-grained location and that do not need location
-        // updates. Gets the best and most recent location currently available, which may be null
-        // in rare cases when a location is not available.
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+        /*mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             Toast.makeText(this, "Location Found", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Location Not detected", Toast.LENGTH_LONG).show();
-        }
+        }*/
         startLocationUpdates();
     }
 
@@ -194,14 +203,67 @@ public class ElderlyHomePage extends ActionBarActivity  implements
     @Override
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
-        Toast.makeText(this, "Location Found", Toast.LENGTH_LONG).show();
-    }
+        SharedPreferences sharedPreferences = getSharedPreferences("locationUpdates", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        mLastUpdateTime = DateFormat.getDateTimeInstance().format(new Date());
 
+        editor.putFloat("latitude", (float) mCurrentLocation.getLatitude());
+        editor.putFloat("longitude", (float) mCurrentLocation.getLongitude());
+        editor.putString("dateAndTime", mLastUpdateTime);
+        editor.commit();
+        Toast.makeText(this, "Location Found"+mLastUpdateTime, Toast.LENGTH_LONG).show();
+        new EldLocInfoAsyncTask().execute(getApplicationContext());
+
+    }
 
     protected void startLocationUpdates() {
         // The final argument to {@code requestLocationUpdates()} is a LocationListener
         // (http://developer.android.com/reference/com/google/android/gms/location/LocationListener.html).
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,mLocationRequest,this);
+    }
+
+    private class EldLocInfoAsyncTask extends AsyncTask<Context, Void, ElderlyLocationInfo> {
+        private ElderlyLocationInfoApi myApiService = null;
+        private Context context;
+
+
+        protected ElderlyLocationInfo doInBackground(Context... params) {
+
+            if(myApiService == null) {  // Only do this once
+                ElderlyLocationInfoApi.Builder builder = new ElderlyLocationInfoApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+                        .setRootUrl("https://bbsystemproject.appspot.com/_ah/api/");
+                // end options for devappserver
+
+                myApiService = builder.build();
+            }
+
+            context = params[0];
+
+            ElderlyLocationInfo eldLocInfo = new ElderlyLocationInfo();
+
+            eldLocInfo.setLatitude(Float.valueOf("2.1"));
+            eldLocInfo.setLongitude(Float.valueOf("2.2"));
+            eldLocInfo.setEldID("e29211107");
+            eldLocInfo.setLocID("l13");
+
+            try {
+                return myApiService.insertElderlyLocationInfo(eldLocInfo).execute();
+            } catch (IOException e) {
+                return null;
+            }
+        }
+
+        protected void onPostExecute(ElderlyLocationInfo result) {
+
+            if (result == null) {
+                Toast.makeText(context, "Location not saved in DB! Some error occurred", Toast.LENGTH_LONG).show();
+
+            } else {
+                Toast.makeText(context, "Location saved in DB!", Toast.LENGTH_LONG).show();
+
+            }
+        }
+
     }
 
 }
