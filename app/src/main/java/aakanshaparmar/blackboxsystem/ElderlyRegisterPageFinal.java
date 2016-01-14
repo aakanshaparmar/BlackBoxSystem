@@ -125,8 +125,6 @@ private class EldRegistrationAsyncTask extends AsyncTask<Context, Void, ElderlyR
         eldInfo.setEid("e123456789");
         eldInfo.setCommonPass(1234);
 
-        String name = eldInfo.getFullName();
-        //Toast.makeText(context, name, Toast.LENGTH_LONG).show();
 
         try {
             return myApiService.insertElderlyRegistration(eldInfo).execute();

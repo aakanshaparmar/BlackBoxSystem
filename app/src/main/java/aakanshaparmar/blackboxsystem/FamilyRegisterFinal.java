@@ -3,7 +3,9 @@ package aakanshaparmar.blackboxsystem;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.aakanshaparmar.myapplication.backend.familyRegistrationApi.FamilyRegistrationApi;
+import com.example.aakanshaparmar.myapplication.backend.familyRegistrationApi.model.FamilyRegistration;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+
+import java.io.IOException;
 
 
 public class FamilyRegisterFinal extends ActionBarActivity {
@@ -47,21 +56,15 @@ public class FamilyRegisterFinal extends ActionBarActivity {
         emailIDField.setText(emailID);
         eldPhoneNoField.setText(eldPhoneNo);
 
-        Toast.makeText(this, role, Toast.LENGTH_LONG).show();
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               // new EndpointsAsyncTask().execute(new Pair<Context, String>(getApplicationContext(), "Manfred"));
-
-                Intent intent = new Intent(v.getContext(), FamilyViewEldLoc.class);
-                startActivity(intent);
+               new FamilyRegistrationAsyncTask().execute(getApplicationContext());
 
             }
         });
-
-
     }
 
     @Override
@@ -84,6 +87,69 @@ public class FamilyRegisterFinal extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class FamilyRegistrationAsyncTask extends AsyncTask<Context, Void, FamilyRegistration> {
+        private FamilyRegistrationApi myApiService = null;
+        private Context context;
+
+
+        protected FamilyRegistration doInBackground(Context... params) {
+
+            if(myApiService == null) {  // Only do this once
+                FamilyRegistrationApi.Builder builder = new FamilyRegistrationApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+                        .setRootUrl("https://bbsystemproject.appspot.com/_ah/api/");
+                // end options for devappserver
+
+                myApiService = builder.build();
+            }
+
+            context = params[0];
+
+            FamilyRegistration famInfo = new FamilyRegistration();
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+            SharedPreferences.Editor editor = prefs.edit();
+
+            String personName = prefs.getString("fullName", "");
+            String phoneNo = prefs.getString("phoneNo", "");
+            String address = prefs.getString("address", "");
+            String eID = "e"+phoneNo;
+            int commonPass = 1234;
+
+            famInfo.setFullName("Vanisha");
+            famInfo.setAddress("b908");
+            //famInfo.set
+            famInfo.setEldID("e123456789");
+            famInfo.setCommonPass(1234);
+            famInfo.setEmailID("van@gmail.com");
+            famInfo.setPhoneNo("7654321");
+            famInfo.setFamID("f7654321");
+
+
+
+            try {
+                return myApiService.insertFamilyRegistration(famInfo).execute();
+            } catch (IOException e) {
+                return null;
+            }
+        }
+
+        protected void onPostExecute(FamilyRegistration result) {
+            if (result == null) {
+                Toast.makeText(context, "Error in registrations!", Toast.LENGTH_LONG).show();
+
+            } else {
+                Toast.makeText(context, "Registration complete", Toast.LENGTH_LONG).show();
+
+                Intent intent;
+                intent = new Intent(context, FamilyViewEldLoc.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+
+            }
+        }
+
     }
 }
 

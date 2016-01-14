@@ -26,13 +26,13 @@ public class FamilyRegistration {
         return address;
     }
 
-    public String getEID() {
+    public String getEldID() {
         return eID;
     }
 
     public String getEmailID()  {return emailID;}
 
-    public String getFID() {return fID;}
+    public String getFamID() {return fID;}
 
     public int getCommonPass() {
         return commonPass;
@@ -50,13 +50,13 @@ public class FamilyRegistration {
         address=add;
     }
 
-    public void seteID(String eldID) {
+    public void setEldID(String eldID) {
         eID = eldID;
     }
 
     public void setEmailID(String email) {emailID = email;}
 
-    public void setfID(String famID) {
+    public void setFamID(String famID) {
         fID = famID;
     }
 
