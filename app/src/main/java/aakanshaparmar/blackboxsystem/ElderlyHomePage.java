@@ -19,7 +19,7 @@ import com.google.android.gms.location.LocationServices;
 
 
 public class ElderlyHomePage extends ActionBarActivity  implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
     protected static final String TAG = "ElderlyHomePage";
 
@@ -40,6 +40,13 @@ public class ElderlyHomePage extends ActionBarActivity  implements
     protected Location mLastLocation;
     protected Location mCurrentLocation;
     protected LocationRequest mLocationRequest;
+
+    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 600000;
+    public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
+            UPDATE_INTERVAL_IN_MILLISECONDS / 2;
+    protected final static String REQUESTING_LOCATION_UPDATES_KEY = "requesting-location-updates-key";
+    protected final static String LOCATION_KEY = "location-key";
+    protected final static String LAST_UPDATED_TIME_STRING_KEY = "last-updated-time-string-key";
 
 
 
@@ -128,6 +135,8 @@ public class ElderlyHomePage extends ActionBarActivity  implements
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+
+        createLocationRequest();
     }
 
     @Override
@@ -158,6 +167,7 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         } else {
             Toast.makeText(this, "Location Not detected", Toast.LENGTH_LONG).show();
         }
+        startLocationUpdates();
     }
 
     public void onConnectionFailed(ConnectionResult result) {
@@ -174,6 +184,27 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         mGoogleApiClient.connect();
     }
 
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
+        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mCurrentLocation = location;
+        Toast.makeText(this, "Location Found", Toast.LENGTH_LONG).show();
+    }
+
+
+    protected void startLocationUpdates() {
+        // The final argument to {@code requestLocationUpdates()} is a LocationListener
+        // (http://developer.android.com/reference/com/google/android/gms/location/LocationListener.html).
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,mLocationRequest,this);
+    }
+
 }
+
 
 
