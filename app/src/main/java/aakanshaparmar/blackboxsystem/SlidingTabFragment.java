@@ -5,16 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-/**
- * Created by aakanshaparmar on 25/12/2015.
- */
-public class SlidingTabFragment extends Fragment {
-
-    LinearLayout hsLayout;
-
-    int n=0;
+public class SlidingTabFragment extends Fragment  {
 
     public static final String ARG_OBJECT = "object";
 
@@ -23,10 +15,13 @@ public class SlidingTabFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View rootView;
-        rootView = inflater.inflate(R.layout.fragment_elderly_hosp_police, container, false);
+        rootView = inflater.inflate(R.layout.fragment_sliding_tab, container, false);
 
-        hsLayout = (LinearLayout) rootView.findViewById(R.id.hsLayout1);
 
         return rootView;
     }
+
+
+
+
 }

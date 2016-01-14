@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 
 public class SlidingTabAdapter extends FragmentPagerAdapter  {
-    private String[] tabs = { "Hot", "Trending", "Fresh" };
+    private String[] tabs = { "Instructions", "SOS", "Hospital and Police Station" };
 
     public SlidingTabAdapter(FragmentManager fm) {
         super(fm);

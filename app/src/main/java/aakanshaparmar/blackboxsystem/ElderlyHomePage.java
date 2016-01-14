@@ -3,7 +3,6 @@ package aakanshaparmar.blackboxsystem;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
@@ -17,8 +16,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-
-import java.text.DateFormat;
 
 
 public class ElderlyHomePage extends ActionBarActivity  implements
@@ -34,9 +31,9 @@ public class ElderlyHomePage extends ActionBarActivity  implements
     android.support.v7.app.ActionBar.Tab hospPoliceTab;
     android.support.v7.app.ActionBar.Tab sosTab;
 
-    ElderlyInstFragment instFragment = new ElderlyInstFragment();
-    ElderlyHospPoliceFragment hospPoliceFragment = new  ElderlyHospPoliceFragment();
-    ElderlySOSFragment sosFragment = new  ElderlySOSFragment();
+    SlidingTabFragment instFragment = new SlidingTabFragment();
+    SlidingTabFragment2 hospPoliceFragment = new  SlidingTabFragment2();
+    SlidingTabFragment3 sosFragment = new  SlidingTabFragment3();
 
     protected GoogleApiClient mGoogleApiClient;
     protected boolean mRequestingLocationUpdates = true;
@@ -67,7 +64,7 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         android.support.v7.app.ActionBar.TabListener tabListener = new android.support.v7.app.ActionBar.TabListener() {
             @Override
             public void onTabSelected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
-
+                viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
