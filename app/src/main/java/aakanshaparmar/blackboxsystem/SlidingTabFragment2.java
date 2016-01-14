@@ -2,13 +2,13 @@ package aakanshaparmar.blackboxsystem;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 public class SlidingTabFragment2 extends Fragment  {
 
@@ -32,8 +32,7 @@ public class SlidingTabFragment2 extends Fragment  {
             @Override
             public void onClick(View v) {
 
-                popUp.showAtLocation(mainLayout, Gravity.BOTTOM, 10, 10);
-                popUp.update(50, 50, 300, 80);
+                Toast.makeText(getActivity(), "You have pressed SOS! We'll get you help! Please Wait", Toast.LENGTH_LONG).show();
 
             }
         });

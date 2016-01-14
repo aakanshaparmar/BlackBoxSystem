@@ -73,7 +73,7 @@ public class FamilyViewEldLoc extends ActionBarActivity implements OnMapReadyCal
     @Override
     public void onMapReady(GoogleMap map) {
 
-        LatLng lastLoc = new LatLng(22.2791873, 114.12873949999994);
+        LatLng lastLoc = new LatLng(22.283984, 114.135042);
         map.addMarker(new MarkerOptions().position(lastLoc).title("Last known Location"));
         map.moveCamera(CameraUpdateFactory.newLatLng(lastLoc));
         CameraUpdate zoom=CameraUpdateFactory.zoomTo(18);
