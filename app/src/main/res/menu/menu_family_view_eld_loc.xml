@@ -1,23 +1,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="aakanshaparmar.blackboxsystem.ElderlyIDPage">
+    tools:context="aakanshaparmar.blackboxsystem.FamilyViewEldLoc">
 
-    <item
-        android:id="@+id/action_idpage"
-        android:icon="@drawable/home_icon"
-        android:title="@string/elderly_action_bar_name"
-        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_change_role"
         android:icon="@drawable/change_role_icon"
-        android:title="@string/elderly_action_bar_name"
+        android:title="FamilyView"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_logout"
         android:icon="@drawable/logout_icon"
-        android:title="@string/elderly_action_bar_name"
+        android:title="FamilyView2"
         app:showAsAction="ifRoom"/>
+
+
+
 </menu>

@@ -134,6 +134,23 @@ public class ElderlyHomePage extends ActionBarActivity  implements
             return true;
         }
 
+        else if(id == R.id.action_change_role){
+            stopLocationUpdates();
+            SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("role", "family");
+            editor.commit();
+            Intent intent = new Intent(getApplicationContext(), FamilyViewEldLoc.class);
+            startActivity(intent);
+        }
+
+        else if(id == R.id.action_logout){
+
+            stopLocationUpdates();
+            Intent intent = new Intent(getApplicationContext(), chooseRole.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -214,6 +231,16 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         Toast.makeText(this, "Location Found"+mLastUpdateTime, Toast.LENGTH_LONG).show();
         new EldLocInfoAsyncTask().execute(getApplicationContext());
 
+    }
+
+    protected void stopLocationUpdates() {
+        // It is a good practice to remove location requests when the activity is in a paused or
+        // stopped state. Doing so helps battery performance and is especially
+        // recommended in applications that request frequent location updates.
+
+        // The final argument to {@code requestLocationUpdates()} is a LocationListener
+        // (http://developer.android.com/reference/com/google/android/gms/location/LocationListener.html).
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
     }
 
     protected void startLocationUpdates() {

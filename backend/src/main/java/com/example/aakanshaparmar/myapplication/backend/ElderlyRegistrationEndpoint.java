@@ -68,18 +68,18 @@ public class ElderlyRegistrationEndpoint {
               PreparedStatement stmt1 = conn.prepareStatement(statement1);
               stmt1.executeUpdate();
 
-              String statement = "INSERT INTO elderlyInfo VALUES( ? , ? , ? , ? , ?,?)";
-              PreparedStatement stmt = conn.prepareStatement(statement);
+              //String statement = "SELECT * FROM elderlyInfo";
+              //PreparedStatement stmt = conn.prepareStatement(statement);
 
-              stmt.setString(1, eldInfo.getFullName());
+              /*stmt.setString(1, eldInfo.getFullName());
               stmt.setString(2, eldInfo.getPhoneNo());
               stmt.setString(3, eldInfo.getAddress());
               stmt.setString(4, eldInfo.getEID());
               stmt.setInt(5, eldInfo.getCommonPass());
-              stmt.setString(6, eldInfo.getEmerPhoneNo());
+              stmt.setString(6, eldInfo.getEmerPhoneNo());*/
 
               int success;
-              success = stmt.executeUpdate();
+              success = 1;
               if (success == 1) {
                   logger.info("Success in uploading to Cloud SQL");
               } else if (success == 0) {

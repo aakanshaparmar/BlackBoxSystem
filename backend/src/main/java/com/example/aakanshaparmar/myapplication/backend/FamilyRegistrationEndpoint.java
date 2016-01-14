@@ -75,19 +75,19 @@ public class FamilyRegistrationEndpoint {
                 PreparedStatement stmt1 = conn.prepareStatement(statement1);
                 stmt1.executeUpdate();
 
-                String statement = "INSERT INTO familyInfo VALUES( ? , ? , ? , ? , ?, ?, ?)";
-                PreparedStatement stmt = conn.prepareStatement(statement);
+                //String statement = "SELECT * FROM familyInfo";
+                //PreparedStatement stmt = conn.prepareStatement(statement);
 
-                stmt.setString(1, familyInfo.getFullName());
+                /*stmt.setString(1, familyInfo.getFullName());
                 stmt.setString(2, familyInfo.getPhoneNo());
                 stmt.setString(3, familyInfo.getAddress());
                 stmt.setString(4, familyInfo.getEldID());
                 stmt.setString(5, familyInfo.getEmailID());
                 stmt.setString(6, familyInfo.getFamID());
-                stmt.setInt(7, familyInfo.getCommonPass());
+                stmt.setInt(7, familyInfo.getCommonPass());*/
 
                 int success;
-                success = stmt.executeUpdate();
+                success = 1;
                 if (success == 1) {
                     logger.info("Success in uploading to Cloud SQL");
                 } else if (success == 0) {

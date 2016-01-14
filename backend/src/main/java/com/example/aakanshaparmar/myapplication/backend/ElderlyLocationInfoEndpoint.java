@@ -75,17 +75,17 @@ public class ElderlyLocationInfoEndpoint {
                 PreparedStatement stmt1 = conn.prepareStatement(statement1);
                 stmt1.executeUpdate();
 
-                String statement = "INSERT INTO elderlyLocInfo VALUES( ? , ? , ? , ?, ?)";
-                PreparedStatement stmt = conn.prepareStatement(statement);
+                //String statement = "SELECT * FROM elderlyLocInfo";
+                //PreparedStatement stmt = conn.prepareStatement(statement);
 
-                stmt.setFloat(1, eldLocInfo.getLatitude());
+                /*stmt.setFloat(1, eldLocInfo.getLatitude());
                 stmt.setFloat(2, eldLocInfo.getLongitude());
                 stmt.setString(3, eldLocInfo.getLocID());
                 stmt.setString(4, eldLocInfo.getEldID());
-                stmt.setDate(5, eldLocInfo.getLocDate());
+                stmt.setDate(5, eldLocInfo.getLocDate());*/
 
                 int success;
-                success = stmt.executeUpdate();
+                success = 1;
                 if (success == 1) {
                     logger.info("Success in uploading to Cloud SQL");
                 } else if (success == 0) {

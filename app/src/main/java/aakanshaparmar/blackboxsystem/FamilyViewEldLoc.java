@@ -1,7 +1,13 @@
 package aakanshaparmar.blackboxsystem;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -79,5 +85,43 @@ public class FamilyViewEldLoc extends ActionBarActivity implements OnMapReadyCal
         CameraUpdate zoom=CameraUpdateFactory.zoomTo(18);
         map.animateCamera(zoom);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+         int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_idpage) {
+            Intent intent = new Intent(getApplicationContext(), ElderlyIDPage.class);
+            startActivity(intent);
+            return true;
+        }
+
+        else if(id == R.id.action_change_role){
+            SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("role", "elderly");
+            editor.commit();
+            Intent intent = new Intent(getApplicationContext(), ElderlyHomePage.class);
+            startActivity(intent);
+        }
+
+        else if(id == R.id.action_logout){
+
+            Intent intent = new Intent(getApplicationContext(), chooseRole.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_family_view_eld_loc, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
