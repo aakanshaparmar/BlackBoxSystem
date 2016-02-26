@@ -68,15 +68,15 @@ public class ElderlyRegistrationEndpoint {
               PreparedStatement stmt1 = conn.prepareStatement(statement1);
               stmt1.executeUpdate();
 
-              //String statement = "SELECT * FROM elderlyInfo";
-              //PreparedStatement stmt = conn.prepareStatement(statement);
+              String statement = "INSERT INTO ";
+              PreparedStatement stmt = conn.prepareStatement(statement);
 
-              /*stmt.setString(1, eldInfo.getFullName());
+              stmt.setString(1, eldInfo.getFullName());
               stmt.setString(2, eldInfo.getPhoneNo());
               stmt.setString(3, eldInfo.getAddress());
               stmt.setString(4, eldInfo.getEID());
               stmt.setInt(5, eldInfo.getCommonPass());
-              stmt.setString(6, eldInfo.getEmerPhoneNo());*/
+              stmt.setString(6, eldInfo.getEmerPhoneNo());
 
               int success;
               success = 1;

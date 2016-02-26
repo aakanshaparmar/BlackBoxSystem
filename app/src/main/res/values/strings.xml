@@ -42,4 +42,8 @@
     <string name="title_activity_elderly_idpage">ElderlyIDPage</string>
     <string name="idPageTitle">Name, Emergency Contact Number and Address of Phone Owner</string>
     <string name="title_activity_elderly_register_emergency_no">ElderlyRegisterEmergencyNo</string>
+    <string name="title_activity_elderly_home_page2">ElderlyHomePage2</string>
+    <string name="title_activity_elderly_sospage">ElderlySOSPage</string>
+    <string name="title_activity_elderly_hosp_police_page">ElderlyHospPolicePage</string>
+    <string name="title_activity_elderly_dir_to_home_page">ElderlyDirToHomePage</string>
 </resources>

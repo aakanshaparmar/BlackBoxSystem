@@ -122,7 +122,7 @@
         <activity
             android:name=".chooseRole"
             android:label="@string/title_activity_choose_role"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
 
         <meta-data
@@ -135,18 +135,34 @@
         <activity
             android:name=".FamilyViewEldLoc"
             android:label="@string/title_activity_family_view_eld_loc"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ElderlyIDPage"
             android:label="@string/title_activity_elderly_idpage"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ElderlyRegisterEmergencyNo"
             android:label="@string/title_activity_elderly_register_emergency_no"
-            android:windowSoftInputMode="stateAlwaysVisible"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible" >
+        </activity>
+        <activity
+            android:name=".ElderlyHomePage2"
+            android:label="@string/title_activity_elderly_home_page2" >
+        </activity>
+        <activity
+            android:name=".ElderlySOSPage"
+            android:label="@string/title_activity_elderly_sospage" >
+        </activity>
+        <activity
+            android:name=".ElderlyHospPolicePage"
+            android:label="@string/title_activity_elderly_hosp_police_page" >
+        </activity>
+        <activity
+            android:name=".ElderlyDirToHomePage"
+            android:label="@string/title_activity_elderly_dir_to_home_page" >
         </activity>
     </application>
 
