@@ -46,4 +46,7 @@
     <string name="title_activity_elderly_sospage">ElderlySOSPage</string>
     <string name="title_activity_elderly_hosp_police_page">ElderlyHospPolicePage</string>
     <string name="title_activity_elderly_dir_to_home_page">ElderlyDirToHomePage</string>
+    <string name="locate_places_f1">Hospital</string>
+    <string name="locate_places_f2">Police Station</string>
+    <string name="str_btn_find">Find</string>
 </resources>

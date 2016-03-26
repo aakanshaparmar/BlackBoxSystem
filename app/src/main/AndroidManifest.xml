@@ -17,6 +17,19 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBsqQIyKHj2MuZfaujwFhQQe6V1KeJQ2aI"/>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation"
@@ -28,6 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ElderlyRegisterEnterName"
             android:configChanges="orientation"
@@ -42,6 +56,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
+
         <activity
             android:name=".ElderlyRegisterAddress"
             android:configChanges="orientation"
@@ -49,23 +64,27 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
+
         <activity
             android:name=".ElderlyRegisterPageFinal"
             android:configChanges="orientation"
             android:label="@string/title_activity_elderly_register_page_final"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".ElderlyHomePage"
             android:configChanges="orientation"
             android:label="@string/title_activity_elderly_home_page"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".FamilyRegisterName"
             android:label="@string/title_activity_family_register_name"
             android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
+
         <activity
             android:name=".FamilyRegisterPhone"
             android:configChanges="orientation"
@@ -73,6 +92,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
+
         <activity
             android:name=".FamilyRegisterElderlyPhone"
             android:configChanges="orientation"
@@ -80,6 +100,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
+
         <activity
             android:name=".FamilyRegisterAddress"
             android:configChanges="orientation"
@@ -94,6 +115,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
+
         <activity
             android:name=".FamilyRegisterCommonPassword"
             android:configChanges="orientation"
@@ -101,42 +123,40 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
+
         <activity
             android:name=".FamilyRegisterFinal"
             android:configChanges="orientation"
             android:label="@string/title_activity_family_register_final"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".ElderlyShowCommonPass"
             android:configChanges="orientation"
             android:label="@string/title_activity_elderly_show_common_pass"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".FamilyHomePage"
             android:configChanges="orientation"
             android:label="@string/title_activity_family_home_page"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".chooseRole"
             android:label="@string/title_activity_choose_role"
             android:screenOrientation="portrait" >
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name=".FamilyViewEldLoc"
             android:label="@string/title_activity_family_view_eld_loc"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".ElderlyIDPage"
             android:label="@string/title_activity_elderly_idpage"
@@ -148,22 +168,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
-        <activity
-            android:name=".ElderlyHomePage2"
-            android:label="@string/title_activity_elderly_home_page2" >
-        </activity>
-        <activity
-            android:name=".ElderlySOSPage"
-            android:label="@string/title_activity_elderly_sospage" >
-        </activity>
-        <activity
-            android:name=".ElderlyHospPolicePage"
-            android:label="@string/title_activity_elderly_hosp_police_page" >
-        </activity>
-        <activity
-            android:name=".ElderlyDirToHomePage"
-            android:label="@string/title_activity_elderly_dir_to_home_page" >
-        </activity>
+
     </application>
 
 </manifest>
