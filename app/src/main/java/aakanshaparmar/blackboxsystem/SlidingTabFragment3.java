@@ -1,6 +1,8 @@
 package aakanshaparmar.blackboxsystem;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.Toast;
+import android.preference.PreferenceManager;
 
 public class SlidingTabFragment3 extends Fragment  {
 
@@ -34,7 +37,6 @@ public class SlidingTabFragment3 extends Fragment  {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getActivity(), "Connecting...", Toast.LENGTH_LONG).show();
                 Intent makeCallIntent = new Intent (v.getContext(), MakeSOSCallActivity.class);
                 startActivity(makeCallIntent);
 
@@ -44,8 +46,6 @@ public class SlidingTabFragment3 extends Fragment  {
 
         return rootView;
     }
-
-
 
 }
 

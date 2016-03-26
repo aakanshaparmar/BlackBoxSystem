@@ -149,8 +149,7 @@
             android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
         <activity
-            android:name=".MakeSOSCallActivity"
-            android:label="@string/title_activity_make_soscall" >
+            android:name=".MakeSOSCallActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
