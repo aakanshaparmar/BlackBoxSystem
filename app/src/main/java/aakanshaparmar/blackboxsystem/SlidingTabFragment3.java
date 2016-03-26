@@ -1,5 +1,7 @@
 package aakanshaparmar.blackboxsystem;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,7 +34,9 @@ public class SlidingTabFragment3 extends Fragment  {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getActivity(), "You have pressed SOS! We'll get you help! Please Wait", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Connecting...", Toast.LENGTH_LONG).show();
+                Intent makeCallIntent = new Intent (v.getContext(), MakeSOSCallActivity.class);
+                startActivity(makeCallIntent);
 
             }
         });

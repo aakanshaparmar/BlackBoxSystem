@@ -49,4 +49,5 @@
     <string name="locate_places_f1">Hospital</string>
     <string name="locate_places_f2">Police Station</string>
     <string name="str_btn_find">Find</string>
+    <string name="title_activity_make_soscall">MakeSOSCallActivity</string>
 </resources>
