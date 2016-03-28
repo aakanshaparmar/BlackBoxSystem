@@ -46,5 +46,14 @@ public class MakeSOSCallActivity extends ActionBarActivity {
         {
             Toast.makeText(getApplicationContext(),"Sorry Could Not Make Call...Please Try Again Later",Toast.LENGTH_LONG).show();
         }
+
+        newIntentAfterCall();
+    }
+
+    private void newIntentAfterCall()
+    {
+        Intent backToHomeScreenIntent = new Intent(this,ElderlyIDPage.class);
+        startActivity(backToHomeScreenIntent);
+
     }
 }

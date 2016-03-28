@@ -32,13 +32,26 @@ public class SlidingTabFragment3 extends Fragment  {
         sosButton = (ImageButton) rootView.findViewById(R.id.imageButton);
         popUp = new PopupWindow(getActivity());
         mainLayout = new FrameLayout(rootView.getContext());
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+        final String emergencyNo = sharedPreferences.getString("emergencyPhoneNo", "");
 
         sosButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent makeCallIntent = new Intent (v.getContext(), MakeSOSCallActivity.class);
-                startActivity(makeCallIntent);
+               Intent takePhotoIntent = new Intent (v.getContext(), ElderlySOSTakePhoto.class);
+               startActivity(takePhotoIntent);
+
+//                Intent makeCallIntent = new Intent (Intent.ACTION_CALL);
+//                makeCallIntent.setData(Uri.parse("tel:" + emergencyNo));
+//                try
+//                {
+//                    startActivity(makeCallIntent);
+//                }
+//                catch (android.content.ActivityNotFoundException ex)
+//                {
+//                    Toast.makeText(getActivity(),"Sorry Could Not Make Call...Please Try Again Later",Toast.LENGTH_LONG).show();
+//                }
 
             }
         });

@@ -105,8 +105,9 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         sosTab = actionBar.newTab().setText("SOS").setTabListener(tabListener);
 
         actionBar.addTab(instTab);
-        actionBar.addTab(sosTab);
         actionBar.addTab(hospPoliceTab);
+        actionBar.addTab(sosTab);
+
 
         buildGoogleApiClient();
 
