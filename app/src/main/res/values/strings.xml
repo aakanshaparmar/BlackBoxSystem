@@ -51,4 +51,6 @@
     <string name="str_btn_find">Find</string>
     <string name="title_activity_make_soscall">MakeSOSCallActivity</string>
     <string name="title_activity_elderly_sostake_photo">ElderlySOSTakePhoto</string>
+    <string name="title_activity_elderly_hospital_locate">ElderlyHospitalLocate</string>
+    <string name="title_activity_elderly_police_locate">ElderlyPoliceLocate</string>
 </resources>

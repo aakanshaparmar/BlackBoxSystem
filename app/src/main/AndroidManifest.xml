@@ -25,6 +25,9 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".MainActivity"
@@ -159,6 +162,22 @@
         <activity
             android:name=".ElderlySOSTakePhoto"
             android:label="@string/title_activity_elderly_sostake_photo" >
+        </activity>
+        <activity
+            android:name=".ElderlyHospitalLocate"
+            android:label="@string/title_activity_elderly_hospital_locate"
+            android:parentActivityName=".ElderlyHomePage" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="aakanshaparmar.blackboxsystem.ElderlyHomePage" />
+        </activity>
+        <activity
+            android:name=".ElderlyPoliceLocate"
+            android:label="@string/title_activity_elderly_police_locate"
+            android:parentActivityName=".ElderlyHomePage" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="aakanshaparmar.blackboxsystem.ElderlyHomePage" />
         </activity>
     </application>
 
