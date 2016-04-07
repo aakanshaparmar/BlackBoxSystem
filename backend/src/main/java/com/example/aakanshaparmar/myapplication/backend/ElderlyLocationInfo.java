@@ -13,41 +13,55 @@ public class ElderlyLocationInfo {
     String eID;
     Date locDate;
 
-    public float getLatitude() {
+    public float getLatitude()
+    {
         return latitude;
     }
 
-    public float getLongitude() {
+    public float getLongitude()
+    {
         return longitude;
     }
 
-    public String getLocID() {
+    public String getLocID()
+    {
         return locID;
     }
 
-    public String getEldID() {
+    public String getEldID()
+    {
         return eID;
     }
 
-    public Date getLocDate() {return locDate;}
+    public Date getLocDate()
+    {
+        return locDate;
+    }
 
-    public void setLatitude(float lat) {
+    public void setLatitude(float lat)
+    {
         latitude = lat;
     }
 
-    public void setLongitude(float longi) {
+    public void setLongitude(float longi)
+    {
         longitude = longi;
     }
 
-    public void setLocID(String lID) {
+    public void setLocID(String lID)
+    {
         locID = lID;
     }
 
-    public void setEldID(String eldID) {
+    public void setEldID(String eldID)
+    {
         eID = eldID;
     }
 
-    public void setLocDate(Date lDate) { locDate = lDate; }
+    public void setLocDate(Date lDate)
+    {
+        locDate = lDate;
+    }
 
 
 }

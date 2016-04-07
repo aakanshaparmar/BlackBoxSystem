@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 
+import static android.app.ActionBar.NAVIGATION_MODE_TABS;
+
 
 public class ElderlyHomePage extends ActionBarActivity  implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
@@ -70,7 +72,7 @@ public class ElderlyHomePage extends ActionBarActivity  implements
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+            actionBar.setNavigationMode(NAVIGATION_MODE_TABS);
         }
 
         // Initilization

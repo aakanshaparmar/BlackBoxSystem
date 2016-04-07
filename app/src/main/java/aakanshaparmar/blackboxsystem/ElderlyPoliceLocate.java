@@ -1,17 +1,27 @@
 package aakanshaparmar.blackboxsystem;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
-public class ElderlyPoliceLocate extends ActionBarActivity {
+
+public class ElderlyPoliceLocate extends ActionBarActivity implements GoogleApiClient.OnConnectionFailedListener {
+
+    private static final String LOG_TAG = "PlacesAPIActivity";
+    private static final int GOOGLE_API_CLIENT_ID = 0;
+    private GoogleApiClient mGoogleApiClient;
+    private static final int PERMISSION_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elderly_police_locate);
+
+
     }
 
     @Override
@@ -33,6 +43,12 @@ public class ElderlyPoliceLocate extends ActionBarActivity {
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
     }
 }
