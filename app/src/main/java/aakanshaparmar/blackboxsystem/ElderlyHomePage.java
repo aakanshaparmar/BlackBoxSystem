@@ -1,6 +1,5 @@
 package aakanshaparmar.blackboxsystem;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -102,7 +101,7 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         };
 
         //Assign Tabs to Action Bar
-        instTab = actionBar.newTab().setText("Instructions for home").setTabListener(tabListener);
+        instTab = actionBar.newTab().setText("Get Home!").setTabListener(tabListener);
         hospPoliceTab = actionBar.newTab().setText("Hospital and Police").setTabListener(tabListener);;
         sosTab = actionBar.newTab().setText("SOS").setTabListener(tabListener);
 
