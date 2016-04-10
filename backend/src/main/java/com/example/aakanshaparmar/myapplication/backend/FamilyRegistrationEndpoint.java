@@ -38,7 +38,7 @@ public class FamilyRegistrationEndpoint {
      */
     @ApiMethod(name = "getFamilyRegistration")
     public FamilyRegistration getFamilyRegistration(@Named("id") Long id) {
-        // TODO: Implement this function
+
         logger.info("Calling getFamilyRegistration method");
         return null;
     }
@@ -51,7 +51,7 @@ public class FamilyRegistrationEndpoint {
      */
     @ApiMethod(name = "insertFamilyRegistration")
     public FamilyRegistration insertFamilyRegistration(FamilyRegistration familyInfo) {
-        // TODO: Implement this function
+
         logger.info("Calling insertFamilyRegistration method");
 
         //Connect to SQL

@@ -36,7 +36,6 @@ public class ElderlyRegistrationEndpoint {
 
     @ApiMethod(name = "getElderlyRegistration")
      public ElderlyRegistration getElderlyRegistration(@Named("id") Long id) {
-        // TODO: Implement this function
         logger.info("Calling getElderlyRegistration method");
         return null;
     }
@@ -44,7 +43,6 @@ public class ElderlyRegistrationEndpoint {
 
     @ApiMethod(name = "insertElderlyRegistration")
     public ElderlyRegistration insertElderlyRegistration(ElderlyRegistration eldInfo) throws IOException {
-        // TODO: Implement this function
         logger.info("Calling insertElderlyRegistration method");
 
         //Connect to SQL

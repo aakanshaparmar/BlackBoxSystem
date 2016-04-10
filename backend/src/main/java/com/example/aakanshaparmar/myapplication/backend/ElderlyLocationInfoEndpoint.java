@@ -38,7 +38,7 @@ public class ElderlyLocationInfoEndpoint {
      */
     @ApiMethod(name = "getElderlyLocationInfo")
     public ElderlyLocationInfo getElderlyLocationInfo(@Named("id") Long id) {
-        // TODO: Implement this function
+
         logger.info("Calling getElderlyLocationInfo method");
         return null;
     }
@@ -51,7 +51,7 @@ public class ElderlyLocationInfoEndpoint {
      */
     @ApiMethod(name = "insertElderlyLocationInfo")
     public ElderlyLocationInfo insertElderlyLocationInfo(ElderlyLocationInfo eldLocInfo) {
-        // TODO: Implement this function
+
         logger.info("Calling insertElderlyLocationInfo method");
 
         //Connect to SQL
