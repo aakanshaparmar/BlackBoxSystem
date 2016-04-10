@@ -43,7 +43,8 @@
             android:text="Call An Uber"
             android:id="@+id/Uber"
             android:layout_marginTop="20dp"
-            android:textSize="30dp"/>
+            android:textSize="30dp"
+            android:clickable="false"/>
 
      </LinearLayout>
 
