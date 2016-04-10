@@ -53,4 +53,5 @@
     <string name="title_activity_elderly_sostake_photo">ElderlySOSTakePhoto</string>
     <string name="title_activity_elderly_hospital_locate">ElderlyHospitalLocate</string>
     <string name="title_activity_elderly_police_locate">ElderlyPoliceLocate</string>
+    <string name="title_activity_elderly_show_path_to_home">ElderlyShowPathToHome</string>
 </resources>

@@ -35,6 +35,8 @@ public class ElderlyRegisterAddress extends ActionBarActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
+
+
                 editor.putString("address", String.valueOf(addressField.getText()));
                 editor.commit();
 

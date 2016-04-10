@@ -96,5 +96,5 @@ public class ElderlySOSTakePhoto extends ActionBarActivity implements
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
     }
-
 }
+
