@@ -14,6 +14,8 @@ public class SlidingTabFragment extends Fragment  {
 
     Button pathToHomeButton;
     Button turnByTurnNavButton;
+    Button AddCardButton;
+    Button UberButton;
 
 
 
@@ -42,7 +44,32 @@ public class SlidingTabFragment extends Fragment  {
             public void onClick(View v) {
 
                 Intent intent = new Intent( getActivity(), ElderlyTurnByTurnNav.class);
+                intent.putExtra("Parent","HomePage");
                 startActivity(intent);
+
+            }
+        });
+
+        AddCardButton = (Button) rootView.findViewById(R.id.AddCard);
+
+        AddCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent( getActivity(), ElderlyAddressCard.class);
+                startActivity(intent);
+
+            }
+        });
+
+        UberButton = (Button) rootView.findViewById(R.id.Uber);
+
+        UberButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Intent intent = new Intent( getActivity(), ElderlyAddressCard.class);
+               // startActivity(intent);
 
             }
         });
@@ -50,8 +77,6 @@ public class SlidingTabFragment extends Fragment  {
 
         return rootView;
     }
-
-
 
 
 }

@@ -172,7 +172,8 @@
         <activity
             android:name=".ElderlyShowPathToHome"
             android:label="@string/title_activity_elderly_show_path_to_home" />
-        <activity android:name=".ElderlyTurnByTurnNav"></activity>
+        <activity android:name=".ElderlyTurnByTurnNav" />
+        <activity android:name=".ElderlyAddressCard"></activity>
     </application>
 
 </manifest>
