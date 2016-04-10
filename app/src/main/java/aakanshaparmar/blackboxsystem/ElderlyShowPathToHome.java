@@ -32,8 +32,11 @@ import java.util.List;
 
 public class ElderlyShowPathToHome extends FragmentActivity {
 
-    private static final LatLng LOWER_MANHATTAN = new LatLng(40.722543, -73.998585);
+    //private static final LatLng LOWER_MANHATTAN = new LatLng(40.722543, -73.998585);
     private static final LatLng WALL_STREET = new LatLng(40.7064, -74.0094);
+
+    LatLng origin;
+    LatLng destination;
 
     GoogleMap map;
     ArrayList<LatLng> markerPoints;
@@ -42,6 +45,9 @@ public class ElderlyShowPathToHome extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elderly_show_path_to_home);
+
+        //Retrieve origin i.e. home
+
 
 
         // Initializing
@@ -56,9 +62,9 @@ public class ElderlyShowPathToHome extends FragmentActivity {
         map.setMyLocationEnabled(true);
 
         //Creating Marker for first location
-        markerPoints.add(LOWER_MANHATTAN);
+        markerPoints.add(origin);
         MarkerOptions options = new MarkerOptions();
-        options.position(LOWER_MANHATTAN);
+        options.position(origin);
         options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         map.addMarker(options);
 
@@ -71,7 +77,7 @@ public class ElderlyShowPathToHome extends FragmentActivity {
 
         //Focus Map to origin location
         CameraPosition camPos = new CameraPosition.Builder()
-                .target(LOWER_MANHATTAN)
+                .target(origin)
                 .zoom(15)
                 .build();
         CameraUpdate camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
@@ -79,7 +85,7 @@ public class ElderlyShowPathToHome extends FragmentActivity {
 
 
         //Retrieve URL for directions
-        String DirectionRequestUrl = getDirectionsUrl(LOWER_MANHATTAN, WALL_STREET);
+        String DirectionRequestUrl = getDirectionsUrl(origin, WALL_STREET);
         DownloadTask downloadTask = new DownloadTask();
 
         // Start downloading json data from Google Directions API
