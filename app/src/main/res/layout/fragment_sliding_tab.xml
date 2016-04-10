@@ -35,7 +35,7 @@
             android:text="Address Card for Taxi"
             android:id="@+id/AddCard"
             android:layout_marginTop="5dp"
-            android:textSize="30dp" />
+            android:textSize="30dp"/>
 
         <Button
             android:layout_width="164dp"
@@ -44,7 +44,7 @@
             android:id="@+id/Uber"
             android:layout_marginTop="20dp"
             android:textSize="30dp"
-            android:clickable="false"/>
+            android:clickable="false" />
 
      </LinearLayout>
 

@@ -1,12 +1,54 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ElderlyShowPathToHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ElderlyShowPathToHome" >
-    <fragment
-        android:id="@+id/map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        class="com.google.android.gms.maps.SupportMapFragment" />
+    android:paddingTop="20dp"
+    android:orientation="vertical">
 
-</RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blue:Origin"
+            android:id="@+id/textView"
+            android:textColor="@color/blue"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Green:Destination"
+            android:textColor="@color/green"
+            android:id="@+id/textView2"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"/>
+
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:paddingTop="20dp"
+            android:layout_height="wrap_content">
+
+           <fragment
+                android:id="@+id/map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                class="com.google.android.gms.maps.SupportMapFragment"/>
+
+        </RelativeLayout>
+   </LinearLayout>
+
+
