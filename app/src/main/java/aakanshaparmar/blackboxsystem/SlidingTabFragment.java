@@ -13,6 +13,8 @@ public class SlidingTabFragment extends Fragment  {
     public static final String ARG_OBJECT = "object";
 
     Button pathToHomeButton;
+    Button turnByTurnNavButton;
+
 
 
     @Override
@@ -32,6 +34,19 @@ public class SlidingTabFragment extends Fragment  {
 
             }
         });
+
+        turnByTurnNavButton = (Button) rootView.findViewById(R.id.TurnNav);
+
+        turnByTurnNavButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent( getActivity(), ElderlyTurnByTurnNav.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         return rootView;
     }

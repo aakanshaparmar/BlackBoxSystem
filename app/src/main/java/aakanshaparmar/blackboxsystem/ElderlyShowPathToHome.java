@@ -212,13 +212,13 @@ public class ElderlyShowPathToHome extends FragmentActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "ElderlyShowPathToHome Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
+                Action.TYPE_VIEW,
+                "ElderlyShowPathToHome Page",
+
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
+
                 Uri.parse("android-app://aakanshaparmar.blackboxsystem/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
@@ -231,13 +231,13 @@ public class ElderlyShowPathToHome extends FragmentActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "ElderlyShowPathToHome Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
+                Action.TYPE_VIEW,
+                "ElderlyShowPathToHome Page",
+
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
+
                 Uri.parse("android-app://aakanshaparmar.blackboxsystem/http/host/path")
         );
         AppIndex.AppIndexApi.end(client, viewAction);

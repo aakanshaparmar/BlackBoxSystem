@@ -6,7 +6,7 @@
     <string name="chooseRole">Choose Your Role</string>
     <string name="elderlyRole">Elderly</string>
     <string name="famRole">Family</string>
-     <string name="enterName">Please Enter Your Full Name</string>
+    <string name="enterName">Please Enter Your Full Name</string>
     <string name="continueButton">Continue</string>
     <string name="backButton">Back</string>
     <string name="enterPhoneNo">Please Enter Your Phone Number</string>
@@ -54,4 +54,6 @@
     <string name="title_activity_elderly_hospital_locate">ElderlyHospitalLocate</string>
     <string name="title_activity_elderly_police_locate">ElderlyPoliceLocate</string>
     <string name="title_activity_elderly_show_path_to_home">ElderlyShowPathToHome</string>
+    <string name="title_activity_elderly_turn_by_turn_navigation">ElderlyTurnByTurnNavigation
+    </string>
 </resources>

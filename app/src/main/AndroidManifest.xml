@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="aakanshaparmar.blackboxsystem" >
+    package="aakanshaparmar.blackboxsystem">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -13,7 +13,7 @@
 
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true"/>
+        android:required="true" />
 
     <permission
         android:name="aakanshaparmar.blackboxsystem.permission.MAPS_RECEIVE"
@@ -30,7 +30,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBsqQIyKHj2MuZfaujwFhQQe6V1KeJQ2aI" />
@@ -42,7 +42,7 @@
             android:name=".MainActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,114 +54,96 @@
             android:configChanges="orientation"
             android:label="@string/title_activity_elderly_register_enter_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".ElderlyRegisterPhoneNo"
             android:configChanges="orientation"
             android:label="@string/title_activity_elderly_register_phone_no"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".ElderlyRegisterAddress"
             android:configChanges="orientation"
             android:label="@string/title_activity_elderly_register_address"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".ElderlyRegisterPageFinal"
             android:configChanges="orientation"
             android:label="@string/title_activity_elderly_register_page_final"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ElderlyHomePage"
             android:configChanges="orientation"
             android:label="@string/title_activity_elderly_home_page"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".FamilyRegisterName"
             android:label="@string/title_activity_family_register_name"
-            android:windowSoftInputMode="stateAlwaysVisible" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".FamilyRegisterPhone"
             android:configChanges="orientation"
             android:label="@string/title_activity_family_register_phone"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".FamilyRegisterElderlyPhone"
             android:configChanges="orientation"
             android:label="@string/title_activity_family_register_elderly_phone"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".FamilyRegisterAddress"
             android:configChanges="orientation"
             android:label="@string/title_activity_family_register_address"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".FamilyRegisterEmailID"
             android:configChanges="orientation"
             android:label="@string/title_activity_family_register_email_id"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".FamilyRegisterCommonPassword"
             android:configChanges="orientation"
             android:label="@string/title_activity_family_register_common_password"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".FamilyRegisterFinal"
             android:configChanges="orientation"
             android:label="@string/title_activity_family_register_final"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ElderlyShowCommonPass"
             android:configChanges="orientation"
             android:label="@string/title_activity_elderly_show_common_pass"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".FamilyHomePage"
             android:configChanges="orientation"
             android:label="@string/title_activity_family_home_page"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".chooseRole"
             android:label="@string/title_activity_choose_role"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".FamilyViewEldLoc"
             android:label="@string/title_activity_family_view_eld_loc"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ElderlyIDPage"
             android:label="@string/title_activity_elderly_idpage"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ElderlyRegisterEmergencyNo"
             android:label="@string/title_activity_elderly_register_emergency_no"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible" >
-        </activity>
-        <activity android:name=".MakeSOSCallActivity" >
+            android:windowSoftInputMode="stateAlwaysVisible" />
+        <activity android:name=".MakeSOSCallActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -170,12 +152,11 @@
         </activity>
         <activity
             android:name=".ElderlySOSTakePhoto"
-            android:label="@string/title_activity_elderly_sostake_photo" >
-        </activity>
+            android:label="@string/title_activity_elderly_sostake_photo" />
         <activity
             android:name=".ElderlyHospitalLocate"
             android:label="@string/title_activity_elderly_hospital_locate"
-            android:parentActivityName=".ElderlyHomePage" >
+            android:parentActivityName=".ElderlyHomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="aakanshaparmar.blackboxsystem.ElderlyHomePage" />
@@ -183,15 +164,15 @@
         <activity
             android:name=".ElderlyPoliceLocate"
             android:label="@string/title_activity_elderly_police_locate"
-            android:parentActivityName=".ElderlyHomePage" >
+            android:parentActivityName=".ElderlyHomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="aakanshaparmar.blackboxsystem.ElderlyHomePage" />
         </activity>
         <activity
             android:name=".ElderlyShowPathToHome"
-            android:label="@string/title_activity_elderly_show_path_to_home" >
-        </activity>
+            android:label="@string/title_activity_elderly_show_path_to_home" />
+        <activity android:name=".ElderlyTurnByTurnNav"></activity>
     </application>
 
 </manifest>
