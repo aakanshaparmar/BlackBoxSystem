@@ -279,6 +279,11 @@ public class ElderlyHospitalLocate extends FragmentActivity implements GoogleApi
             // Clears all the existing markers
             mGoogleMap.clear();
 
+            if(list.size() == 0)
+            {
+                Toast.makeText(getApplicationContext(), "Sorry None Found", Toast.LENGTH_LONG).show();
+            }
+
             for(int i=0;i<list.size();i++){
 
                 // Creating a marker
