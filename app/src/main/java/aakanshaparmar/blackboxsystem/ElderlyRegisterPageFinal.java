@@ -65,7 +65,10 @@ public class ElderlyRegisterPageFinal extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                new EldRegistrationAsyncTask().execute(getApplicationContext());
+                //new EldRegistrationAsyncTask().execute(getApplicationContext());
+                Intent intent;
+                intent = new Intent(getApplicationContext(), ElderlyShowCommonPass.class);
+                startActivity(intent);
 
             }
         });

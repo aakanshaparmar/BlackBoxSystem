@@ -3,19 +3,20 @@ package aakanshaparmar.blackboxsystem;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,18 +40,22 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class ElderlyShowPathToHome extends FragmentActivity {
+public class ElderlyShowPathToHome extends FragmentActivity implements
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
-    //private static final LatLng LOWER_MANHATTAN = new LatLng(40.722543, -73.998585);
-   // private static final LatLng WALL_STREET = new LatLng(22.2844, 114.1345);
+   protected static final String TAG = "ElderlyShowPathToHome";
 
-    LatLng origin;
-    LatLng destination;
 
-    GoogleMap map;
+    protected GoogleApiClient mGoogleApiClient;
+    protected Location mLastLocation;
+
+
+    LatLng origin, destination;
+
     ArrayList<LatLng> markerPoints;
 
-    private GoogleApiClient client;
+    GoogleMap map;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +71,84 @@ public class ElderlyShowPathToHome extends FragmentActivity {
         //Save it in destination
         destination = new LatLng(latitude, longitude);
 
-        //Get Current location to be the origin
-        getCurrentLocation();
+        buildGoogleApiClient();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_elderly_show_path_to_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    /**
+     * Builds a GoogleApiClient. Uses the addApi() method to request the LocationServices API.
+     */
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .addApi(AppIndex.API)
+                .build();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    /**
+     * Runs when a GoogleApiClient object successfully connects.
+     */
+    public void onConnected(Bundle connectionHint) {
+
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null) {
+           double latitude = mLastLocation.getLatitude();
+           double longitude = mLastLocation.getLongitude();
+           origin = new LatLng(latitude, longitude);
+            Toast.makeText(this, "Current Location Found", Toast.LENGTH_LONG).show();
+            createMarkers();
+        } else {
+            Toast.makeText(this, "Location Not Found", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onConnectionFailed(ConnectionResult result) {
+        // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
+        // onConnectionFailed.
+        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+    }
+
+
+    public void onConnectionSuspended(int cause) {
+        // The connection to Google Play services was lost for some reason. We call connect() to
+        // attempt to re-establish the connection.
+        Log.i(TAG, "Connection suspended");
+        mGoogleApiClient.connect();
+    }
+
+    public void createMarkers(){
         // Initializing
         markerPoints = new ArrayList<LatLng>();
 
@@ -109,35 +189,6 @@ public class ElderlyShowPathToHome extends FragmentActivity {
 
         // Start downloading json data from Google Directions API
         downloadTask.execute(DirectionRequestUrl);
-
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-
-    private void getCurrentLocation()
-    {
-        // Getting LocationManager object from System Service LOCATION_SERVICE
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        // Creating a criteria object to retrieve provider
-        Criteria criteria = new Criteria();
-
-        // Getting the name of the best provider
-        String provider = locationManager.getBestProvider(criteria, true);
-
-        // Getting Current Location
-        Location location = locationManager.getLastKnownLocation(provider);
-
-        //Converting location to separate latitude and longitude values
-        double latitude = location.getLatitude();
-
-        // Getting longitude of the current location
-        double longitude = location.getLongitude();
-
-        // Creating a LatLng object for the current location
-        origin= new LatLng(latitude, longitude);
 
     }
 
@@ -202,46 +253,6 @@ public class ElderlyShowPathToHome extends FragmentActivity {
             urlConnection.disconnect();
         }
         return data;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW,
-                "ElderlyShowPathToHome Page",
-
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-
-                Uri.parse("android-app://aakanshaparmar.blackboxsystem/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW,
-                "ElderlyShowPathToHome Page",
-
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-
-                Uri.parse("android-app://aakanshaparmar.blackboxsystem/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
     }
 
     // Fetches data from url passed
@@ -335,13 +346,10 @@ public class ElderlyShowPathToHome extends FragmentActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_elderly_show_path_to_home, menu);
-        return true;
-    }
+
+
 
 }
+
 
 

@@ -158,8 +158,8 @@ public class ElderlyHomePage extends ActionBarActivity  implements
 
 
     /**
-     * Builds a GoogleApiClient. Uses the addApi() method to request the LocationServices API.
-     */
+            * Builds a GoogleApiClient. Uses the addApi() method to request the LocationServices API.
+            */
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -231,6 +231,7 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         editor.putString("dateAndTime", mLastUpdateTime);
         editor.commit();
         Toast.makeText(this, "Location Found"+mLastUpdateTime, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Latitude"+mCurrentLocation.getLatitude(), Toast.LENGTH_LONG).show();
         new EldLocInfoAsyncTask().execute(getApplicationContext());
 
     }

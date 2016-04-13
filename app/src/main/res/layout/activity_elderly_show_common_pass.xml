@@ -7,10 +7,20 @@
     android:orientation="vertical"
     tools:context="aakanshaparmar.blackboxsystem.ElderlyShowCommonPass">
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Assistance"
+        android:src="@drawable/speaker_icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/title"
+        android:layout_alignEnd="@+id/title"
+        android:layout_gravity="right" />
+
     <TextView android:text="Your Family's Common Password is 1234 " android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="60dp"
+        android:textSize="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

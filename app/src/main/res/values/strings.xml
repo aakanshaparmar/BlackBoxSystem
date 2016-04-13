@@ -6,13 +6,17 @@
     <string name="chooseRole">Choose Your Role</string>
     <string name="elderlyRole">Elderly</string>
     <string name="famRole">Family</string>
-    <string name="enterName">Please Enter Your Full Name</string>
+
     <string name="continueButton">Continue</string>
     <string name="backButton">Back</string>
+
+    <string name="enterName">Please Enter Your Full Name</string>
     <string name="enterPhoneNo">Please Enter Your Phone Number</string>
-    <string name="enterEmergencyPhoneNo">Please Enter an Emergency Phone Number</string>
     <string name="enterAddress">Please Enter Your Address</string>
+    <string name="enterEmergencyPhoneNo">Please Enter an Emergency Phone Number</string>
     <string name="finalRegPage">Please Review Information Else Press Back to Edit</string>
+
+
     <string name="enterEldPhoneNo">Please Enter The Elderly \'s Phone Number</string>
     <string name="enterEmailID">Please Enter Your Email ID</string>
     <string name="enterCommonPassword">Please Enter Common Password Provided to the Elderly</string>
@@ -56,4 +60,6 @@
     <string name="title_activity_elderly_show_path_to_home">ElderlyShowPathToHome</string>
     <string name="title_activity_elderly_turn_by_turn_navigation">ElderlyTurnByTurnNavigation
     </string>
+
+    <string name="google_app_id">646717414944</string>
 </resources>

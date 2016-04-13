@@ -16,10 +16,9 @@
         android:textSize="45dp"
         android:gravity="center_horizontal"
         android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="40dp" />
+        android:layout_below="@+id/Assistance"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,6 +54,15 @@
         android:layout_alignEnd="@+id/button1"
         android:textStyle="bold"
         android:height="60dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Assistance"
+        android:src="@drawable/speaker_icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/title"
+        android:layout_alignEnd="@+id/title" />
 
 
 </RelativeLayout>
