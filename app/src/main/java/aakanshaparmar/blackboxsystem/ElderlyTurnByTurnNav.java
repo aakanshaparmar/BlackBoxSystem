@@ -3,19 +3,36 @@ package aakanshaparmar.blackboxsystem;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
-public class ElderlyTurnByTurnNav extends AppCompatActivity {
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+
+public class ElderlyTurnByTurnNav extends AppCompatActivity implements
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+
+    protected static final String TAG = "ElderlyShowPathToHome";
+
+
+    protected GoogleApiClient mGoogleApiClient;
+    protected Location mLastLocation;
 
     double originLat, originLng, destLat, destLng;
     ImageButton homeButton;
+    Button mapButton;
+
+    Bundle extras;
+    String root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +50,22 @@ public class ElderlyTurnByTurnNav extends AppCompatActivity {
             }
         });
 
+        mapButton = (Button) findViewById (R.id.mapButton);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        //Get Origin i.e. Current Location
-         getCurrentLocation();
+                launchGoogleMaps();
+
+            }
+        });
+
+
+
+        root = "hello";
+        Intent intent = getIntent();
+        root = intent.getStringExtra("Parent");
+        extras = intent.getExtras();
 
         //Get Destination i.e. Home from Shared Preferences
         SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
@@ -43,6 +73,71 @@ public class ElderlyTurnByTurnNav extends AppCompatActivity {
         destLat = Double.longBitsToDouble(sharedPreferences.getLong("homeLat", 0));
         destLng = Double.longBitsToDouble(sharedPreferences.getLong("homeLng", 0));
 
+        buildGoogleApiClient();
+
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .addApi(AppIndex.API)
+                .build();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    /**
+     * Runs when a GoogleApiClient object successfully connects.
+     */
+    public void onConnected(Bundle connectionHint) {
+
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null) {
+            originLat = mLastLocation.getLatitude();
+            originLng = mLastLocation.getLongitude();
+            if(extras!= null)
+            {
+                if(root.equals("HomePage"))
+                    launchGoogleMaps();
+            }
+        } else {
+            Toast.makeText(this, "Location Not Found", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onConnectionFailed(ConnectionResult result) {
+        // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
+        // onConnectionFailed.
+        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+    }
+
+
+    public void onConnectionSuspended(int cause) {
+        // The connection to Google Play services was lost for some reason. We call connect() to
+        // attempt to re-establish the connection.
+        Log.i(TAG, "Connection suspended");
+        mGoogleApiClient.connect();
+    }
+
+    protected void launchGoogleMaps()
+    {
+
+        root = "hello";
         //Fire intent for google maps api
         final Intent intent = new Intent(Intent.ACTION_VIEW,
                 /* Using the web based turn by turn directions url. */
@@ -62,25 +157,7 @@ public class ElderlyTurnByTurnNav extends AppCompatActivity {
 
     }
 
-    private void getCurrentLocation()
-    {
-        // Getting LocationManager object from System Service LOCATION_SERVICE
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        // Creating a criteria object to retrieve provider
-        Criteria criteria = new Criteria();
 
-        // Getting the name of the best provider
-        String provider = locationManager.getBestProvider(criteria, true);
 
-        // Getting Current Location
-        Location location = locationManager.getLastKnownLocation(provider);
-
-        //Converting location to separate latitude and longitude values
-        originLat = location.getLatitude();
-
-        // Getting longitude of the current location
-        originLng = location.getLongitude();
-
-    }
 }
