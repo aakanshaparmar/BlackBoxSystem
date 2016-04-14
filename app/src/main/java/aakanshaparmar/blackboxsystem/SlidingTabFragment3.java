@@ -3,7 +3,6 @@ package aakanshaparmar.blackboxsystem;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
-import android.widget.Toast;
-import android.preference.PreferenceManager;
 
 public class SlidingTabFragment3 extends Fragment  {
 
@@ -39,7 +36,7 @@ public class SlidingTabFragment3 extends Fragment  {
             @Override
             public void onClick(View v) {
 
-               Intent takePhotoIntent = new Intent (v.getContext(), ElderlySOSTakePhoto.class);
+               Intent takePhotoIntent = new Intent (v.getContext(), MakeSOSCallActivity.class);
                startActivity(takePhotoIntent);
 
 //                Intent makeCallIntent = new Intent (Intent.ACTION_CALL);

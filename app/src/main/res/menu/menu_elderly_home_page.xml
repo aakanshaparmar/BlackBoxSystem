@@ -10,7 +10,7 @@
         android:title="@string/elderly_action_bar_name"
         app:showAsAction="ifRoom"/>
 
-    <item
+   <!-- <item
         android:id="@+id/action_change_role"
         android:icon="@drawable/change_role_icon"
         android:title="@string/elderly_action_bar_name"
@@ -20,7 +20,7 @@
         android:id="@+id/action_logout"
         android:icon="@drawable/logout_icon"
         android:title="@string/elderly_action_bar_name"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"/>-->
 
 
 

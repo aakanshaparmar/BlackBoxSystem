@@ -124,19 +124,19 @@ public class ElderlyHomePage extends ActionBarActivity  implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
+        //*/ Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_idpage) {
-            Intent intent = new Intent(getApplicationContext(), ElderlyIDPage.class);
+            Intent intent = new Intent(getApplicationContext(), ElderlyEnterIDPasswordPage.class);
             startActivity(intent);
             return true;
         }
 
-        else if(id == R.id.action_change_role){
+       /* else if(id == R.id.action_change_role){
             stopLocationUpdates();
             SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -152,7 +152,7 @@ public class ElderlyHomePage extends ActionBarActivity  implements
             Intent intent = new Intent(getApplicationContext(), chooseRole.class);
             startActivity(intent);
         }
-
+*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -191,7 +191,7 @@ public class ElderlyHomePage extends ActionBarActivity  implements
 
         /*mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
-            Toast.makeText(this, "Location Found", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Location Found", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Location Not detected", Toast.LENGTH_LONG).show();
         }*/
@@ -230,7 +230,7 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         editor.putFloat("longitude", (float) mCurrentLocation.getLongitude());
         editor.putString("dateAndTime", mLastUpdateTime);
         editor.commit();
-        Toast.makeText(this, "Location Found"+mLastUpdateTime, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Location Found"+mLastUpdateTime, Toast.LENGTH_LONG).show();
         //Toast.makeText(this, "Latitude"+mCurrentLocation.getLatitude(), Toast.LENGTH_LONG).show();
         new EldLocInfoAsyncTask().execute(getApplicationContext());
 
@@ -286,10 +286,10 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         protected void onPostExecute(ElderlyLocationInfo result) {
 
             if (result == null) {
-                Toast.makeText(context, "Location not saved in DB! Some error occurred", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Location not saved in DB! Some error occurred", Toast.LENGTH_LONG).show();
 
             } else {
-                Toast.makeText(context, "Location saved in DB!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Location saved in DB!", Toast.LENGTH_LONG).show();
 
             }
         }

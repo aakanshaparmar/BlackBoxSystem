@@ -1,30 +1,50 @@
 package aakanshaparmar.blackboxsystem;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
-import android.preference.PreferenceManager;
 
 
 public class MakeSOSCallActivity extends ActionBarActivity {
 
-    Button callButton;
+    Button callButton, callAgainButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_make_soscall);
+
+        callButton = (Button) findViewById(R.id.callButton);
+        callAgainButton = (Button) findViewById(R.id.callAgain);
+
+        callButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent;
+                intent = new Intent(getApplicationContext(), ElderlyEnterIDPasswordPage.class);
+                startActivity(intent);
+
+            }
+        });
+
+        callAgainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                call();
+
+            }
+        });
+
+
         Toast.makeText(this, "Connecting...", Toast.LENGTH_LONG).show();
         call();
 
@@ -47,13 +67,8 @@ public class MakeSOSCallActivity extends ActionBarActivity {
             Toast.makeText(getApplicationContext(),"Sorry Could Not Make Call...Please Try Again Later",Toast.LENGTH_LONG).show();
         }
 
-        newIntentAfterCall();
-    }
-
-    private void newIntentAfterCall()
-    {
-        Intent backToHomeScreenIntent = new Intent(this,ElderlyIDPage.class);
-        startActivity(backToHomeScreenIntent);
 
     }
+
+
 }
