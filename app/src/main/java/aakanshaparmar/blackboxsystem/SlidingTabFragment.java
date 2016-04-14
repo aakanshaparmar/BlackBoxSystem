@@ -64,18 +64,15 @@ public class SlidingTabFragment extends Fragment  {
 
         UberButton = (Button) rootView.findViewById(R.id.Uber);
 
-        UberButton.setEnabled(false);
-
-
-       /* UberButton.setOnClickListener(new View.OnClickListener() {
+        UberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //Intent intent = new Intent( getActivity(), ElderlyAddressCard.class);
-               // startActivity(intent);
+                Intent intent = new Intent( getActivity(), ElderlyCallUber.class);
+                startActivity(intent);
 
             }
-        });*/
+        });
 
 
         return rootView;

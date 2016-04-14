@@ -17,13 +17,13 @@ public class ElderlyCallUber extends AppCompatActivity {
             PackageManager pm = getApplicationContext().getPackageManager();
             pm.getPackageInfo("com.ubercab", PackageManager.GET_ACTIVITIES);
             String uri =
-                    "uber://?action=setPickup&pickup=my_location&client_id=YOUR_CLIENT_ID";
+                    "uber://?action=setPickup&pickup=my_location";
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(uri));
             startActivity(intent);
         } catch (PackageManager.NameNotFoundException e) {
             // No Uber app! Open mobile website.
-            String url = "https://m.uber.com/sign-up?client_id=YOUR_CLIENT_ID";
+            String url = "https://m.uber.com/sign-up?";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             startActivity(i);
