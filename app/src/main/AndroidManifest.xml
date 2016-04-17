@@ -45,6 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ElderlyRegisterEnterName"
             android:configChanges="orientation"
@@ -140,11 +141,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity android:name=".MakeSOSCallActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            
         </activity>
         <activity
             android:name=".ElderlySOSTakePhoto"
@@ -168,6 +165,7 @@
         <activity
             android:name=".ElderlyShowPathToHome"
             android:label="@string/title_activity_elderly_show_path_to_home" />
+
         <activity android:name=".ElderlyTurnByTurnNav" />
         <activity android:name=".ElderlyAddressCard" />
         <activity android:name=".ElderlyCallUber" />
