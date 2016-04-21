@@ -6,7 +6,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="aakanshaparmar.blackboxsystem.FamilyRegisterFinal"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@color/white">
 
     <TextView
         android:layout_width="wrap_content"
@@ -192,5 +193,10 @@
         android:textStyle="bold"
         android:height="60dp"
         android:gravity="center"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:background="@color/appBlue"
+        android:textColor="@color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="10dp"/>
 </LinearLayout>

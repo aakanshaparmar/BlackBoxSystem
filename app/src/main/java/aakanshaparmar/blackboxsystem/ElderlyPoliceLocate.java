@@ -153,7 +153,7 @@ public class ElderlyPoliceLocate extends FragmentActivity implements GoogleApiCl
 
         } else { // Google Play Services are available
 
-            // Getting reference to the SupportMapFragment
+            // Getting reference to SupportMapFragment
             SupportMapFragment fragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
             // Getting Google Map

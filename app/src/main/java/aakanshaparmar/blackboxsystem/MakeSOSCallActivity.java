@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
 public class MakeSOSCallActivity extends ActionBarActivity {
 
-    Button callButton, callAgainButton;
+    Button callButton;
+    ImageButton callAgainButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -22,7 +24,7 @@ public class MakeSOSCallActivity extends ActionBarActivity {
         setContentView(R.layout.activity_make_soscall);
 
         callButton = (Button) findViewById(R.id.callButton);
-        callAgainButton = (Button) findViewById(R.id.callAgain);
+        callAgainButton = (ImageButton) findViewById(R.id.callAgain);
 
         callButton.setOnClickListener(new View.OnClickListener() {
             @Override

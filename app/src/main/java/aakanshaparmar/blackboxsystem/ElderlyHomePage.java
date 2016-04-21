@@ -1,5 +1,6 @@
 package aakanshaparmar.blackboxsystem;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +13,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.aakanshaparmar.myapplication.backend.elderlyLocationInfoApi.ElderlyLocationInfoApi;
 import com.example.aakanshaparmar.myapplication.backend.elderlyLocationInfoApi.model.ElderlyLocationInfo;
@@ -30,7 +30,7 @@ import java.util.Date;
 import static android.app.ActionBar.NAVIGATION_MODE_TABS;
 
 
-public class ElderlyHomePage extends ActionBarActivity  implements
+public class ElderlyHomePage extends ActionBarActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
     protected static final String TAG = "ElderlyHomePage";
@@ -68,6 +68,10 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elderly_home_page);
 
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.icon);
+
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -78,7 +82,9 @@ public class ElderlyHomePage extends ActionBarActivity  implements
         viewPager = (ViewPager) findViewById(R.id.pager);
         tabAdapter = new SlidingTabAdapter(getSupportFragmentManager());
 
+
         viewPager.setAdapter(tabAdapter);
+
 
         // Create a tab listener that is called when the user changes tabs.
         android.support.v7.app.ActionBar.TabListener tabListener = new android.support.v7.app.ActionBar.TabListener() {

@@ -41,9 +41,9 @@ import java.util.List;
 
 
 public class ElderlyShowPathToHome extends FragmentActivity implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-   protected static final String TAG = "ElderlyShowPathToHome";
+    protected static final String TAG = "ElderlyShowPathToHome";
 
 
     protected GoogleApiClient mGoogleApiClient;
@@ -124,9 +124,9 @@ public class ElderlyShowPathToHome extends FragmentActivity implements
 
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
-           double latitude = mLastLocation.getLatitude();
-           double longitude = mLastLocation.getLongitude();
-           origin = new LatLng(latitude, longitude);
+            double latitude = mLastLocation.getLatitude();
+            double longitude = mLastLocation.getLongitude();
+            origin = new LatLng(latitude, longitude);
             Toast.makeText(this, "Current Location Found", Toast.LENGTH_LONG).show();
             createMarkers();
         } else {
@@ -148,7 +148,7 @@ public class ElderlyShowPathToHome extends FragmentActivity implements
         mGoogleApiClient.connect();
     }
 
-    public void createMarkers(){
+    public void createMarkers() {
         // Initializing
         markerPoints = new ArrayList<LatLng>();
 
@@ -345,11 +345,4 @@ public class ElderlyShowPathToHome extends FragmentActivity implements
             map.addPolyline(lineOptions);
         }
     }
-
-
-
-
 }
-
-
-

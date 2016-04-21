@@ -24,9 +24,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/CustomActionBarTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBsqQIyKHj2MuZfaujwFhQQe6V1KeJQ2aI" />
@@ -37,7 +37,7 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation"
-            android:label="@string/app_name"
+            android:label="Blackbox System"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,67 +45,66 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ElderlyRegisterEnterName"
             android:configChanges="orientation"
-            android:label="@string/title_activity_elderly_register_enter_name"
+            android:label="Elderly First Name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".ElderlyRegisterPhoneNo"
             android:configChanges="orientation"
-            android:label="@string/title_activity_elderly_register_phone_no"
+            android:label="Elderly Phone Number"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".ElderlyRegisterAddress"
             android:configChanges="orientation"
-            android:label="@string/title_activity_elderly_register_address"
+            android:label="Elderly Address"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".ElderlyRegisterPageFinal"
             android:configChanges="orientation"
-            android:label="@string/title_activity_elderly_register_page_final"
+            android:label="Elderly Review Information"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ElderlyHomePage"
             android:configChanges="orientation"
-            android:label="@string/title_activity_elderly_home_page"
+            android:label="Elderly Home Page"
             android:screenOrientation="portrait" />
         <activity
             android:name=".FamilyRegisterName"
-            android:label="@string/title_activity_family_register_name"
+            android:label="Family Register Name"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".FamilyRegisterPhone"
             android:configChanges="orientation"
-            android:label="@string/title_activity_family_register_phone"
+            android:label="Family Register Phone"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".FamilyRegisterElderlyPhone"
             android:configChanges="orientation"
-            android:label="@string/title_activity_family_register_elderly_phone"
+            android:label="Family Register Elderly&apos;s Phone No."
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".FamilyRegisterAddress"
             android:configChanges="orientation"
-            android:label="@string/title_activity_family_register_address"
+            android:label="Family Register Address"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".FamilyRegisterEmailID"
             android:configChanges="orientation"
-            android:label="@string/title_activity_family_register_email_id"
+            android:label="Family Register Email ID"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".FamilyRegisterCommonPassword"
             android:configChanges="orientation"
-            android:label="@string/title_activity_family_register_common_password"
+            android:label="Family Enter Common Password"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
@@ -116,39 +115,37 @@
         <activity
             android:name=".ElderlyShowCommonPass"
             android:configChanges="orientation"
-            android:label="@string/title_activity_elderly_show_common_pass"
+            android:label="Elderly Show Common Password"
             android:screenOrientation="portrait" />
         <activity
             android:name=".FamilyHomePage"
             android:configChanges="orientation"
-            android:label="@string/title_activity_family_home_page"
+            android:label="Family Home Page"
             android:screenOrientation="portrait" />
         <activity
             android:name=".chooseRole"
-            android:label="@string/title_activity_choose_role"
+            android:label="Choose Your Role"
             android:screenOrientation="portrait" />
         <activity
             android:name=".FamilyViewEldLoc"
-            android:label="@string/title_activity_family_view_eld_loc"
+            android:label="View Elderly&apos;s Location"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ElderlyIDPage"
-            android:label="@string/title_activity_elderly_idpage"
+            android:label="Elderly&apos;s ID Page"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ElderlyRegisterEmergencyNo"
-            android:label="@string/title_activity_elderly_register_emergency_no"
+            android:label="Elderly Register an Emergency No."
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
-        <activity android:name=".MakeSOSCallActivity">
-            
-        </activity>
+        <activity android:name=".MakeSOSCallActivity" />
         <activity
             android:name=".ElderlySOSTakePhoto"
             android:label="@string/title_activity_elderly_sostake_photo" />
         <activity
             android:name=".ElderlyHospitalLocate"
-            android:label="@string/title_activity_elderly_hospital_locate"
+            android:label="Nearby Hospitals"
             android:parentActivityName=".ElderlyHomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -156,7 +153,7 @@
         </activity>
         <activity
             android:name=".ElderlyPoliceLocate"
-            android:label="@string/title_activity_elderly_police_locate"
+            android:label="Nearby Police Stations"
             android:parentActivityName=".ElderlyHomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -165,11 +162,11 @@
         <activity
             android:name=".ElderlyShowPathToHome"
             android:label="@string/title_activity_elderly_show_path_to_home" />
-
         <activity android:name=".ElderlyTurnByTurnNav" />
         <activity android:name=".ElderlyAddressCard" />
         <activity android:name=".ElderlyCallUber" />
-        <activity android:name=".ElderlyEnterIDPasswordPage"></activity>
+        <activity android:name=".ElderlyEnterIDPasswordPage" />
+        <activity android:name=".Main2Activity"></activity>
     </application>
 
 </manifest>

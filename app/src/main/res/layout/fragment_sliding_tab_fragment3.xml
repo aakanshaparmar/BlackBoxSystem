@@ -1,13 +1,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="aakanshaparmar.blackboxsystem.SlidingTabFragment2">
+    tools:context="aakanshaparmar.blackboxsystem.SlidingTabFragment2"
+    android:background="@color/white">
 
 
     <ImageButton
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="443dp"
+        android:layout_height="348dp"
         android:id="@+id/imageButton"
         android:layout_gravity="center"
-        android:background="@mipmap/sos_button2"/>
+        android:background="@drawable/sos"
+        />
+
 </FrameLayout>

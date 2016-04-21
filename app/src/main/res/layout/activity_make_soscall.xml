@@ -6,27 +6,34 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/white">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Proceed to authenticate then view ID"
+        android:text="Verify to view ID"
         android:id="@+id/callButton"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="122dp"
         android:textSize="30dp"
+        android:background="@color/appBlue"
+        android:textColor="@color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Call Again"
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/callAgain"
+        android:layout_gravity="center"
+        android:background="@drawable/call_sos"
+        android:layout_marginTop="69dp"
         android:layout_below="@+id/callButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp"
-        android:textSize="30dp"/>
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

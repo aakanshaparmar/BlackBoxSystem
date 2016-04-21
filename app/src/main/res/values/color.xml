@@ -3,6 +3,9 @@
 
     <color name="blue">#2058F2</color>
     <color name="green">#20F227</color>
+    <color name="appBlue">#34A5DA</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
 
 
 </resources>
