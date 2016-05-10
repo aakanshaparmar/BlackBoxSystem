@@ -39,6 +39,8 @@ public class ElderlyHomePage extends ActionBarActivity implements
     private ViewPager viewPager;
     private SlidingTabAdapter tabAdapter;
 
+    int locNo=0;
+
     android.support.v7.app.ActionBar.Tab instTab;
     android.support.v7.app.ActionBar.Tab hospPoliceTab;
     android.support.v7.app.ActionBar.Tab sosTab;
@@ -234,7 +236,7 @@ public class ElderlyHomePage extends ActionBarActivity implements
 
         editor.putFloat("latitude", (float) mCurrentLocation.getLatitude());
         editor.putFloat("longitude", (float) mCurrentLocation.getLongitude());
-        editor.putString("dateAndTime", mLastUpdateTime);
+        editor.putInt("locNo", locNo+1);
         editor.commit();
         //Toast.makeText(this, "Location Found"+mLastUpdateTime, Toast.LENGTH_LONG).show();
         //Toast.makeText(this, "Latitude"+mCurrentLocation.getLatitude(), Toast.LENGTH_LONG).show();
@@ -277,10 +279,19 @@ public class ElderlyHomePage extends ActionBarActivity implements
 
             ElderlyLocationInfo eldLocInfo = new ElderlyLocationInfo();
 
-            eldLocInfo.setLatitude(Float.valueOf("2.1"));
-            eldLocInfo.setLongitude(Float.valueOf("2.2"));
-            eldLocInfo.setEldID("e29211107");
-            eldLocInfo.setLocID("l13");
+            SharedPreferences pref1 = getSharedPreferences("locationUpdates", Context.MODE_PRIVATE);
+            SharedPreferences pref2 = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+
+            Float lat = pref1.getFloat("latitude", 0.0f);
+            Float lon = pref1.getFloat("longitude", 0.0f);
+            int locNo = pref1.getInt("locNo", 0);
+
+            String eID = "e"+pref2.getString("phoneNo", "");
+
+            eldLocInfo.setLatitude(lat);
+            eldLocInfo.setLongitude(lon);
+            eldLocInfo.setEldID(eID);
+            eldLocInfo.setLocID(locNo);
 
             try {
                 return myApiService.insertElderlyLocationInfo(eldLocInfo).execute();

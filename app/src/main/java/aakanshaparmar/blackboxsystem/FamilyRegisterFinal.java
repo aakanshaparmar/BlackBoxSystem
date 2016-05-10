@@ -141,7 +141,7 @@ public class FamilyRegisterFinal extends ActionBarActivity {
                 Toast.makeText(context, "Registration complete", Toast.LENGTH_LONG).show();
 
                 Intent intent;
-                intent = new Intent(context, FamilyHomePage.class);
+                intent = new Intent(context, FamilyViewEldLoc.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
