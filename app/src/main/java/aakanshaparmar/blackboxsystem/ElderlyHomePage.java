@@ -1,6 +1,5 @@
 package aakanshaparmar.blackboxsystem;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.aakanshaparmar.myapplication.backend.elderlyLocationInfoApi.ElderlyLocationInfoApi;
 import com.example.aakanshaparmar.myapplication.backend.elderlyLocationInfoApi.model.ElderlyLocationInfo;
@@ -142,7 +142,7 @@ public class ElderlyHomePage extends ActionBarActivity implements
             return true;
         }
 
-       /* else if(id == R.id.action_change_role){
+        else if(id == R.id.action_change_role){
             stopLocationUpdates();
             SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -158,14 +158,14 @@ public class ElderlyHomePage extends ActionBarActivity implements
             Intent intent = new Intent(getApplicationContext(), chooseRole.class);
             startActivity(intent);
         }
-*/
+
         return super.onOptionsItemSelected(item);
     }
 
 
     /**
-            * Builds a GoogleApiClient. Uses the addApi() method to request the LocationServices API.
-            */
+     * Builds a GoogleApiClient. Uses the addApi() method to request the LocationServices API.
+     */
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -292,10 +292,10 @@ public class ElderlyHomePage extends ActionBarActivity implements
         protected void onPostExecute(ElderlyLocationInfo result) {
 
             if (result == null) {
-                //Toast.makeText(context, "Location not saved in DB! Some error occurred", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Location not saved in DB! Some error occurred", Toast.LENGTH_LONG).show();
 
             } else {
-                //Toast.makeText(context, "Location saved in DB!", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Location saved in DB!", Toast.LENGTH_LONG).show();
 
             }
         }

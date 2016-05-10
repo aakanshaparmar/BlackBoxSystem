@@ -74,8 +74,12 @@ public class VerifyElderlyRegistrationEndpoint {
 
                 conn.createStatement().executeQuery("USE bbsystemDB;");
 
-                ResultSet numberOfRecords = conn.createStatement().executeQuery("select count(*) from elderlyInfo where phoneNo = \"" + checkEldInfo.getPhoneNo() + "\"");
-                checkEldInfo.setPhoneNo(String.valueOf(numberOfRecords));
+                ResultSet numberOfRecords = conn.createStatement().executeQuery("select count(*) AS totalNumber from elderlyInfo where phoneNo = \"" + checkEldInfo.getPhoneNo() + "\";");
+
+                if(numberOfRecords.next()){
+                    checkEldInfo.setPhoneNo(numberOfRecords.getString("totalNumber"));
+                    logger.info(numberOfRecords.getString("totalNumber"));
+                }
                 conn.commit();
             }finally{
                 conn.close();
