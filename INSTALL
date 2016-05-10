@@ -1,0 +1,12 @@
+To run the Android application the following steps must be foloowed - 
+
+1.) Install Android Studio with the latest version of Google Play Services. 
+2.) Download the project - program.zip and unzip it. 
+3.) Import the project. 
+4.) In Android Studio go to Build -> Make project. 
+5.) Then click on Build -> Deploy Module to App engine. 
+6.) Connect an Android device with USB debugging enabled, to the coomputer/laptop.
+7.) Click on the run button in the toolbar (The green triange).
+8.) In the "Select Deployment Target" window that opens, choose the connected device and click OK.
+9.) The application may take some time to build and deploy to the device. 
+10.) Once step 9 is completed, the application will open on the android device.
