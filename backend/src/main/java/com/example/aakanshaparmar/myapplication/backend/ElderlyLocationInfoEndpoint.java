@@ -81,7 +81,7 @@ public class ElderlyLocationInfoEndpoint {
             }
         } catch (SQLException e) {
             logger.warning(e.getMessage());
-            return null;Ele
+            return null;
         }
 
         return eldLocInfo;
