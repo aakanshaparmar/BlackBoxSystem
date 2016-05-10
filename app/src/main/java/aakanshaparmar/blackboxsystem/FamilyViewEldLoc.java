@@ -3,12 +3,17 @@ package aakanshaparmar.blackboxsystem;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.aakanshaparmar.myapplication.backend.elderlyLocationInfoApi.ElderlyLocationInfoApi;
+import com.example.aakanshaparmar.myapplication.backend.elderlyLocationInfoApi.model.ElderlyLocationInfo;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,15 +21,25 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+
+import java.io.IOException;
 
 public class FamilyViewEldLoc extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    float lat= (float) 22.2840;
+    float lon = (float) 114.1350;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family_view_eld_loc);
+
+        Toast.makeText(this, "Finding Location Please Wait", Toast.LENGTH_LONG).show();
+
+        new EldLocInfoAsyncTask().execute(getApplicationContext());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -73,17 +88,21 @@ public class FamilyViewEldLoc extends FragmentActivity implements OnMapReadyCall
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lon)).title("Marker"));
+        LatLng last = new LatLng(lat, lon);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(last));
+        CameraUpdate zoom=CameraUpdateFactory.zoomTo(20);
+        mMap.animateCamera(zoom);
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
 
-        LatLng lastLoc = new LatLng(22.283984, 114.135042);
-        map.addMarker(new MarkerOptions().position(lastLoc).title("Last known Location"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(lastLoc));
-        CameraUpdate zoom=CameraUpdateFactory.zoomTo(18);
-        map.animateCamera(zoom);
+        //LatLng lastLoc = new LatLng(lat, lon);
+        //map.addMarker(new MarkerOptions().position(lastLoc).title("Last known Location"));
+        //map.moveCamera(CameraUpdateFactory.newLatLng(lastLoc));
+        //CameraUpdate zoom=CameraUpdateFactory.zoomTo(18);
+        //map.animateCamera(zoom);
 
     }
 
@@ -99,20 +118,6 @@ public class FamilyViewEldLoc extends FragmentActivity implements OnMapReadyCall
             return true;
         }
 
-        else if(id == R.id.action_change_role){
-            SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("role", "elderly");
-            editor.commit();
-            Intent intent = new Intent(getApplicationContext(), ElderlyHomePage.class);
-            startActivity(intent);
-        }
-
-        else if(id == R.id.action_logout){
-
-            Intent intent = new Intent(getApplicationContext(), chooseRole.class);
-            startActivity(intent);
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -123,5 +128,51 @@ public class FamilyViewEldLoc extends FragmentActivity implements OnMapReadyCall
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_family_view_eld_loc, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private class EldLocInfoAsyncTask extends AsyncTask<Context, Void, ElderlyLocationInfo> {
+        private ElderlyLocationInfoApi myApiService = null;
+        private Context context;
+
+
+        protected ElderlyLocationInfo doInBackground(Context... params) {
+
+            if (myApiService == null) {  // Only do this once
+                ElderlyLocationInfoApi.Builder builder = new ElderlyLocationInfoApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+                        .setRootUrl("https://bbsystemproject.appspot.com/_ah/api/");
+                // end options for devappserver
+
+                myApiService = builder.build();
+            }
+
+            context = params[0];
+
+            ElderlyLocationInfo eldLocInfo = new ElderlyLocationInfo();
+
+            SharedPreferences pref2 = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+
+            String eID = "e" + pref2.getString("ePhoneNo", "");
+
+            Log.d("HELLLLOOOOO", eID);
+            try {
+                return myApiService.getElderlyLocationInfo(eID).execute();
+            } catch (IOException e) {
+                return null;
+            }
+        }
+
+        protected void onPostExecute(ElderlyLocationInfo result) {
+
+            if (result == null) {
+                Toast.makeText(context, "Sorry ! Location Not Found", Toast.LENGTH_LONG).show();
+
+            } else {
+                Toast.makeText(context, "Location Found!", Toast.LENGTH_LONG).show();
+                lat = result.getLatitude();
+                lon = result.getLongitude();
+                setUpMap();
+
+            }
+        }
     }
 }

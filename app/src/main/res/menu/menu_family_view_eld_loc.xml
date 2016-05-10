@@ -4,17 +4,17 @@
     tools:context="aakanshaparmar.blackboxsystem.FamilyViewEldLoc">
 
 
-    <item
-        android:id="@+id/action_change_role"
-        android:icon="@drawable/change_role_icon"
-        android:title="FamilyView"
-        app:showAsAction="ifRoom"/>
+    <!--<item-->
+        <!--android:id="@+id/action_change_role"-->
+        <!--android:icon="@drawable/change_role_icon"-->
+        <!--android:title="FamilyView"-->
+        <!--app:showAsAction="ifRoom"/>-->
 
-    <item
-        android:id="@+id/action_logout"
-        android:icon="@drawable/logout_icon"
-        android:title="FamilyView2"
-        app:showAsAction="ifRoom"/>
+    <!--<item-->
+        <!--android:id="@+id/action_logout"-->
+        <!--android:icon="@drawable/logout_icon"-->
+        <!--android:title="FamilyView2"-->
+        <!--app:showAsAction="ifRoom"/>-->
 
 
 

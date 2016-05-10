@@ -144,22 +144,22 @@ public class ElderlyHomePage extends ActionBarActivity implements
             return true;
         }
 
-        else if(id == R.id.action_change_role){
-            stopLocationUpdates();
-            SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("role", "family");
-            editor.commit();
-            Intent intent = new Intent(getApplicationContext(), FamilyViewEldLoc.class);
-            startActivity(intent);
-        }
-
-        else if(id == R.id.action_logout){
-
-            stopLocationUpdates();
-            Intent intent = new Intent(getApplicationContext(), chooseRole.class);
-            startActivity(intent);
-        }
+//        else if(id == R.id.action_change_role){
+//            stopLocationUpdates();
+//            SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putString("role", "family");
+//            editor.commit();
+//            Intent intent = new Intent(getApplicationContext(), FamilyViewEldLoc.class);
+//            startActivity(intent);
+//        }
+//
+//        else if(id == R.id.action_logout){
+//
+//            stopLocationUpdates();
+//            Intent intent = new Intent(getApplicationContext(), chooseRole.class);
+//            startActivity(intent);
+//        }
 
         return super.onOptionsItemSelected(item);
     }

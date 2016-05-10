@@ -1,6 +1,5 @@
 package aakanshaparmar.blackboxsystem;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -60,20 +59,20 @@ public class ElderlyIDPage extends ActionBarActivity {
             startActivity(intent);
             return true;
         }
-        else if(id == R.id.action_change_role){
-            SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("role", "family");
-            editor.commit();
-            Intent intent = new Intent(getApplicationContext(), FamilyViewEldLoc.class);
-            startActivity(intent);
-        }
-
-        else if(id == R.id.action_logout){
-
-            Intent intent = new Intent(getApplicationContext(), chooseRole.class);
-            startActivity(intent);
-        }
+//        else if(id == R.id.action_change_role){
+//            SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putString("role", "family");
+//            editor.commit();
+//            Intent intent = new Intent(getApplicationContext(), FamilyViewEldLoc.class);
+//            startActivity(intent);
+//        }
+//
+//        else if(id == R.id.action_logout){
+//
+//            Intent intent = new Intent(getApplicationContext(), chooseRole.class);
+//            startActivity(intent);
+//        }
 
         return super.onOptionsItemSelected(item);
     }
