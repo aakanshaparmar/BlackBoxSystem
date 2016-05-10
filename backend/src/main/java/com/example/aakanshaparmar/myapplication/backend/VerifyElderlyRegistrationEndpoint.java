@@ -5,10 +5,9 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.appengine.api.utils.SystemProperty;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
@@ -18,31 +17,38 @@ import javax.inject.Named;
  * An endpoint class we are exposing
  */
 @Api(
-        name = "elderlyRegistrationApi",
+        name = "verifyElderlyRegistrationApi",
         version = "v1",
-        resource = "elderlyRegistration",
+        resource = "verifyElderlyRegistration",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.myapplication.aakanshaparmar.example.com",
                 ownerName = "backend.myapplication.aakanshaparmar.example.com",
                 packagePath = ""
         )
 )
-public class ElderlyRegistrationEndpoint {
+public class VerifyElderlyRegistrationEndpoint {
 
-    private static final Logger logger = Logger.getLogger(ElderlyRegistrationEndpoint.class.getName());
+    private static final Logger logger = Logger.getLogger(VerifyElderlyRegistrationEndpoint.class.getName());
 
-    public ElderlyRegistrationEndpoint() {
+    public VerifyElderlyRegistrationEndpoint() {
     }
 
-    @ApiMethod(name = "getElderlyRegistration")
-    public ElderlyRegistration getElderlyRegistration(@Named("id") Long id) {
-        logger.info("Calling getElderlyRegistration method");
+    @ApiMethod(name = "getVerifyElderlyRegistration")
+    public VerifyElderlyRegistration getVerifyElderlyRegistration(@Named("id") Long id) {
+        // TODO: Implement this function
+        logger.info("Calling getVerifyElderlyRegistration method");
         return null;
     }
 
 
-    @ApiMethod(name = "insertElderlyRegistration")
-    public ElderlyRegistration insertElderlyRegistration(ElderlyRegistration eldInfo) throws IOException {
+    @ApiMethod(name = "insertVerifyElderlyRegistration")
+    public VerifyElderlyRegistration insertVerifyElderlyRegistration(VerifyElderlyRegistration checkEldInfo) {
+        // TODO: Implement this function
+        logger.info("Calling insertVerifyElderlyRegistration method");
+
+        // TODO: Implement this function
+        logger.info("Calling insertcheckElderlyRegistration method");
+
         logger.info("Calling insertElderlyRegistration method");
 
         //Connect to SQL
@@ -68,16 +74,8 @@ public class ElderlyRegistrationEndpoint {
 
                 conn.createStatement().executeQuery("USE bbsystemDB;");
 
-                String statement = "INSERT INTO elderlyInfo (fullName, phoneNo, address, eID, commonPass, emergencyPhoneNo) VALUES ( ? , ? , ? , ?, ?, ?)";
-                PreparedStatement stmtMoney = conn.prepareStatement(statement);
-                stmtMoney.setString(1, eldInfo.getFullName());
-                stmtMoney.setString(2, eldInfo.getPhoneNo());
-                stmtMoney.setString(3, eldInfo.getAddress());
-                stmtMoney.setString(4, eldInfo.getEID());
-                stmtMoney.setInt(5, eldInfo.getCommonPass());
-                stmtMoney.setString(6, eldInfo.getEmerPhoneNo());
-                stmtMoney.executeUpdate();
-
+                ResultSet numberOfRecords = conn.createStatement().executeQuery("select count(*) from elderlyInfo where phoneNo = \"" + checkEldInfo.getPhoneNo() + "\"");
+                checkEldInfo.setPhoneNo(String.valueOf(numberOfRecords));
                 conn.commit();
             }finally{
                 conn.close();
@@ -87,9 +85,7 @@ public class ElderlyRegistrationEndpoint {
             return null;
         }
 
-        return eldInfo;
+        return checkEldInfo;
 
     }
-
-
 }

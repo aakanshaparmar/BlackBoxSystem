@@ -8,7 +8,8 @@
             <param-value>com.example.aakanshaparmar.myapplication.backend.MyEndpoint,
                 com.example.aakanshaparmar.myapplication.backend.ElderlyRegistrationEndpoint,
                 com.example.aakanshaparmar.myapplication.backend.FamilyRegistrationEndpoint,
-                com.example.aakanshaparmar.myapplication.backend.ElderlyLocationInfoEndpoint</param-value>
+                com.example.aakanshaparmar.myapplication.backend.ElderlyLocationInfoEndpoint,
+                com.example.aakanshaparmar.myapplication.backend.VerifyElderlyRegistrationEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
