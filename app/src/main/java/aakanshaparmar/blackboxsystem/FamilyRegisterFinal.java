@@ -1,12 +1,10 @@
 package aakanshaparmar.blackboxsystem;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -62,7 +60,7 @@ public class FamilyRegisterFinal extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-               new FamilyRegistrationAsyncTask().execute(getApplicationContext());
+                new FamRegistrationAsyncTask().execute(getApplicationContext());
 
             }
         });
@@ -86,7 +84,8 @@ public class FamilyRegisterFinal extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class FamilyRegistrationAsyncTask extends AsyncTask<Context, Void, FamilyRegistration> {
+
+    private class FamRegistrationAsyncTask extends AsyncTask<Context, Void, FamilyRegistration> {
         private FamilyRegistrationApi myApiService = null;
         private Context context;
 
@@ -105,24 +104,26 @@ public class FamilyRegisterFinal extends ActionBarActivity {
 
             FamilyRegistration famInfo = new FamilyRegistration();
 
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+            SharedPreferences prefs = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
 
             String personName = prefs.getString("fullName", "");
             String phoneNo = prefs.getString("phoneNo", "");
             String address = prefs.getString("address", "");
-            String eID = "e"+phoneNo;
+            String eldPhoneNo = prefs.getString("ePhoneNo", "");
             int commonPass = 1234;
+            String eID = "e"+eldPhoneNo;
+            String emailID = prefs.getString("emailID", "");
+            String fID = "f"+phoneNo;
 
-            famInfo.setFullName("Vanisha");
-            famInfo.setAddress("b908");
-            //famInfo.set
-            famInfo.setEldID("e123456789");
-            famInfo.setCommonPass(1234);
-            famInfo.setEmailID("van@gmail.com");
-            famInfo.setPhoneNo("7654321");
-            famInfo.setFamID("f7654321");
 
+            famInfo.setFullName(personName);
+            famInfo.setPhoneNo(phoneNo);
+            famInfo.setAddress(address);
+            famInfo.setEldID(eID);
+            famInfo.setEmailID(emailID);
+            famInfo.setFamID(fID);
+            famInfo.setCommonPass(commonPass);
 
 
             try {
@@ -140,7 +141,7 @@ public class FamilyRegisterFinal extends ActionBarActivity {
                 Toast.makeText(context, "Registration complete", Toast.LENGTH_LONG).show();
 
                 Intent intent;
-                intent = new Intent(context, FamilyViewEldLoc.class);
+                intent = new Intent(context, FamilyHomePage.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 

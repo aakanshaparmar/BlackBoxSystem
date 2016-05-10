@@ -37,7 +37,7 @@ public class FamilyRegisterEmailID extends ActionBarActivity {
                 editor.putString("emailID", String.valueOf(emailIDField.getText()));
                 editor.commit();
 
-                Intent intent = new Intent( v.getContext(), FamilyRegisterCommonPassword.class);
+                Intent intent = new Intent( v.getContext(), FamilyRegisterFinal.class);
                 startActivity(intent);
 
             }

@@ -17,39 +17,31 @@ import javax.inject.Named;
  * An endpoint class we are exposing
  */
 @Api(
-        name = "verifyElderlyRegistrationApi",
+        name = "verifyFamilyRegistrationApi",
         version = "v1",
-        resource = "verifyElderlyRegistration",
+        resource = "verifyFamilyRegistration",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.myapplication.aakanshaparmar.example.com",
                 ownerName = "backend.myapplication.aakanshaparmar.example.com",
                 packagePath = ""
         )
 )
-public class VerifyElderlyRegistrationEndpoint {
+public class VerifyFamilyRegistrationEndpoint {
 
-    private static final Logger logger = Logger.getLogger(VerifyElderlyRegistrationEndpoint.class.getName());
+    private static final Logger logger = Logger.getLogger(VerifyFamilyRegistrationEndpoint.class.getName());
 
-    public VerifyElderlyRegistrationEndpoint() {
-    }
-
-    @ApiMethod(name = "getVerifyElderlyRegistration")
-    public VerifyElderlyRegistration getVerifyElderlyRegistration(@Named("id") Long id) {
+    @ApiMethod(name = "getVerifyFamilyRegistration")
+    public VerifyFamilyRegistration getVerifyFamilyRegistration(@Named("id") Long id) {
         // TODO: Implement this function
-        logger.info("Calling getVerifyElderlyRegistration method");
+        logger.info("Calling getVerifyFamilyRegistration method");
         return null;
     }
 
-
-    @ApiMethod(name = "insertVerifyElderlyRegistration")
-    public VerifyElderlyRegistration insertVerifyElderlyRegistration(VerifyElderlyRegistration checkEldInfo) {
+    @ApiMethod(name = "insertVerifyFamilyRegistration")
+    public VerifyFamilyRegistration insertVerifyFamilyRegistration(VerifyFamilyRegistration checkFamInfo) {
         // TODO: Implement this function
-        logger.info("Calling insertVerifyElderlyRegistration method");
+        logger.info("Calling insertVerifyFamilyRegistration method");
 
-        // TODO: Implement this function
-        logger.info("Calling insertcheckElderlyRegistration method");
-
-        logger.info("Calling insertElderlyRegistration method");
 
         //Connect to SQL
         String url = null;
@@ -74,10 +66,10 @@ public class VerifyElderlyRegistrationEndpoint {
 
                 conn.createStatement().executeQuery("USE bbsystemDB;");
 
-                ResultSet numberOfRecords = conn.createStatement().executeQuery("select count(*) AS totalNumber from elderlyInfo where phoneNo = \"" + checkEldInfo.getPhoneNo() + "\";");
+                ResultSet numberOfRecords = conn.createStatement().executeQuery("select count(*) AS totalNumber from familyInfo where phoneNo = \"" + checkFamInfo.getPhoneNo() + "\";");
 
                 if(numberOfRecords.next()){
-                    checkEldInfo.setPhoneNo(numberOfRecords.getString("totalNumber"));
+                    checkFamInfo.setPhoneNo(numberOfRecords.getString("totalNumber"));
                     logger.info(numberOfRecords.getString("totalNumber"));
                 }
                 conn.commit();
@@ -89,7 +81,6 @@ public class VerifyElderlyRegistrationEndpoint {
             return null;
         }
 
-        return checkEldInfo;
-
+        return checkFamInfo;
     }
 }

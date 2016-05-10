@@ -9,7 +9,9 @@
                 com.example.aakanshaparmar.myapplication.backend.ElderlyRegistrationEndpoint,
                 com.example.aakanshaparmar.myapplication.backend.FamilyRegistrationEndpoint,
                 com.example.aakanshaparmar.myapplication.backend.ElderlyLocationInfoEndpoint,
-                com.example.aakanshaparmar.myapplication.backend.VerifyElderlyRegistrationEndpoint</param-value>
+                com.example.aakanshaparmar.myapplication.backend.VerifyElderlyRegistrationEndpoint,
+                com.example.aakanshaparmar.myapplication.backend.VerifyFamilyElderlyNumberEndpoint,
+                com.example.aakanshaparmar.myapplication.backend.VerifyFamilyRegistrationEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

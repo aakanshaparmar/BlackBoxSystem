@@ -1,6 +1,5 @@
 package aakanshaparmar.blackboxsystem;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,7 +42,7 @@ public class FamilyRegisterElderlyPhone extends ActionBarActivity {
                 editor.putString("ePhoneNo", String.valueOf(phoneField.getText()));
                 editor.commit();
 
-                Intent intent = new Intent(v.getContext(), FamilyRegisterName.class);
+                Intent intent = new Intent(v.getContext(), FamilyRegisterCommonPassword.class);
                 startActivity(intent);
 
 

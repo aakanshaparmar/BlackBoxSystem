@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,7 +65,7 @@ public class ElderlyRegisterPageFinal extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                //new EldRegistrationAsyncTask().execute(getApplicationContext());
+                new EldRegistrationAsyncTask().execute(getApplicationContext());
                 Intent intent;
                 intent = new Intent(getApplicationContext(), ElderlyShowCommonPass.class);
                 startActivity(intent);
@@ -95,65 +95,66 @@ public class ElderlyRegisterPageFinal extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-private class EldRegistrationAsyncTask extends AsyncTask<Context, Void, ElderlyRegistration> {
-    private  ElderlyRegistrationApi myApiService = null;
-    private Context context;
+    private class EldRegistrationAsyncTask extends AsyncTask<Context, Void, ElderlyRegistration> {
+        private  ElderlyRegistrationApi myApiService = null;
+        private Context context;
 
 
-    protected ElderlyRegistration doInBackground(Context... params) {
+        protected ElderlyRegistration doInBackground(Context... params) {
 
-        if(myApiService == null) {  // Only do this once
-            ElderlyRegistrationApi.Builder builder = new ElderlyRegistrationApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-                    .setRootUrl("https://bbsystemproject.appspot.com/_ah/api/");
-            // end options for devappserver
+            if(myApiService == null) {  // Only do this once
+                ElderlyRegistrationApi.Builder builder = new ElderlyRegistrationApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+                        .setRootUrl("https://bbsystemproject.appspot.com/_ah/api/");
+                // end options for devappserver
 
-            myApiService = builder.build();
+                myApiService = builder.build();
+            }
+
+            context = params[0];
+
+            ElderlyRegistration eldInfo = new ElderlyRegistration();
+
+            SharedPreferences prefs = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+
+            String personName = prefs.getString("fullName", "");
+            String phoneNo = prefs.getString("phoneNo", "");
+            String address = prefs.getString("address", "");
+            String eID = "e"+phoneNo;
+            int commonPass = 1234;
+            String emergencyPhoneNo = prefs.getString("emergencyPhoneNo","");
+            Log.d("PERSONNAME IS ", "" +personName+phoneNo+address+eID+commonPass+emergencyPhoneNo);
+
+            eldInfo.setFullName(personName);
+            eldInfo.setPhoneNo(phoneNo);
+            eldInfo.setAddress(address);
+            eldInfo.setEid(eID);
+            eldInfo.setCommonPass(commonPass);
+            eldInfo.setEmerPhoneNo(emergencyPhoneNo);
+
+
+            try {
+                return myApiService.insertElderlyRegistration(eldInfo).execute();
+            } catch (IOException e) {
+                return null;
+            }
         }
 
-        context = params[0];
-
-        ElderlyRegistration eldInfo = new ElderlyRegistration();
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-        SharedPreferences.Editor editor = prefs.edit();
-
-        String personName = prefs.getString("fullName", "");
-        String phoneNo = prefs.getString("phoneNo", "");
-        String address = prefs.getString("address", "");
-        String eID = "e"+phoneNo;
-        int commonPass = 1234;
-
-        eldInfo.setFullName("Medhavi");
-        eldInfo.setPhoneNo("789564");
-        eldInfo.setAddress("b908");
-        eldInfo.setEid("e789564");
-        eldInfo.setCommonPass(1234);
-        eldInfo.setEmerPhoneNo("1234567");
-
-
-
-        try {
-            return myApiService.insertElderlyRegistration(eldInfo).execute();
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    protected void onPostExecute(ElderlyRegistration result) {
-         if (result == null) {
+        protected void onPostExecute(ElderlyRegistration result) {
+            if (result == null) {
                 Toast.makeText(context, "Error in registrations!", Toast.LENGTH_LONG).show();
 
             } else {
                 Toast.makeText(context, "Registration complete", Toast.LENGTH_LONG).show();
 
-                 Intent intent;
-                 intent = new Intent(context, ElderlyShowCommonPass.class);
-                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                 context.startActivity(intent);
+                Intent intent;
+                intent = new Intent(context, ElderlyShowCommonPass.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
 
             }
-    }
+        }
 
-}
+    }
 }
 
