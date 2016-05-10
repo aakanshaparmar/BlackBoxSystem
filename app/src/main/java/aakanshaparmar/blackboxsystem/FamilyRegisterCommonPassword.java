@@ -51,6 +51,7 @@ public class FamilyRegisterCommonPassword extends ActionBarActivity {
                     editor.putString("commonPass", String.valueOf(commonPassField.getText()));
                     editor.commit();
 
+                    new VerFamilyElderlyNumberAsyncTask().execute(getApplicationContext());
 
 
                 }
