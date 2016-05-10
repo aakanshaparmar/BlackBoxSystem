@@ -8,8 +8,11 @@ import com.google.appengine.api.utils.SystemProperty;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
+
+import javax.inject.Named;
 
 /**
  * An endpoint class we are exposing
@@ -27,6 +30,58 @@ import java.util.logging.Logger;
 public class ElderlyLocationInfoEndpoint {
 
     private static final Logger logger = Logger.getLogger(ElderlyLocationInfoEndpoint.class.getName());
+
+    public ElderlyLocationInfoEndpoint() {
+    }
+
+    @ApiMethod(name = "getElderlyLocationInfo")
+    public ElderlyLocationInfo getElderlyLocationInfo(@Named("id") String eID) {
+        logger.info("Calling getElderlyRegistration method");
+
+        ElderlyLocationInfo eldLocInfo = new ElderlyLocationInfo();
+
+        //Connect to SQL
+        String url = null;
+        try {
+            if (SystemProperty.environment.value() ==
+                    SystemProperty.Environment.Value.Production) {
+                Class.forName("com.mysql.jdbc.GoogleDriver");
+                url = "jdbc:google:mysql://bbsystemproject:blackboxsystemsqlinstance?user=root";
+
+            }
+        }catch(Exception e){
+            logger.warning(e.getMessage());
+            return null;
+        }
+
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+
+            try {
+                conn.setAutoCommit(false);
+
+                conn.createStatement().executeQuery("USE bbsystemDB;");
+
+                ResultSet numberOfRecords = conn.createStatement().executeQuery("select latitude,longitude,locNo from elderlyLocInfo where eID = \"" + eID + "\";");
+
+                if(numberOfRecords.next()){
+                    eldLocInfo.setLatitude(numberOfRecords.getFloat("latitude"));
+                    eldLocInfo.setLongitude(numberOfRecords.getFloat("longitude"));
+                    eldLocInfo.setLocID(numberOfRecords.getInt("locNo"));
+                }
+                conn.commit();
+            }finally{
+                conn.close();
+            }
+        } catch (SQLException e) {
+            logger.warning(e.getMessage());
+            return null;
+        }
+
+        return eldLocInfo;
+    }
+
 
     @ApiMethod(name = "insertElderlyLocationInfo")
     public ElderlyLocationInfo insertElderlyLocationInfo(ElderlyLocationInfo eldLocInfo) {
@@ -56,24 +111,13 @@ public class ElderlyLocationInfoEndpoint {
 
                 conn.createStatement().executeQuery("USE bbsystemDB;");
 
-                String statement = "INSERT INTO elderlyLocInfo (latitude, longitude, locID, eID) VALUES ( ? , ? , ? , ?)";
+                String statement = "INSERT INTO elderlyLocInfo (latitude, longitude, eID, locNo) VALUES ( ? , ? , ? , ?)";
                 PreparedStatement stmtMoney = conn.prepareStatement(statement);
-                stmtMoney.setFloat(1, (float) 22.2840);
-                stmtMoney.setFloat(2, (float) 114.1350);
-                stmtMoney.setString(3, "le12341");
-                stmtMoney.setString(4, "e789564 ");
+                stmtMoney.setFloat(1, eldLocInfo.getLatitude());
+                stmtMoney.setFloat(2, eldLocInfo.getLongitude());
+                stmtMoney.setString(3, eldLocInfo.getEldID());
+                stmtMoney.setInt(4, eldLocInfo.getLocID());
                 stmtMoney.executeUpdate();
-
-
-                /*int success;
-                success = 1;
-                if (success == 1) {
-                    logger.info("Success in uploading to Cloud SQL");
-                } else if (success == 0) {
-                    logger.warning("Failure in uploading to Cloud SQL");
-                    conn.close();
-                    return null;
-                }*/
 
                 conn.commit();
             }finally{

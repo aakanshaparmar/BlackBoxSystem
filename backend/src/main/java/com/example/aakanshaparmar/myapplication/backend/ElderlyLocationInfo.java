@@ -1,17 +1,14 @@
 package com.example.aakanshaparmar.myapplication.backend;
 
-import java.sql.Date;
-
 /**
  * Created by aakanshaparmar on 15/1/2016.
  */
-public class ElderlyLocationInfo {
+public class ElderlyLocationInfo{
 
     float latitude;
     float longitude;
-    String locID;
+    int locID;
     String eID;
-    Date locDate;
 
     public float getLatitude()
     {
@@ -23,7 +20,7 @@ public class ElderlyLocationInfo {
         return longitude;
     }
 
-    public String getLocID()
+    public int getLocID()
     {
         return locID;
     }
@@ -33,10 +30,6 @@ public class ElderlyLocationInfo {
         return eID;
     }
 
-    public Date getLocDate()
-    {
-        return locDate;
-    }
 
     public void setLatitude(float lat)
     {
@@ -48,7 +41,7 @@ public class ElderlyLocationInfo {
         longitude = longi;
     }
 
-    public void setLocID(String lID)
+    public void setLocID(int lID)
     {
         locID = lID;
     }
@@ -58,10 +51,6 @@ public class ElderlyLocationInfo {
         eID = eldID;
     }
 
-    public void setLocDate(Date lDate)
-    {
-        locDate = lDate;
-    }
 
 
 }
