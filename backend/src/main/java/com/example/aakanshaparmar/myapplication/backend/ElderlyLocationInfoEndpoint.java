@@ -11,8 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-import javax.inject.Named;
-
 /**
  * An endpoint class we are exposing
  */
@@ -30,25 +28,6 @@ public class ElderlyLocationInfoEndpoint {
 
     private static final Logger logger = Logger.getLogger(ElderlyLocationInfoEndpoint.class.getName());
 
-    /**
-     * This method gets the <code>ElderlyLocationInfo</code> object associated with the specified <code>id</code>.
-     *
-     * @param id The id of the object to be returned.
-     * @return The <code>ElderlyLocationInfo</code> associated with <code>id</code>.
-     */
-    @ApiMethod(name = "getElderlyLocationInfo")
-    public ElderlyLocationInfo getElderlyLocationInfo(@Named("id") Long id) {
-
-        logger.info("Calling getElderlyLocationInfo method");
-        return null;
-    }
-
-    /**
-     * This inserts a new <code>ElderlyLocationInfo</code> object.
-     *
-     * @param eldLocInfo The object to be added.
-     * @return The object to be added.
-     */
     @ApiMethod(name = "insertElderlyLocationInfo")
     public ElderlyLocationInfo insertElderlyLocationInfo(ElderlyLocationInfo eldLocInfo) {
 
@@ -68,23 +47,25 @@ public class ElderlyLocationInfoEndpoint {
             return null;
         }
 
+        Connection conn = null;
         try {
-            Connection conn = DriverManager.getConnection(url);
+            conn = DriverManager.getConnection(url);
+
             try {
-                String statement1 = "USE bbsystemDB";
-                PreparedStatement stmt1 = conn.prepareStatement(statement1);
-                stmt1.executeUpdate();
+                conn.setAutoCommit(false);
 
-                //String statement = "SELECT * FROM elderlyLocInfo";
-                //PreparedStatement stmt = conn.prepareStatement(statement);
+                conn.createStatement().executeQuery("USE bbsystemDB;");
 
-                /*stmt.setFloat(1, eldLocInfo.getLatitude());
-                stmt.setFloat(2, eldLocInfo.getLongitude());
-                stmt.setString(3, eldLocInfo.getLocID());
-                stmt.setString(4, eldLocInfo.getEldID());
-                stmt.setDate(5, eldLocInfo.getLocDate());*/
+                String statement = "INSERT INTO elderlyLocInfo (latitude, longitude, locID, eID) VALUES ( ? , ? , ? , ?)";
+                PreparedStatement stmtMoney = conn.prepareStatement(statement);
+                stmtMoney.setFloat(1, (float) 22.2840);
+                stmtMoney.setFloat(2, (float) 114.1350);
+                stmtMoney.setString(3, "le12341");
+                stmtMoney.setString(4, "e789564 ");
+                stmtMoney.executeUpdate();
 
-                int success;
+
+                /*int success;
                 success = 1;
                 if (success == 1) {
                     logger.info("Success in uploading to Cloud SQL");
@@ -92,13 +73,15 @@ public class ElderlyLocationInfoEndpoint {
                     logger.warning("Failure in uploading to Cloud SQL");
                     conn.close();
                     return null;
-                }
+                }*/
+
+                conn.commit();
             }finally{
                 conn.close();
             }
         } catch (SQLException e) {
             logger.warning(e.getMessage());
-            return null;
+            return null;Ele
         }
 
         return eldLocInfo;
