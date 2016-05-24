@@ -1,0 +1,881 @@
+Index: backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/FamilyRegistrationEndpoint.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/FamilyRegistrationEndpoint.java	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/FamilyRegistrationEndpoint.java	(revision )
+@@ -30,12 +30,6 @@
+ 
+     private static final Logger logger = Logger.getLogger(FamilyRegistrationEndpoint.class.getName());
+ 
+-    /**
+-     * This method gets the <code>FamilyRegistration</code> object associated with the specified <code>id</code>.
+-     *
+-     * @param id The id of the object to be returned.
+-     * @return The <code>FamilyRegistration</code> associated with <code>id</code>.
+-     */
+     @ApiMethod(name = "getFamilyRegistration")
+     public FamilyRegistration getFamilyRegistration(@Named("id") Long id) {
+ 
+@@ -43,12 +37,6 @@
+         return null;
+     }
+ 
+-    /**
+-     * This inserts a new <code>FamilyRegistration</code> object.
+-     *
+-     * @param familyInfo The object to be added.
+-     * @return The object to be added.
+-     */
+     @ApiMethod(name = "insertFamilyRegistration")
+     public FamilyRegistration insertFamilyRegistration(FamilyRegistration familyInfo) {
+ 
+@@ -63,39 +51,33 @@
+                 url = "jdbc:google:mysql://bbsystemproject:blackboxsystemsqlinstance?user=root";
+ 
+             }
+-        }catch(Exception e){
++        } catch (Exception e) {
+             logger.warning(e.getMessage());
+             return null;
+         }
+ 
++        Connection conn = null;
+         try {
+-            Connection conn = DriverManager.getConnection(url);
++            conn = DriverManager.getConnection(url);
++
+             try {
+-                String statement1 = "USE bbsystemDB";
+-                PreparedStatement stmt1 = conn.prepareStatement(statement1);
+-                stmt1.executeUpdate();
++                conn.setAutoCommit(false);
+ 
+-                //String statement = "SELECT * FROM familyInfo";
+-                //PreparedStatement stmt = conn.prepareStatement(statement);
++                conn.createStatement().executeQuery("USE bbsystemDB;");
+ 
+-                /*stmt.setString(1, familyInfo.getFullName());
+-                stmt.setString(2, familyInfo.getPhoneNo());
+-                stmt.setString(3, familyInfo.getAddress());
+-                stmt.setString(4, familyInfo.getEldID());
+-                stmt.setString(5, familyInfo.getEmailID());
+-                stmt.setString(6, familyInfo.getFamID());
+-                stmt.setInt(7, familyInfo.getCommonPass());*/
++                String statement = "INSERT INTO familyInfo (fullName, phoneNo, address, eID, emailID, fID, commonPass) VALUES ( ? , ? , ? , ?, ?, ?, ?)";
++                PreparedStatement stmtMoney = conn.prepareStatement(statement);
++                stmtMoney.setString(1, familyInfo.getFullName());
++                stmtMoney.setString(2, familyInfo.getPhoneNo());
++                stmtMoney.setString(3, familyInfo.getAddress());
++                stmtMoney.setString(4, familyInfo.getEldID());
++                stmtMoney.setString(5, familyInfo.getEmailID());
++                stmtMoney.setString(6, familyInfo.getFamID());
++                stmtMoney.setInt(7, familyInfo.getCommonPass());
++                stmtMoney.executeUpdate();
+ 
+-                int success;
+-                success = 1;
+-                if (success == 1) {
+-                    logger.info("Success in uploading to Cloud SQL");
+-                } else if (success == 0) {
+-                    logger.warning("Failure in uploading to Cloud SQL");
+-                    conn.close();
+-                    return null;
+-                }
++                conn.commit();
+-            }finally{
++            } finally {
+                 conn.close();
+             }
+         } catch (SQLException e) {
+@@ -104,6 +86,5 @@
+         }
+ 
+         return familyInfo;
+-
+     }
+ }
+\ No newline at end of file
+Index: app/app.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/app.iml	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ app/app.iml	(revision )
+@@ -135,7 +135,9 @@
+     <orderEntry type="library" exported="" name="google-oauth-client-1.19.0" level="project" />
+     <orderEntry type="library" exported="" name="support-vector-drawable-23.3.0" level="project" />
+     <orderEntry type="library" exported="" name="play-services-base-8.4.0" level="project" />
++    <orderEntry type="library" exported="" name="appengine-endpoints-1.9.18" level="project" />
+     <orderEntry type="library" exported="" name="jackson-core-2.1.3" level="project" />
++    <orderEntry type="library" exported="" name="appengine-api-1.0-sdk-1.9.18" level="project" />
+     <orderEntry type="library" exported="" name="google-api-client-android-1.19.0" level="project" />
+     <orderEntry type="library" exported="" name="appcompat-v7-23.3.0" level="project" />
+     <orderEntry type="library" exported="" name="backend-android-endpoints" level="project" />
+\ No newline at end of file
+Index: app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterFinal.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterFinal.java	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterFinal.java	(revision )
+@@ -1,12 +1,10 @@
+ package aakanshaparmar.blackboxsystem;
+ 
+-import android.app.Activity;
+ import android.content.Context;
+ import android.content.Intent;
+ import android.content.SharedPreferences;
+ import android.os.AsyncTask;
+ import android.os.Bundle;
+-import android.preference.PreferenceManager;
+ import android.support.v7.app.ActionBarActivity;
+ import android.view.Menu;
+ import android.view.MenuItem;
+@@ -62,7 +60,7 @@
+             @Override
+             public void onClick(View v) {
+ 
+-               new FamilyRegistrationAsyncTask().execute(getApplicationContext());
++               new FamRegistrationAsyncTask().execute(getApplicationContext());
+ 
+             }
+         });
+@@ -86,7 +84,8 @@
+         return super.onOptionsItemSelected(item);
+     }
+ 
+-    private class FamilyRegistrationAsyncTask extends AsyncTask<Context, Void, FamilyRegistration> {
++
++    private class FamRegistrationAsyncTask extends AsyncTask<Context, Void, FamilyRegistration> {
+         private FamilyRegistrationApi myApiService = null;
+         private Context context;
+ 
+@@ -105,24 +104,26 @@
+ 
+             FamilyRegistration famInfo = new FamilyRegistration();
+ 
+-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
++            SharedPreferences prefs = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+             SharedPreferences.Editor editor = prefs.edit();
+ 
+             String personName = prefs.getString("fullName", "");
+             String phoneNo = prefs.getString("phoneNo", "");
+             String address = prefs.getString("address", "");
+-            String eID = "e"+phoneNo;
++            String eldPhoneNo = prefs.getString("ePhoneNo", "");
+             int commonPass = 1234;
++            String eID = "e"+eldPhoneNo;
++            String emailID = prefs.getString("emailID", "");
++            String fID = "f"+phoneNo;
+ 
+-            famInfo.setFullName("Vanisha");
+-            famInfo.setAddress("b908");
+-            //famInfo.set
+-            famInfo.setEldID("e123456789");
+-            famInfo.setCommonPass(1234);
+-            famInfo.setEmailID("van@gmail.com");
+-            famInfo.setPhoneNo("7654321");
+-            famInfo.setFamID("f7654321");
+ 
++            famInfo.setFullName(personName);
++            famInfo.setPhoneNo(phoneNo);
++            famInfo.setAddress(address);
++            famInfo.setEldID(eID);
++            famInfo.setEmailID(emailID);
++            famInfo.setFamID(fID);
++            famInfo.setCommonPass(commonPass);
+ 
+ 
+             try {
+@@ -140,7 +141,7 @@
+                 Toast.makeText(context, "Registration complete", Toast.LENGTH_LONG).show();
+ 
+                 Intent intent;
+-                intent = new Intent(context, FamilyViewEldLoc.class);
++                intent = new Intent(context, FamilyHomePage.class);
+                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                 context.startActivity(intent);
+ 
+Index: app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterCommonPassword.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterCommonPassword.java	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterCommonPassword.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.content.Context;
+ import android.content.Intent;
+ import android.content.SharedPreferences;
++import android.os.AsyncTask;
+ import android.os.Bundle;
+ import android.support.v7.app.ActionBarActivity;
+ import android.view.Menu;
+@@ -12,11 +13,19 @@
+ import android.widget.EditText;
+ import android.widget.Toast;
+ 
++import com.example.aakanshaparmar.myapplication.backend.verifyFamilyElderlyNumberApi.VerifyFamilyElderlyNumberApi;
++import com.example.aakanshaparmar.myapplication.backend.verifyFamilyElderlyNumberApi.model.VerifyFamilyElderlyNumber;
++import com.google.api.client.extensions.android.http.AndroidHttp;
++import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+ 
++import java.io.IOException;
++
++
+ public class FamilyRegisterCommonPassword extends ActionBarActivity {
+ 
+     Button continueButton;
+     EditText commonPassField;
++    String phoneNumber;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -42,9 +51,8 @@
+                     editor.putString("commonPass", String.valueOf(commonPassField.getText()));
+                     editor.commit();
+ 
+-                    Intent intent = new Intent(v.getContext(), FamilyRegisterFinal.class);
+-                    startActivity(intent);
+ 
++
+                 }
+ 
+                 else{
+@@ -74,5 +82,59 @@
+ 
+ 
+         return super.onOptionsItemSelected(item);
++    }
++
++
++    private class VerFamilyElderlyNumberAsyncTask extends AsyncTask<Context, Void, VerifyFamilyElderlyNumber> {
++        private VerifyFamilyElderlyNumberApi myApiService = null;
++        private Context context;
++
++        @Override
++        protected VerifyFamilyElderlyNumber doInBackground(Context... params) {
++            if(myApiService == null) {  // Only do this once
++                VerifyFamilyElderlyNumberApi.Builder builder = new VerifyFamilyElderlyNumberApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
++                        .setRootUrl("https://bbsystemproject.appspot.com/_ah/api/");
++                // end options for devappserver
++
++                myApiService = builder.build();
++            }
++
++            context = params[0];
++
++            VerifyFamilyElderlyNumber verifyFamInfo = new VerifyFamilyElderlyNumber();
++            SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
++            phoneNumber = sharedPreferences.getString("ePhoneNo", "");
++            verifyFamInfo.setPhoneNo(phoneNumber);
++
++            try {
++                return myApiService.insertVerifyFamilyElderlyNumber(verifyFamInfo).execute();
++            } catch (IOException e) {
++                return null;
++            }
++        }
++
++        protected void onPostExecute(VerifyFamilyElderlyNumber result) {
++
++
++            if (result == null)
++            {
++                Toast.makeText(context, "Some unknown Error occurred", Toast.LENGTH_LONG).show();
++            }
++            else if (result.getPhoneNo().equals("0"))
++            {
++
++                Toast.makeText(context, "Sorry Elderly Phone Number Doesnt Exist!", Toast.LENGTH_LONG).show();
++
++
++
++            } else {
++
++                Toast.makeText(context, "Elderly Info Valid", Toast.LENGTH_LONG).show();
++
++                Intent intent = new Intent(context, FamilyRegisterName.class);
++                startActivity(intent);
++
++            }
++        }
+     }
+ }
+Index: app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterElderlyPhone.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterElderlyPhone.java	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterElderlyPhone.java	(revision )
+@@ -1,6 +1,5 @@
+ package aakanshaparmar.blackboxsystem;
+ 
+-import android.app.Activity;
+ import android.content.Context;
+ import android.content.Intent;
+ import android.content.SharedPreferences;
+@@ -43,7 +42,7 @@
+                 editor.putString("ePhoneNo", String.valueOf(phoneField.getText()));
+                 editor.commit();
+ 
+-                Intent intent = new Intent(v.getContext(), FamilyRegisterName.class);
++                Intent intent = new Intent(v.getContext(), FamilyRegisterCommonPassword.class);
+                 startActivity(intent);
+ 
+ 
+Index: app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterEmailID.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterEmailID.java	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterEmailID.java	(revision )
+@@ -37,7 +37,7 @@
+                 editor.putString("emailID", String.valueOf(emailIDField.getText()));
+                 editor.commit();
+ 
+-                Intent intent = new Intent( v.getContext(), FamilyRegisterCommonPassword.class);
++                Intent intent = new Intent( v.getContext(), FamilyRegisterFinal.class);
+                 startActivity(intent);
+ 
+             }
+Index: backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyElderlyNumber.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyElderlyNumber.java	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyElderlyNumber.java	(revision )
+@@ -4,4 +4,16 @@
+  * Created by aakanshaparmar on 10/5/16.
+  */
+ public class VerifyFamilyElderlyNumber {
++
++    //Elderly Registration Info
++    private String phoneNo;
++
++    public String getPhoneNo() {
++        return phoneNo;
++    }
++
++
++    public void setPhoneNo(String num) {
++        phoneNo = num;
++    }
+ }
+Index: backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyElderlyNumberEndpoint.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyElderlyNumberEndpoint.java	(revision )
++++ backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyElderlyNumberEndpoint.java	(revision )
+@@ -0,0 +1,88 @@
++package com.example.aakanshaparmar.myapplication.backend;
++
++import com.google.api.server.spi.config.Api;
++import com.google.api.server.spi.config.ApiMethod;
++import com.google.api.server.spi.config.ApiNamespace;
++import com.google.appengine.api.utils.SystemProperty;
++
++import java.sql.Connection;
++import java.sql.DriverManager;
++import java.sql.ResultSet;
++import java.sql.SQLException;
++import java.util.logging.Logger;
++
++import javax.inject.Named;
++
++/**
++ * An endpoint class we are exposing
++ */
++@Api(
++        name = "verifyFamilyElderlyNumberApi",
++        version = "v1",
++        resource = "verifyFamilyElderlyNumber",
++        namespace = @ApiNamespace(
++                ownerDomain = "backend.myapplication.aakanshaparmar.example.com",
++                ownerName = "backend.myapplication.aakanshaparmar.example.com",
++                packagePath = ""
++        )
++)
++public class VerifyFamilyElderlyNumberEndpoint {
++
++    private static final Logger logger = Logger.getLogger(VerifyFamilyElderlyNumberEndpoint.class.getName());
++
++
++    @ApiMethod(name = "getVerifyFamilyElderlyNumber")
++    public VerifyFamilyElderlyNumber getVerifyFamilyElderlyNumber(@Named("id") Long id) {
++        // TODO: Implement this function
++        logger.info("Calling getVerifyFamilyElderlyNumber method");
++        return null;
++    }
++
++
++    @ApiMethod(name = "insertVerifyFamilyElderlyNumber")
++    public VerifyFamilyElderlyNumber insertVerifyFamilyElderlyNumber(VerifyFamilyElderlyNumber checkFamInfo) {
++        // TODO: Implement this function
++        logger.info("Calling insertVerifyFamilyElderlyNumber method");
++
++
++        //Connect to SQL
++        String url = null;
++        try {
++            if (SystemProperty.environment.value() ==
++                    SystemProperty.Environment.Value.Production) {
++                Class.forName("com.mysql.jdbc.GoogleDriver");
++                url = "jdbc:google:mysql://bbsystemproject:blackboxsystemsqlinstance?user=root";
++
++            }
++        }catch(Exception e){
++            logger.warning(e.getMessage());
++            return null;
++        }
++
++        Connection conn = null;
++        try {
++            conn = DriverManager.getConnection(url);
++
++            try {
++                conn.setAutoCommit(false);
++
++                conn.createStatement().executeQuery("USE bbsystemDB;");
++
++                ResultSet numberOfRecords = conn.createStatement().executeQuery("select count(*) AS totalNumber from elderlyInfo where phoneNo = \"" + checkFamInfo.getPhoneNo() + "\";");
++
++                if(numberOfRecords.next()){
++                    checkFamInfo.setPhoneNo(numberOfRecords.getString("totalNumber"));
++                    logger.info(numberOfRecords.getString("totalNumber"));
++                }
++                conn.commit();
++            }finally{
++                conn.close();
++            }
++        } catch (SQLException e) {
++            logger.warning(e.getMessage());
++            return null;
++        }
++
++        return checkFamInfo;
++    }
++}
+\ No newline at end of file
+Index: backend/src/main/webapp/WEB-INF/web.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/webapp/WEB-INF/web.xml	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ backend/src/main/webapp/WEB-INF/web.xml	(revision )
+@@ -9,7 +9,9 @@
+                 com.example.aakanshaparmar.myapplication.backend.ElderlyRegistrationEndpoint,
+                 com.example.aakanshaparmar.myapplication.backend.FamilyRegistrationEndpoint,
+                 com.example.aakanshaparmar.myapplication.backend.ElderlyLocationInfoEndpoint,
+-                com.example.aakanshaparmar.myapplication.backend.VerifyElderlyRegistrationEndpoint</param-value>
++                com.example.aakanshaparmar.myapplication.backend.VerifyElderlyRegistrationEndpoint,
++                com.example.aakanshaparmar.myapplication.backend.VerifyFamilyRegistrationEndpoint,
++                com.example.aakanshaparmar.myapplication.backend.VerifyFamilyElderlyNumberEndpoint</param-value>
+         </init-param>
+     </servlet>
+     <servlet-mapping>
+\ No newline at end of file
+Index: backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyLocationInfo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyLocationInfo.java	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyLocationInfo.java	(revision )
+@@ -1,7 +1,5 @@
+ package com.example.aakanshaparmar.myapplication.backend;
+ 
+-import java.sql.Date;
+-
+ /**
+  * Created by aakanshaparmar on 15/1/2016.
+  */
+@@ -9,9 +7,8 @@
+ 
+     float latitude;
+     float longitude;
+-    String locID;
++    int locID;
+     String eID;
+-    Date locDate;
+ 
+     public float getLatitude()
+     {
+@@ -23,7 +20,7 @@
+         return longitude;
+     }
+ 
+-    public String getLocID()
++    public int getLocID()
+     {
+         return locID;
+     }
+@@ -33,10 +30,6 @@
+         return eID;
+     }
+ 
+-    public Date getLocDate()
+-    {
+-        return locDate;
+-    }
+ 
+     public void setLatitude(float lat)
+     {
+@@ -48,7 +41,7 @@
+         longitude = longi;
+     }
+ 
+-    public void setLocID(String lID)
++    public void setLocID(int lID)
+     {
+         locID = lID;
+     }
+@@ -58,10 +51,6 @@
+         eID = eldID;
+     }
+ 
+-    public void setLocDate(Date lDate)
+-    {
+-        locDate = lDate;
+-    }
+ 
+ 
+ }
+Index: backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyLocationInfoEndpoint.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyLocationInfoEndpoint.java	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyLocationInfoEndpoint.java	(revision )
+@@ -56,24 +56,13 @@
+ 
+                 conn.createStatement().executeQuery("USE bbsystemDB;");
+ 
+-                String statement = "INSERT INTO elderlyLocInfo (latitude, longitude, locID, eID) VALUES ( ? , ? , ? , ?)";
++                String statement = "INSERT INTO elderlyLocInfo (latitude, longitude, eID, locNo) VALUES ( ? , ? , ? , ?)";
+                 PreparedStatement stmtMoney = conn.prepareStatement(statement);
+-                stmtMoney.setFloat(1, (float) 22.2840);
+-                stmtMoney.setFloat(2, (float) 114.1350);
+-                stmtMoney.setString(3, "le12341");
+-                stmtMoney.setString(4, "e789564 ");
++                stmtMoney.setFloat(1, eldLocInfo.getLatitude());
++                stmtMoney.setFloat(2, eldLocInfo.getLongitude());
++                stmtMoney.setString(3, eldLocInfo.getEldID());
++                stmtMoney.setInt(4, eldLocInfo.getLocID());
+                 stmtMoney.executeUpdate();
+-
+-
+-                /*int success;
+-                success = 1;
+-                if (success == 1) {
+-                    logger.info("Success in uploading to Cloud SQL");
+-                } else if (success == 0) {
+-                    logger.warning("Failure in uploading to Cloud SQL");
+-                    conn.close();
+-                    return null;
+-                }*/
+ 
+                 conn.commit();
+             }finally{
+\ No newline at end of file
+Index: backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyRegistrationEndpoint.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyRegistrationEndpoint.java	(revision )
++++ backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyRegistrationEndpoint.java	(revision )
+@@ -0,0 +1,86 @@
++package com.example.aakanshaparmar.myapplication.backend;
++
++import com.google.api.server.spi.config.Api;
++import com.google.api.server.spi.config.ApiMethod;
++import com.google.api.server.spi.config.ApiNamespace;
++import com.google.appengine.api.utils.SystemProperty;
++
++import java.sql.Connection;
++import java.sql.DriverManager;
++import java.sql.ResultSet;
++import java.sql.SQLException;
++import java.util.logging.Logger;
++
++import javax.inject.Named;
++
++/**
++ * An endpoint class we are exposing
++ */
++@Api(
++        name = "verifyFamilyRegistrationApi",
++        version = "v1",
++        resource = "verifyFamilyRegistration",
++        namespace = @ApiNamespace(
++                ownerDomain = "backend.myapplication.aakanshaparmar.example.com",
++                ownerName = "backend.myapplication.aakanshaparmar.example.com",
++                packagePath = ""
++        )
++)
++public class VerifyFamilyRegistrationEndpoint {
++
++    private static final Logger logger = Logger.getLogger(VerifyFamilyRegistrationEndpoint.class.getName());
++
++    @ApiMethod(name = "getVerifyFamilyRegistration")
++    public VerifyFamilyRegistration getVerifyFamilyRegistration(@Named("id") Long id) {
++        // TODO: Implement this function
++        logger.info("Calling getVerifyFamilyRegistration method");
++        return null;
++    }
++
++    @ApiMethod(name = "insertVerifyFamilyRegistration")
++    public VerifyFamilyRegistration insertVerifyFamilyRegistration(VerifyFamilyRegistration checkFamInfo) {
++        // TODO: Implement this function
++        logger.info("Calling insertVerifyFamilyRegistration method");
++
++
++        //Connect to SQL
++        String url = null;
++        try {
++            if (SystemProperty.environment.value() ==
++                    SystemProperty.Environment.Value.Production) {
++                Class.forName("com.mysql.jdbc.GoogleDriver");
++                url = "jdbc:google:mysql://bbsystemproject:blackboxsystemsqlinstance?user=root";
++
++            }
++        }catch(Exception e){
++            logger.warning(e.getMessage());
++            return null;
++        }
++
++        Connection conn = null;
++        try {
++            conn = DriverManager.getConnection(url);
++
++            try {
++                conn.setAutoCommit(false);
++
++                conn.createStatement().executeQuery("USE bbsystemDB;");
++
++                ResultSet numberOfRecords = conn.createStatement().executeQuery("select count(*) AS totalNumber from familyInfo where phoneNo = \"" + checkFamInfo.getPhoneNo() + "\";");
++
++                if(numberOfRecords.next()){
++                    checkFamInfo.setPhoneNo(numberOfRecords.getString("totalNumber"));
++                    logger.info(numberOfRecords.getString("totalNumber"));
++                }
++                conn.commit();
++            }finally{
++                conn.close();
++            }
++        } catch (SQLException e) {
++            logger.warning(e.getMessage());
++            return null;
++        }
++
++        return checkFamInfo;
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterPhone.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterPhone.java	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ app/src/main/java/aakanshaparmar/blackboxsystem/FamilyRegisterPhone.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.content.Context;
+ import android.content.Intent;
+ import android.content.SharedPreferences;
++import android.os.AsyncTask;
+ import android.os.Bundle;
+ import android.support.v7.app.ActionBarActivity;
+ import android.view.Menu;
+@@ -10,12 +11,21 @@
+ import android.view.View;
+ import android.widget.Button;
+ import android.widget.EditText;
++import android.widget.Toast;
+ 
++import com.example.aakanshaparmar.myapplication.backend.verifyFamilyRegistrationApi.VerifyFamilyRegistrationApi;
++import com.example.aakanshaparmar.myapplication.backend.verifyFamilyRegistrationApi.model.VerifyFamilyRegistration;
++import com.google.api.client.extensions.android.http.AndroidHttp;
++import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+ 
++import java.io.IOException;
++
++
+ public class FamilyRegisterPhone extends ActionBarActivity {
+ 
+     Button continueButton;
+     EditText phoneField;
++    String phoneNumber;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -35,9 +45,11 @@
+                 editor.putString("phoneNo", String.valueOf(phoneField.getText()));
+                 editor.commit();
+ 
+-                Intent intent = new Intent(v.getContext(), FamilyRegisterAddress.class);
+-                startActivity(intent);
++                Toast.makeText(getApplicationContext(), "Please wait while phone number validity is checked", Toast.LENGTH_LONG).show();
++                phoneNumber = String.valueOf(phoneField.getText());
++                new VerFamRegistrationAsyncTask().execute(getApplicationContext());
+ 
++
+             }
+         });
+     }
+@@ -58,5 +70,55 @@
+ 
+ 
+         return super.onOptionsItemSelected(item);
++    }
++
++    private class VerFamRegistrationAsyncTask extends AsyncTask<Context, Void, VerifyFamilyRegistration> {
++        private VerifyFamilyRegistrationApi myApiService = null;
++        private Context context;
++
++        @Override
++        protected VerifyFamilyRegistration doInBackground(Context... params) {
++            if(myApiService == null) {  // Only do this once
++                VerifyFamilyRegistrationApi.Builder builder = new VerifyFamilyRegistrationApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
++                        .setRootUrl("https://bbsystemproject.appspot.com/_ah/api/");
++                // end options for devappserver
++
++                myApiService = builder.build();
++            }
++
++            context = params[0];
++
++            VerifyFamilyRegistration verifyFamInfo = new VerifyFamilyRegistration();
++            verifyFamInfo.setPhoneNo(phoneNumber);
++
++            try {
++                return myApiService.insertVerifyFamilyRegistration(verifyFamInfo).execute();
++            } catch (IOException e) {
++                return null;
++            }
++        }
++
++        protected void onPostExecute(VerifyFamilyRegistration result) {
++
++
++            if (result == null)
++            {
++                Toast.makeText(context, "Some unknown Error occurred", Toast.LENGTH_LONG).show();
++            }
++            else if (result.getPhoneNo().equals("0"))
++            {
++
++                Toast.makeText(context, "Phone Number Valid", Toast.LENGTH_LONG).show();
++
++                Intent intent = new Intent(context, FamilyRegisterAddress.class);
++                startActivity(intent);
++
++
++            } else {
++
++                Toast.makeText(context, "Sorry Phone Number Already Exists!", Toast.LENGTH_LONG).show();
++
++            }
++        }
+     }
+ }
+Index: app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyHomePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyHomePage.java	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyHomePage.java	(revision )
+@@ -39,6 +39,8 @@
+     private ViewPager viewPager;
+     private SlidingTabAdapter tabAdapter;
+ 
++    int locNo=0;
++
+     android.support.v7.app.ActionBar.Tab instTab;
+     android.support.v7.app.ActionBar.Tab hospPoliceTab;
+     android.support.v7.app.ActionBar.Tab sosTab;
+@@ -234,7 +236,7 @@
+ 
+         editor.putFloat("latitude", (float) mCurrentLocation.getLatitude());
+         editor.putFloat("longitude", (float) mCurrentLocation.getLongitude());
+-        editor.putString("dateAndTime", mLastUpdateTime);
++        editor.putInt("locNo", locNo+1);
+         editor.commit();
+         //Toast.makeText(this, "Location Found"+mLastUpdateTime, Toast.LENGTH_LONG).show();
+         //Toast.makeText(this, "Latitude"+mCurrentLocation.getLatitude(), Toast.LENGTH_LONG).show();
+@@ -277,10 +279,19 @@
+ 
+             ElderlyLocationInfo eldLocInfo = new ElderlyLocationInfo();
+ 
+-            eldLocInfo.setLatitude(Float.valueOf("2.1"));
+-            eldLocInfo.setLongitude(Float.valueOf("2.2"));
+-            eldLocInfo.setEldID("e29211107");
+-            eldLocInfo.setLocID("l13");
++            SharedPreferences pref1 = getSharedPreferences("locationUpdates", Context.MODE_PRIVATE);
++            SharedPreferences pref2 = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
++
++            Float lat = pref1.getFloat("latitude", Float.parseFloat(""));
++            Float lon = pref1.getFloat("longitude", Float.parseFloat(""));
++            int locNo = pref1.getInt("locNo", Integer.parseInt(""));
++
++            String eID = "e"+pref2.getString("phoneNo", "");
++
++            eldLocInfo.setLatitude(lat);
++            eldLocInfo.setLongitude(lon);
++            eldLocInfo.setEldID(eID);
++            eldLocInfo.setLocID(locNo);
+ 
+             try {
+                 return myApiService.insertElderlyLocationInfo(eldLocInfo).execute();
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ app/build.gradle	(revision )
+@@ -25,6 +25,7 @@
+     compile 'com.android.support:appcompat-v7:23.3.0'
+     compile 'com.google.android.gms:play-services:8.4.0'
+     compile 'com.android.support:design:23.3.0'
++    compile 'com.google.appengine:appengine-endpoints:1.9.18'
+ }
+ 
+ 
+Index: backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyRegistration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyRegistration.java	(revision a214dca97c783f5214b419e987cdf70434b14d02)
++++ backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyFamilyRegistration.java	(revision )
+@@ -4,4 +4,16 @@
+  * Created by aakanshaparmar on 10/5/16.
+  */
+ public class VerifyFamilyRegistration {
++
++    //Elderly Registration Info
++    private String phoneNo;
++
++    public String getPhoneNo() {
++        return phoneNo;
++    }
++
++
++    public void setPhoneNo(String num) {
++        phoneNo = num;
++    }
+ }

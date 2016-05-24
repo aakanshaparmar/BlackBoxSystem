@@ -1,0 +1,800 @@
+Index: app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyRegisterPageFinal.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyRegisterPageFinal.java	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyRegisterPageFinal.java	(revision )
+@@ -5,8 +5,8 @@
+ import android.content.SharedPreferences;
+ import android.os.AsyncTask;
+ import android.os.Bundle;
+-import android.preference.PreferenceManager;
+ import android.support.v7.app.ActionBarActivity;
++import android.util.Log;
+ import android.view.Menu;
+ import android.view.MenuItem;
+ import android.view.View;
+@@ -65,7 +65,7 @@
+             @Override
+             public void onClick(View v) {
+ 
+-                //new EldRegistrationAsyncTask().execute(getApplicationContext());
++                new EldRegistrationAsyncTask().execute(getApplicationContext());
+                 Intent intent;
+                 intent = new Intent(getApplicationContext(), ElderlyShowCommonPass.class);
+                 startActivity(intent);
+@@ -114,7 +114,7 @@
+ 
+         ElderlyRegistration eldInfo = new ElderlyRegistration();
+ 
+-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
++        SharedPreferences prefs = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+         SharedPreferences.Editor editor = prefs.edit();
+ 
+         String personName = prefs.getString("fullName", "");
+@@ -122,14 +122,15 @@
+         String address = prefs.getString("address", "");
+         String eID = "e"+phoneNo;
+         int commonPass = 1234;
++        String emergencyPhoneNo = prefs.getString("emergencyPhoneNo","");
++        Log.d("PERSONNAME IS ", "" +personName+phoneNo+address+eID+commonPass+emergencyPhoneNo);
+ 
+-        eldInfo.setFullName("Medhavi");
+-        eldInfo.setPhoneNo("789564");
+-        eldInfo.setAddress("b908");
+-        eldInfo.setEid("e789564");
+-        eldInfo.setCommonPass(1234);
+-        eldInfo.setEmerPhoneNo("1234567");
+-
++        eldInfo.setFullName(personName);
++        eldInfo.setPhoneNo(phoneNo);
++        eldInfo.setAddress(address);
++        eldInfo.setEid(eID);
++        eldInfo.setCommonPass(commonPass);
++        eldInfo.setEmerPhoneNo(emergencyPhoneNo);
+ 
+ 
+         try {
+Index: app/app.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/app.iml	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ app/app.iml	(revision )
+@@ -61,13 +61,6 @@
+       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/aidl" isTestSource="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
+       <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
+       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+       <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
+@@ -75,6 +68,13 @@
+       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+       <sourceFolder url="file://$MODULE_DIR$/src/test/jni" isTestSource="true" />
+       <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/aidl" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/bundles" />
+@@ -113,13 +113,10 @@
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/8.4.0/jars" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services/8.4.0/jars" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
+-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
+-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-verifier" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
+-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/restart-dex" />
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
+@@ -134,7 +131,10 @@
+     <orderEntry type="library" exported="" name="google-oauth-client-1.19.0" level="project" />
+     <orderEntry type="library" exported="" name="support-vector-drawable-23.3.0" level="project" />
+     <orderEntry type="library" exported="" name="play-services-base-8.4.0" level="project" />
++    <orderEntry type="library" exported="" name="appengine-endpoints-1.9.18" level="project" />
+     <orderEntry type="library" exported="" name="jackson-core-2.1.3" level="project" />
++    <orderEntry type="library" exported="" name="servlet-api-2.5" level="project" />
++    <orderEntry type="library" exported="" name="appengine-api-1.0-sdk-1.9.18" level="project" />
+     <orderEntry type="library" exported="" name="google-api-client-android-1.19.0" level="project" />
+     <orderEntry type="library" exported="" name="appcompat-v7-23.3.0" level="project" />
+     <orderEntry type="library" exported="" name="backend-android-endpoints" level="project" />
+@@ -168,11 +168,13 @@
+     <orderEntry type="library" exported="" name="play-services-wallet-8.4.0" level="project" />
+     <orderEntry type="library" exported="" name="animated-vector-drawable-23.3.0" level="project" />
+     <orderEntry type="library" exported="" name="play-services-appstate-8.4.0" level="project" />
++    <orderEntry type="library" exported="" name="appengine-endpoints-deps-1.9.18" level="project" />
+     <orderEntry type="library" exported="" name="play-services-gcm-8.4.0" level="project" />
+     <orderEntry type="library" exported="" name="play-services-panorama-8.4.0" level="project" />
+     <orderEntry type="library" exported="" name="play-services-plus-8.4.0" level="project" />
+     <orderEntry type="library" exported="" name="play-services-analytics-8.4.0" level="project" />
+     <orderEntry type="library" exported="" name="play-services-measurement-8.4.0" level="project" />
+     <orderEntry type="library" exported="" name="play-services-cast-8.4.0" level="project" />
++    <orderEntry type="module" module-name="backend" exported="" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_elderly_register_page_final.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_elderly_register_page_final.xml	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ app/src/main/res/layout/activity_elderly_register_page_final.xml	(revision )
+@@ -28,7 +28,7 @@
+         android:text="@string/finalRegPage"
+         android:id="@+id/finalPage"
+         android:textStyle="bold"
+-        android:textSize="35dp"
++        android:textSize="30dp"
+         android:gravity="center_horizontal"
+         android:layout_alignParentTop="true"
+         android:layout_alignParentLeft="true"
+@@ -51,7 +51,7 @@
+         android:text="Large Text"
+         android:id="@+id/personName"
+         android:layout_weight="0.04"
+-        android:textSize="30dp"
++        android:textSize="25dp"
+         android:gravity="center_horizontal"/>
+ 
+     <TextView
+@@ -60,7 +60,7 @@
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:text="Large Text"
+         android:id="@+id/phoneNo"
+-        android:textSize="30dp"
++        android:textSize="25dp"
+         android:gravity="center_horizontal"
+         android:layout_weight="0.04" />
+ 
+@@ -71,7 +71,7 @@
+         android:text="Large Text"
+         android:id="@+id/address"
+         android:layout_weight="0.04"
+-        android:textSize="30dp"
++        android:textSize="25dp"
+         android:gravity="center_horizontal"/>
+ 
+     <TextView
+@@ -81,7 +81,7 @@
+         android:text="Large Text"
+         android:id="@+id/emerPhoneNo"
+         android:layout_weight="0.04"
+-        android:textSize="30dp"
++        android:textSize="25dp"
+         android:gravity="center_horizontal"/>
+ 
+     </LinearLayout>
+Index: backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyElderlyRegistrationEndpoint.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyElderlyRegistrationEndpoint.java	(revision )
++++ backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyElderlyRegistrationEndpoint.java	(revision )
+@@ -0,0 +1,91 @@
++package com.example.aakanshaparmar.myapplication.backend;
++
++import com.google.api.server.spi.config.Api;
++import com.google.api.server.spi.config.ApiMethod;
++import com.google.api.server.spi.config.ApiNamespace;
++import com.google.appengine.api.utils.SystemProperty;
++
++import java.sql.Connection;
++import java.sql.DriverManager;
++import java.sql.ResultSet;
++import java.sql.SQLException;
++import java.util.logging.Logger;
++
++import javax.inject.Named;
++
++/**
++ * An endpoint class we are exposing
++ */
++@Api(
++        name = "verifyElderlyRegistrationApi",
++        version = "v1",
++        resource = "verifyElderlyRegistration",
++        namespace = @ApiNamespace(
++                ownerDomain = "backend.myapplication.aakanshaparmar.example.com",
++                ownerName = "backend.myapplication.aakanshaparmar.example.com",
++                packagePath = ""
++        )
++)
++public class VerifyElderlyRegistrationEndpoint {
++
++    private static final Logger logger = Logger.getLogger(VerifyElderlyRegistrationEndpoint.class.getName());
++
++    public VerifyElderlyRegistrationEndpoint() {
++    }
++
++    @ApiMethod(name = "getVerifyElderlyRegistration")
++    public VerifyElderlyRegistration getVerifyElderlyRegistration(@Named("id") Long id) {
++        // TODO: Implement this function
++        logger.info("Calling getVerifyElderlyRegistration method");
++        return null;
++    }
++
++
++    @ApiMethod(name = "insertVerifyElderlyRegistration")
++    public VerifyElderlyRegistration insertVerifyElderlyRegistration(VerifyElderlyRegistration checkEldInfo) {
++        // TODO: Implement this function
++        logger.info("Calling insertVerifyElderlyRegistration method");
++
++        // TODO: Implement this function
++        logger.info("Calling insertcheckElderlyRegistration method");
++
++        logger.info("Calling insertElderlyRegistration method");
++
++        //Connect to SQL
++        String url = null;
++        try {
++            if (SystemProperty.environment.value() ==
++                    SystemProperty.Environment.Value.Production) {
++                Class.forName("com.mysql.jdbc.GoogleDriver");
++                url = "jdbc:google:mysql://bbsystemproject:blackboxsystemsqlinstance?user=root";
++
++            }
++        }catch(Exception e){
++            logger.warning(e.getMessage());
++            return null;
++        }
++
++        Connection conn = null;
++        try {
++            conn = DriverManager.getConnection(url);
++
++            try {
++                conn.setAutoCommit(false);
++
++                conn.createStatement().executeQuery("USE bbsystemDB;");
++
++                ResultSet numberOfRecords = conn.createStatement().executeQuery("select count(*) from elderlyInfo where phoneNo = \"" + checkEldInfo.getPhoneNo() + "\"");
++                checkEldInfo.setPhoneNo(String.valueOf(numberOfRecords));
++                conn.commit();
++            }finally{
++                conn.close();
++            }
++        } catch (SQLException e) {
++            logger.warning(e.getMessage());
++            return null;
++        }
++
++        return checkEldInfo;
++
++    }
++}
+\ No newline at end of file
+Index: backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyRegistrationEndpoint.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyRegistrationEndpoint.java	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyRegistrationEndpoint.java	(revision )
+@@ -59,35 +59,29 @@
+             return null;
+         }
+ 
++        Connection conn = null;
+         try {
+-            Connection conn = DriverManager.getConnection(url);
++            conn = DriverManager.getConnection(url);
++
+-          try {
++            try {
+-              String statement1 = "USE bbsystemDB";
+-              PreparedStatement stmt1 = conn.prepareStatement(statement1);
+-              stmt1.executeUpdate();
++                conn.setAutoCommit(false);
+ 
+-              String statement = "INSERT INTO ";
+-              PreparedStatement stmt = conn.prepareStatement(statement);
++                conn.createStatement().executeQuery("USE bbsystemDB;");
+ 
+-              stmt.setString(1, eldInfo.getFullName());
+-              stmt.setString(2, eldInfo.getPhoneNo());
+-              stmt.setString(3, eldInfo.getAddress());
+-              stmt.setString(4, eldInfo.getEID());
+-              stmt.setInt(5, eldInfo.getCommonPass());
+-              stmt.setString(6, eldInfo.getEmerPhoneNo());
++                String statement = "INSERT INTO elderlyInfo (fullName, phoneNo, address, eID, commonPass, emergencyPhoneNo) VALUES ( ? , ? , ? , ?, ?, ?)";
++                PreparedStatement stmtMoney = conn.prepareStatement(statement);
++                stmtMoney.setString(1, eldInfo.getFullName());
++                stmtMoney.setString(2, eldInfo.getPhoneNo());
++                stmtMoney.setString(3, eldInfo.getAddress());
++                stmtMoney.setString(4, eldInfo.getEID());
++                stmtMoney.setInt(5, eldInfo.getCommonPass());
++                stmtMoney.setString(6, eldInfo.getEmerPhoneNo());
++                stmtMoney.executeUpdate();
+ 
+-              int success;
+-              success = 1;
+-              if (success == 1) {
+-                  logger.info("Success in uploading to Cloud SQL");
+-              } else if (success == 0) {
+-                  logger.warning("Failure in uploading to Cloud SQL");
+-                  conn.close();
+-                  return null;
+-              }
++                conn.commit();
+-        }finally{
+-              conn.close();
+-          }
++            }finally{
++                conn.close();
++            }
+         } catch (SQLException e) {
+             logger.warning(e.getMessage());
+             return null;
+@@ -96,4 +90,6 @@
+         return eldInfo;
+ 
+     }
++
++
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_elderly_idpage.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_elderly_idpage.xml	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ app/src/main/res/layout/activity_elderly_idpage.xml	(revision )
+@@ -21,7 +21,7 @@
+         android:layout_alignParentTop="true"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentStart="true"
+-        android:paddingTop="60dp"/>
++        android:paddingTop="30dp"/>
+ 
+ 
+     <LinearLayout
+Index: backend/src/main/webapp/WEB-INF/web.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/webapp/WEB-INF/web.xml	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ backend/src/main/webapp/WEB-INF/web.xml	(revision )
+@@ -8,7 +8,8 @@
+             <param-value>com.example.aakanshaparmar.myapplication.backend.MyEndpoint,
+                 com.example.aakanshaparmar.myapplication.backend.ElderlyRegistrationEndpoint,
+                 com.example.aakanshaparmar.myapplication.backend.FamilyRegistrationEndpoint,
+-                com.example.aakanshaparmar.myapplication.backend.ElderlyLocationInfoEndpoint</param-value>
++                com.example.aakanshaparmar.myapplication.backend.ElderlyLocationInfoEndpoint,
++                com.example.aakanshaparmar.myapplication.backend.VerifyElderlyRegistrationEndpoint</param-value>
+         </init-param>
+     </servlet>
+     <servlet-mapping>
+\ No newline at end of file
+Index: app/src/main/res/menu/menu_family_home_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/menu/menu_family_home_page.xml	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ app/src/main/res/menu/menu_family_home_page.xml	(revision )
+@@ -3,4 +3,17 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     tools:context="aakanshaparmar.blackboxsystem.FamilyHomePage">
+ 
++    <item
++        android:id="@+id/action_change_role"
++        android:icon="@drawable/change_role_icon"
++        android:title="@string/elderly_action_bar_name"
++        app:showAsAction="ifRoom"/>
++
++    <item
++        android:id="@+id/action_logout"
++        android:icon="@drawable/logout_icon"
++        android:title="@string/elderly_action_bar_name"
++        app:showAsAction="ifRoom"/>
++
++
+ </menu>
+Index: app/src/main/java/aakanshaparmar/blackboxsystem/FamilyHomePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/aakanshaparmar/blackboxsystem/FamilyHomePage.java	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ app/src/main/java/aakanshaparmar/blackboxsystem/FamilyHomePage.java	(revision )
+@@ -1,5 +1,8 @@
+ package aakanshaparmar.blackboxsystem;
+ 
++import android.content.Context;
++import android.content.Intent;
++import android.content.SharedPreferences;
+ import android.os.Bundle;
+ import android.support.v7.app.ActionBarActivity;
+ import android.view.Menu;
+@@ -39,6 +42,21 @@
+         // as you specify a parent activity in AndroidManifest.xml.
+         int id = item.getItemId();
+ 
++        if(id == R.id.action_change_role){
++
++            SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
++            SharedPreferences.Editor editor = sharedPreferences.edit();
++            editor.putString("role", "elderly");
++            editor.commit();
++            Intent intent = new Intent(getApplicationContext(), ElderlyHomePage.class);
++            startActivity(intent);
++        }
++
++        else if(id == R.id.action_logout){
++
++            Intent intent = new Intent(getApplicationContext(), chooseRole.class);
++            startActivity(intent);
++        }
+ 
+         return super.onOptionsItemSelected(item);
+     }
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ app/src/main/AndroidManifest.xml	(revision )
+@@ -166,7 +166,7 @@
+         <activity android:name=".ElderlyAddressCard" />
+         <activity android:name=".ElderlyCallUber" />
+         <activity android:name=".ElderlyEnterIDPasswordPage" />
+-        <activity android:name=".Main2Activity"></activity>
++        <activity android:name=".Main2Activity" />
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyLocationInfoEndpoint.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyLocationInfoEndpoint.java	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/ElderlyLocationInfoEndpoint.java	(revision )
+@@ -11,8 +11,6 @@
+ import java.sql.SQLException;
+ import java.util.logging.Logger;
+ 
+-import javax.inject.Named;
+-
+ /**
+  * An endpoint class we are exposing
+  */
+@@ -30,26 +28,7 @@
+ 
+     private static final Logger logger = Logger.getLogger(ElderlyLocationInfoEndpoint.class.getName());
+ 
+-    /**
+-     * This method gets the <code>ElderlyLocationInfo</code> object associated with the specified <code>id</code>.
+-     *
+-     * @param id The id of the object to be returned.
+-     * @return The <code>ElderlyLocationInfo</code> associated with <code>id</code>.
+-     */
+-    @ApiMethod(name = "getElderlyLocationInfo")
+-    public ElderlyLocationInfo getElderlyLocationInfo(@Named("id") Long id) {
+-
+-        logger.info("Calling getElderlyLocationInfo method");
+-        return null;
+-    }
+-
+-    /**
+-     * This inserts a new <code>ElderlyLocationInfo</code> object.
+-     *
+-     * @param eldLocInfo The object to be added.
+-     * @return The object to be added.
+-     */
+-    @ApiMethod(name = "insertElderlyLocationInfo")
++   @ApiMethod(name = "insertElderlyLocationInfo")
+     public ElderlyLocationInfo insertElderlyLocationInfo(ElderlyLocationInfo eldLocInfo) {
+ 
+         logger.info("Calling insertElderlyLocationInfo method");
+@@ -68,23 +47,25 @@
+             return null;
+         }
+ 
++        Connection conn = null;
+         try {
+-            Connection conn = DriverManager.getConnection(url);
++            conn = DriverManager.getConnection(url);
++
+             try {
+-                String statement1 = "USE bbsystemDB";
+-                PreparedStatement stmt1 = conn.prepareStatement(statement1);
+-                stmt1.executeUpdate();
++                conn.setAutoCommit(false);
+ 
+-                //String statement = "SELECT * FROM elderlyLocInfo";
+-                //PreparedStatement stmt = conn.prepareStatement(statement);
++                conn.createStatement().executeQuery("USE bbsystemDB;");
+ 
+-                /*stmt.setFloat(1, eldLocInfo.getLatitude());
+-                stmt.setFloat(2, eldLocInfo.getLongitude());
+-                stmt.setString(3, eldLocInfo.getLocID());
+-                stmt.setString(4, eldLocInfo.getEldID());
+-                stmt.setDate(5, eldLocInfo.getLocDate());*/
++                String statement = "INSERT INTO elderlyLocInfo (latitude, longitude, locID, eID) VALUES ( ? , ? , ? , ?)";
++                PreparedStatement stmtMoney = conn.prepareStatement(statement);
++                stmtMoney.setFloat(1, (float) 22.2840);
++                stmtMoney.setFloat(2, (float) 114.1350);
++                stmtMoney.setString(3, "le12341");
++                stmtMoney.setString(4, "e789564 ");
++                stmtMoney.executeUpdate();
+ 
+-                int success;
++
++                /*int success;
+                 success = 1;
+                 if (success == 1) {
+                     logger.info("Success in uploading to Cloud SQL");
+@@ -92,7 +73,9 @@
+                     logger.warning("Failure in uploading to Cloud SQL");
+                     conn.close();
+                     return null;
+-                }
++                }*/
++
++                conn.commit();
+             }finally{
+                 conn.close();
+             }
+\ No newline at end of file
+Index: app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyRegisterPhoneNo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyRegisterPhoneNo.java	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyRegisterPhoneNo.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.content.Context;
+ import android.content.Intent;
+ import android.content.SharedPreferences;
++import android.os.AsyncTask;
+ import android.os.Bundle;
+ import android.support.v7.app.ActionBarActivity;
+ import android.view.Menu;
+@@ -10,12 +11,21 @@
+ import android.view.View;
+ import android.widget.Button;
+ import android.widget.EditText;
++import android.widget.Toast;
+ 
++import com.example.aakanshaparmar.myapplication.backend.verifyElderlyRegistrationApi.VerifyElderlyRegistrationApi;
++import com.example.aakanshaparmar.myapplication.backend.verifyElderlyRegistrationApi.model.VerifyElderlyRegistration;
++import com.google.api.client.extensions.android.http.AndroidHttp;
++import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+ 
++import java.io.IOException;
++
++
+ public class ElderlyRegisterPhoneNo extends ActionBarActivity {
+ 
+     Button continueButton;
+     EditText phoneField;
++    String phoneNumber;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -36,9 +46,11 @@
+                 editor.putString("phoneNo", String.valueOf(phoneField.getText()));
+                 editor.commit();
+ 
+-                Intent intent = new Intent( v.getContext(), ElderlyRegisterAddress.class);
+-                startActivity(intent);
++                Toast.makeText(getApplicationContext(), "Please wait while phone number validity is checked", Toast.LENGTH_LONG).show();
++                phoneNumber = String.valueOf(phoneField.getText());
++                new VerEldRegistrationAsyncTask().execute(getApplicationContext());
+ 
++
+             }
+         });
+     }
+@@ -60,4 +72,47 @@
+ 
+         return super.onOptionsItemSelected(item);
+     }
++
++    private class VerEldRegistrationAsyncTask extends AsyncTask<Context, Void, VerifyElderlyRegistration>{
++        private VerifyElderlyRegistrationApi myApiService = null;
++        private Context context;
++
++        @Override
++        protected VerifyElderlyRegistration doInBackground(Context... params) {
++            if(myApiService == null) {  // Only do this once
++                VerifyElderlyRegistrationApi.Builder builder = new VerifyElderlyRegistrationApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
++                        .setRootUrl("https://bbsystemproject.appspot.com/_ah/api/");
++                // end options for devappserver
++
++                myApiService = builder.build();
++            }
++
++            context = params[0];
++
++            VerifyElderlyRegistration verifyEldInfo = new VerifyElderlyRegistration();
++            verifyEldInfo.setPhoneNo(phoneNumber);
++
++            try {
++                return myApiService.insertVerifyElderlyRegistration(verifyEldInfo).execute();
++            } catch (IOException e) {
++                return null;
++            }
++        }
++
++        protected void onPostExecute(VerifyElderlyRegistration result) {
++            if (result.getPhoneNo().equals(1)) {
++                Toast.makeText(context, "Sorry Phone Number Already Exists!", Toast.LENGTH_LONG).show();
++
++            } else {
++                Toast.makeText(context, "Phone Number Valid", Toast.LENGTH_LONG).show();
++
++                Intent intent = new Intent( context, ElderlyRegisterAddress.class);
++                startActivity(intent);
++
++
++            }
++        }
++    }
++
++
+-}
++}
+\ No newline at end of file
+Index: backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyElderlyRegistration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyElderlyRegistration.java	(revision )
++++ backend/src/main/java/com/example/aakanshaparmar/myapplication/backend/VerifyElderlyRegistration.java	(revision )
+@@ -0,0 +1,19 @@
++package com.example.aakanshaparmar.myapplication.backend;
++
++/**
++ * Created by aakanshaparmar on 10/5/16.
++ */
++public class VerifyElderlyRegistration {
++
++    //Elderly Registration Info
++    private String phoneNo;
++
++    public String getPhoneNo() {
++        return phoneNo;
++    }
++
++
++    public void setPhoneNo(String num) {
++        phoneNo = num;
++    }
++}
+Index: app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyHomePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyHomePage.java	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ app/src/main/java/aakanshaparmar/blackboxsystem/ElderlyHomePage.java	(revision )
+@@ -1,6 +1,5 @@
+ package aakanshaparmar.blackboxsystem;
+ 
+-import android.app.Activity;
+ import android.content.Context;
+ import android.content.Intent;
+ import android.content.SharedPreferences;
+@@ -13,6 +12,7 @@
+ import android.view.Menu;
+ import android.view.MenuInflater;
+ import android.view.MenuItem;
++import android.widget.Toast;
+ 
+ import com.example.aakanshaparmar.myapplication.backend.elderlyLocationInfoApi.ElderlyLocationInfoApi;
+ import com.example.aakanshaparmar.myapplication.backend.elderlyLocationInfoApi.model.ElderlyLocationInfo;
+@@ -142,7 +142,7 @@
+             return true;
+         }
+ 
+-       /* else if(id == R.id.action_change_role){
++       else if(id == R.id.action_change_role){
+             stopLocationUpdates();
+             SharedPreferences sharedPreferences = getSharedPreferences("aakanshaparmar.blackboxsystem", Context.MODE_PRIVATE);
+             SharedPreferences.Editor editor = sharedPreferences.edit();
+@@ -158,7 +158,7 @@
+             Intent intent = new Intent(getApplicationContext(), chooseRole.class);
+             startActivity(intent);
+         }
+-*/
++
+         return super.onOptionsItemSelected(item);
+     }
+ 
+@@ -292,10 +292,10 @@
+         protected void onPostExecute(ElderlyLocationInfo result) {
+ 
+             if (result == null) {
+-                //Toast.makeText(context, "Location not saved in DB! Some error occurred", Toast.LENGTH_LONG).show();
++                Toast.makeText(context, "Location not saved in DB! Some error occurred", Toast.LENGTH_LONG).show();
+ 
+             } else {
+-                //Toast.makeText(context, "Location saved in DB!", Toast.LENGTH_LONG).show();
++                Toast.makeText(context, "Location saved in DB!", Toast.LENGTH_LONG).show();
+ 
+             }
+         }
+Index: backend/backend.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- backend/backend.iml	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ backend/backend.iml	(revision )
+@@ -44,6 +44,7 @@
+     <orderEntry type="library" exported="" name="appengine-endpoints-deps-1.9.18" level="project" />
+     <orderEntry type="library" exported="" name="servlet-api-2.5" level="project" />
+     <orderEntry type="library" exported="" name="appengine-api-1.0-sdk-1.9.18" level="project" />
++    <orderEntry type="library" exported="" name="backend.backend" level="project" />
+     <orderEntry type="library" exported="" name="backend.backend-android-endpoints" level="project" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ app/build.gradle	(revision )
+@@ -25,6 +25,7 @@
+     compile 'com.android.support:appcompat-v7:23.3.0'
+     compile 'com.google.android.gms:play-services:8.4.0'
+     compile 'com.android.support:design:23.3.0'
++    compile project(path: ':backend')
+ }
+ 
+ 
+Index: app/src/main/java/aakanshaparmar/blackboxsystem/FamilyViewEldLoc.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/aakanshaparmar/blackboxsystem/FamilyViewEldLoc.java	(revision 03395e50b1d8467b67a781dd773837f572b69022)
++++ app/src/main/java/aakanshaparmar/blackboxsystem/FamilyViewEldLoc.java	(revision )
+@@ -4,7 +4,7 @@
+ import android.content.Intent;
+ import android.content.SharedPreferences;
+ import android.os.Bundle;
+-import android.support.v4.app.FragmentActivity;
++import android.support.v7.app.ActionBarActivity;
+ import android.view.Menu;
+ import android.view.MenuInflater;
+ import android.view.MenuItem;
+@@ -17,7 +17,7 @@
+ import com.google.android.gms.maps.model.LatLng;
+ import com.google.android.gms.maps.model.MarkerOptions;
+ 
+-public class FamilyViewEldLoc extends FragmentActivity implements OnMapReadyCallback {
++public class FamilyViewEldLoc extends ActionBarActivity implements OnMapReadyCallback {
+ 
+     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+ 
